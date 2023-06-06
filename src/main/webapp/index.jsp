@@ -11,7 +11,7 @@
         <title>FFood</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
+
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
         <link rel="stylesheet" href="assets/css/templatemo.css" type="text/css"/>
         <link rel="stylesheet" href="assets/css/custom.css" type="text/css"/>
@@ -66,7 +66,7 @@
             <div class="container d-flex justify-content-between align-items-center">
                 <a
                     class="navbar-brand text-success logo h1 align-self-center"
-                    href="index.html"
+                    href="index.jsp"
                     >
                     FFood
                 </a>
@@ -92,13 +92,13 @@
                             class="nav navbar-nav d-flex justify-content-between mx-lg-auto"
                             >
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Home</a>
+                                <a class="nav-link" href="index.jsp">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
+                                <a class="nav-link" href="about.html">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                                <a class="nav-link" href="contact.html">Contact</a>
                             </li>
                         </ul>
                     </div>
