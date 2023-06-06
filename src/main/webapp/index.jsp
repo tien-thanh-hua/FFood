@@ -12,9 +12,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="assets/css/templatemo.css" />
-        <link rel="stylesheet" href="assets/css/custom.css" />
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" href="assets/css/templatemo.css" type="text/css"/>
+        <link rel="stylesheet" href="assets/css/custom.css" type="text/css"/>
 
         <!-- Load fonts style after rendering the layout styles -->
         <link
@@ -214,7 +214,7 @@
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
                                 <img
                                     class="img-fluid"
-                                    src="./assets/img/banner_img_01.jpg"
+                                    src="assets/img/banner_img_01.jpg"
                                     alt=""
                                     />
                             </div>
@@ -233,7 +233,7 @@
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
                                 <img
                                     class="img-fluid"
-                                    src="./assets/img/banner_img_02.jpg"
+                                    src="assets/img/banner_img_02.jpg"
                                     alt=""
                                     />
                             </div>
@@ -252,7 +252,7 @@
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
                                 <img
                                     class="img-fluid"
-                                    src="./assets/img/banner_img_03.jpg"
+                                    src="assets/img/banner_img_03.jpg"
                                     alt=""
                                     />
                             </div>
