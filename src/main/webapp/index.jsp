@@ -7,18 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
     <title>FFood | Đặt món nhanh, rẻ, tiện</title>
-
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -31,13 +28,11 @@
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
 
-
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="assets/css/theme.css" rel="stylesheet" />
   </head>
-
 
   <body>
     <!-- ===============================================-->
@@ -51,34 +46,32 @@
             <div>
               <i class="fa fa-envelope mx-2"></i>
               <a class="navbar-sm-brand text-light text-decoration-none" href="#">
-                FFood@fpt.com
+                ffood@support.com
               </a>
               <i class="fa fa-phone mx-2"></i>
               <a class="navbar-sm-brand text-light text-decoration-none" href="#">
-                0123456789
+                0017-001-1704
               </a>
             </div>
             <div>
-              <a class="text-light" href="#" target="_blank" rel="sponsored"
-                 ><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i
-                ></a>
-              <a class="text-light" href="#" target="_blank"
-                 ><i class="fab fa-instagram fa-sm fa-fw me-2"></i
-                ></a>
-              <a class="text-light" href="#" target="_blank"
-                 ><i class="fab fa-twitter fa-sm fa-fw me-2"></i
-                ></a>
-              <a class="text-light" href="#" target="_blank"
-                 ><i class="fab fa-linkedin fa-sm fa-fw"></i
-                ></a>
+              <a class="text-light" href="#" target="_blank" rel="sponsored">
+                <i class="fab fa-facebook-f fa-sm fa-fw me-2"></i>
+              </a>
+              <a class="text-light" href="#" target="_blank">
+                <i class="fab fa-instagram fa-sm fa-fw me-2"></i>
+              </a>
+              <a class="text-light" href="#" target="_blank">
+                <i class="fab fa-twitter fa-sm fa-fw me-2"></i>
+              </a>
+              <a class="text-light" href="#" target="_blank">
+                <i class="fab fa-linkedin fa-sm fa-fw"></i>
+              </a>
             </div>
           </div>
-        </div>
       </nav>
-      <!-- Close Top Nav -->
 
       <!-- NAVBAR -->
-      <nav class="navbar navbar-expand-lg navbar-light shadow bg-light fixed-top" data-navbar-on-scroll="data-navbar-on-scroll">
+      <nav class="navbar navbar-expand-lg navbar-light shadow bg-light sticky-top" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container">
           <a class="navbar-brand d-inline-flex" href="index.html">
             <img class="d-inline-block" src="assets/img/gallery/logo.svg" alt="logo" />
@@ -95,17 +88,50 @@
               </div>
               <a class="nav-icon text-decoration-none my-auto" href="#">
                 <i class="fas fa-fw fa-cart-arrow-down text-primary fs-2 mx-2"></i>             
-              </a>              
+              </a>    
+              <%
+                Cookie[] cookies = request.getCookies();
+                boolean isLoggedIn = true;
+                try {
+                  if (cookies[1] == null) {
+                    if (session.getAttribute("quantri") == null) {
+                      isLoggedIn = false;
+                    }
+                  } else {
+                    Cookie c = cookies[1];
+                    if (!c.getName().equals("quantri")) {
+                      isLoggedIn = false;
+                    }
+                  }
+                } catch (ArrayIndexOutOfBoundsException ae) {
+                  if (session.getAttribute("quantri") == null) {
+                    isLoggedIn = false;
+                  }
+                } catch (NullPointerException ne) {
+                  isLoggedIn = false;
+                }
+                
+                if (isLoggedIn) {
+              %>
+              <button class="btn btn-primary text-white ms-2" data-bs-toggle="modal" data-bs-target="#" type="button">
+                <i class="fas fa-user me-2"></i>
+                <%= "Group 1" %>
+              </button>
+              <%   
+                } else {
+              %>
               <button class="btn btn-primary text-white ms-2" data-bs-toggle="modal" data-bs-target="#login-modal" type="button">
                 <i class="fas fa-user me-2"></i>
                 Đăng nhập
               </button>
-              
+              <%
+                }
+              %>
             </form>
           </div>
         </div>
       </nav>
-      
+
       <!-- LOGIN -->
       <div class="modal" tabindex="-1" id="login-modal">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -160,7 +186,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- SIGNUP -->
       <div class="modal" tabindex="-1" id="signup-modal">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -211,7 +237,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- ======================================-->
       <!-- HERO =================================-->
       <section class="py-5 overflow-hidden bg-primary" id="home">
