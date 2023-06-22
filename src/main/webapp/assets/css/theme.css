@@ -2942,6 +2942,10 @@ textarea.form-control-lg {
   margin-right: 1rem;
 }
 
+.btn {
+  color: #FFFEFE;
+}
+
 .btn-check {
   position: absolute;
   clip: rect(0, 0, 0, 0);
@@ -3514,13 +3518,13 @@ fieldset:disabled .btn {
 }
 
 .btn-primary {
-  color: #616161;
+  color: #ffffff;
   background-color: #FFB30E;
   border-color: #FFB30E;
 }
 
 .btn-primary:hover {
-  color: #616161;
+  color: #ffffff;
   background-color: #ffbe32;
   border-color: #ffbb26;
 }
@@ -18222,9 +18226,6 @@ ul {
   box-shadow: 0 10px 20px #D42DA3, 0 6px 6px #FFB30E;
 }
 
-.btn {
-  color: #FFFEFE;
-}
 
 /* Hover */
 .hover-top {
