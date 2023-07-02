@@ -25,3 +25,4 @@ replay_pid*
 
 #DBConnection file
 src/main/java/DBConnection/DBConnection.java
+target/
