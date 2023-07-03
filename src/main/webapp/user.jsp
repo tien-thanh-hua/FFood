@@ -14,23 +14,7 @@
 
     <!-- Title -->
     <title>FFood | Tài khoản Người dùng</title>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- Stylesheets -->
-    <link href="<%= request.getContextPath() + "assets/css/theme.css"%>" rel="stylesheet" />
-    <link href="<%= request.getContextPath() + "assets/css/style.css"%>" rel="stylesheet" />
-    <link href="<%= request.getContextPath() + "assets/css/vendors/bootstrap-5.3.0-dist/bootstrap.min.css"%>" rel="stylesheet">
-
-    <!-- JavaScript -->
-    <script src="<%= request.getContextPath() + "vendors/code.jquery.com_jquery-3.7.0.js"%>"></script>
+    <%@ include file="WEB-INF/jspf/resources.jspf" %>
   </head>
   <body>
     <%@ include file="WEB-INF/jspf/base.jspf" %>
@@ -159,14 +143,6 @@
       </div>
     </div>
     <%@ include file="WEB-INF/jspf/footer.jspf" %>
-    <!-- JavaScripts -->
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="vendors/fontawesome/all.min.js"></script>
-    <script src="assets/js/theme.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+    <%@ include file="WEB-INF/jspf/javascript.jspf" %>
   </body>
 </html>
