@@ -15,23 +15,8 @@
 
     <!-- Title -->
     <title>FFood | Đặt món nhanh, rẻ, tiện</title>
+    <%@ include file="WEB-INF/jspf/resources.jspf" %>
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- Stylesheets -->
-    <link href="<%= request.getContextPath() + "assets/css/theme.css"%>" rel="stylesheet" />
-    <link href="<%= request.getContextPath() + "assets/css/style.css"%>" rel="stylesheet" />
-    <link href="<%= request.getContextPath() + "assets/css/vendors/bootstrap-5.3.0-dist/bootstrap.min.css"%>" rel="stylesheet">
-    
-    <!-- JavaScript -->
-    <script src="vendors/code.jquery.com_jquery-3.7.0.js""></script>
   </head>
 
   <body>
@@ -76,42 +61,42 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active" data-bs-interval="0">
                     <div class="row h-100 align-items-center">
-                      <div class="col-sm-4 col-md-4 col-xl mb-5 h-100">
+                      <div class="col-sm-4 col-md-3 col-lg mb-5 h-100">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
                           <div class="card-body">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Cơm</h5>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-4 col-md-4 col-xl mb-5 h-100">
+                      <div class="col-sm-4 col-md-3 col-lg mb-5 h-100">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
                           <div class="card-body">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Mì</h5>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-4 col-md-4 col-xl mb-5 h-100">
+                      <div class="col-sm-4 col-md-3 col-lg mb-5 h-100">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
                           <div class="card-body">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Bánh mì</h5>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-4 col-md-4 col-xl mb-5 h-100">
+                      <div class="col-sm-4 col-md-3 col-lg mb-5 h-100">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/fried-chicken-square.png" alt="..." />
                           <div class="card-body">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Gà rán</h5>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-4 col-md-4 col-xl mb-5 h-100">
+                      <div class="col-sm-4 col-md-3 col-lg mb-5 h-100">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
                           <div class="card-body">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Tráng miệng</h5>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-4 col-md-4 col-xl mb-5 h-100">
+                      <div class="col-sm-4 col-md-3 col-lg mb-5 h-100">
                         <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
                           <div class="card-body">
                             <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Đồ uống</h5>
@@ -128,7 +113,7 @@
           <!<!-- Food list -->
           <div class="row gx-3">
             <c:forEach items="${requestScope.listFood}" var="food"  >
-              <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+              <div class="col-sm-6 col-md-4 col-lg-2 mb-5 h-100">
                 <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="${food.url}" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title fw-bold fs-1 text-1000 text-truncate mb-1">${food.foodName}</h5>
@@ -142,7 +127,7 @@
                 <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="" role="button">Thêm vào Giỏ hàng</a></div>
               </div>
             </c:forEach>
-            <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-5 h-100">
               <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="https://pastaxi-manager.onepas.vn/content/uploads/articles/vuonghoai/cach-lam-com-tam-suon-bi-cha/cach-lam-com-tam-suon-bi-cha-1.jpg" alt="..." />
                 <div class="card-img-overlay ps-0">
                   <span class="badge bg-danger p-2 ms-3">
@@ -161,7 +146,7 @@
               </div>
               <div class="d-grid gap-2"><a class="btn btn-lg btn-danger px-1" href="" role="button">Thêm vào Giỏ hàng</a></div>
             </div>
-            
+
             <div class="col-12 d-flex justify-content-center mt-2">
               <a class="btn btn-lg btn-primary" href="#!">
                 XEM TẤT CẢ 
@@ -231,16 +216,6 @@
       </section>
       <%@ include file="WEB-INF/jspf/footer.jspf" %>
     </main>
-
-    <!-- JavaScripts -->
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="vendors/fontawesome/all.min.js"></script>
-    <script src="assets/js/theme.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+    <%@ include file="WEB-INF/jspf/javascript.jspf" %>
   </body>
-
 </html>
