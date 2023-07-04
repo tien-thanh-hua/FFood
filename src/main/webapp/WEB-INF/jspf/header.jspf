@@ -49,44 +49,34 @@
           <input class="form-control border-1 input-box bg-100" type="search" placeholder="Tìm món ăn" aria-label="Tìm món ăn" />
         </div>
         <button class="nav-icon text-decoration-none my-auto fas fa-fw fa-cart-arrow-down text-primary fs-2 mx-2" data-bs-toggle="modal" data-bs-target="#cart-modal"></button>             
-        <%
-          Cookie[] cookies = request.getCookies();
-          boolean isLoggedIn = true;
-          try {
-            if (cookies[1] == null) {
-              if (session.getAttribute("quantri") == null) {
-                isLoggedIn = false;
-              }
-            } else {
-              Cookie c = cookies[1];
-              if (!c.getName().equals("quantri")) {
-                isLoggedIn = false;
-              }
-            }
-          } catch (ArrayIndexOutOfBoundsException ae) {
-            if (session.getAttribute("quantri") == null) {
-              isLoggedIn = false;
-            }
-          } catch (NullPointerException ne) {
-            isLoggedIn = false;
-          }
-
-          if (isLoggedIn) {
-        %>
-        <button class="btn btn-primary text-white ms-2" data-bs-toggle="modal" data-bs-target="#" type="button">
-          <i class="fas fa-user me-2"></i>
-          <%= "Group 1"%>
-        </button>
-        <%
-        } else {
-        %>
-        <button class="btn btn-primary text-white ms-2" data-bs-toggle="modal" data-bs-target="#login-modal" type="button">
-          <i class="fas fa-user me-2"></i>
-          Đăng nhập
-        </button>
-        <%
-          }
-        %>
+        <c:choose>
+          <c:when test="${isLoggedIn}">
+            <div class="dropdown">
+              <button class="btn btn-primary text-white ms-2" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                <i class="fas fa-user me-2"></i>
+                ${username}
+              </button>
+              <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                ${username}
+              </a>
+              <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="/user/account">Tài khoản của tôi</a></li>
+              </ul>
+              <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="/user/orders">Đơn món</a></li>
+              </ul>
+              <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+              </ul>
+            </div>
+          </c:when>
+          <c:otherwise>
+            <button class="btn btn-primary text-white ms-2" data-bs-toggle="modal" data-bs-target="#login-modal" type="button">
+              <i class="fas fa-user me-2"></i>
+              Đăng nhập
+            </button>
+          </c:otherwise>
+        </c:choose>
       </form>
     </div>
   </div>
