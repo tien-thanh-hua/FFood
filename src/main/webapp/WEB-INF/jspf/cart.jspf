@@ -1,0 +1,57 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<!-- LOGIN -->
+<div class="modal" tabindex="-1" id="cart-modal">
+  <div class="modal-xl modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Giỏ hàng
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex-row">
+        <table id="cart-table" class="table">
+          <thead>
+            <tr>
+              <th scope="col">Món ăn/Đồ uống</th>
+              <th scope="col">Đơn giá</th>
+              <th scope="col">Số lượng</th>
+              <th scope="col">Số tiền</th>
+              <th scope="col">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="align-middle">
+              <td class="table-image-cell">
+                <img src="https://pastaxi-manager.onepas.vn/content/uploads/articles/vuonghoai/cach-lam-com-tam-suon-bi-cha/cach-lam-com-tam-suon-bi-cha-1.jpg" 
+                     alt=""
+                     class="me-3" />
+                Cơm sườn bì chả
+              </td>
+              <td>40.000đ</td>
+              <td>2</td>
+              <td>80.000đ</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Do you want to delete this product?')">
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="row align-items-center">
+          <div class="col text-end">
+            <strong>Tổng thanh toán: 80.000đ</strong>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary">Thanh toán</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
