@@ -18,18 +18,20 @@ public class Order {
   private int cartID;
   private int customerID;
   private byte orderStatusID;
+  private String orderStatus;
   private byte paymentMethodID;
+  private String paymentMethod;
   private Date orderTime;
   private BigDecimal orderTotal = new BigDecimal(BigInteger.ZERO);
   private String orderNote;
-  private Date delivery_time;
-  private String contact_phone;
-  private Date order_cancel_time;
+  private Date deliveryTime;
+  private String contactPhone;
+  private Date orderCancelTime;
 
   public Order() {
   }
 
-  public Order(int orderID, int cartID, int customerID, byte orderStatusID, byte paymentMethodID, Date orderTime, String orderNote, Date delivery_time, String contact_phone, Date order_cancel_time) {
+  public Order(int orderID, int cartID, int customerID, byte orderStatusID, byte paymentMethodID, Date orderTime, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
     this.orderID = orderID;
     this.cartID = cartID;
     this.customerID = customerID;
@@ -37,9 +39,39 @@ public class Order {
     this.paymentMethodID = paymentMethodID;
     this.orderTime = orderTime;
     this.orderNote = orderNote;
-    this.delivery_time = delivery_time;
-    this.contact_phone = contact_phone;
-    this.order_cancel_time = order_cancel_time;
+    this.deliveryTime = deliveryTime;
+    this.contactPhone = contactPhone;
+    this.orderCancelTime = orderCancelTime;
+  }
+
+  public Order(int orderID, int cartID, int customerID, byte orderStatusID, byte paymentMethodID, Date orderTime, BigDecimal orderTotal, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
+    this.orderID = orderID;
+    this.cartID = cartID;
+    this.customerID = customerID;
+    this.orderStatusID = orderStatusID;
+    this.paymentMethodID = paymentMethodID;
+    this.orderTime = orderTime;
+    this.orderTotal = orderTotal;
+    this.orderNote = orderNote;
+    this.deliveryTime = deliveryTime;
+    this.contactPhone = contactPhone;
+    this.orderCancelTime = orderCancelTime;
+  }
+  
+  public Order(int orderID, int cartID, int customerID, byte orderStatusID, String orderStatus, byte paymentMethodID, String paymentMethod, Date orderTime, BigDecimal orderTotal, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
+    this.orderID = orderID;
+    this.cartID = cartID;
+    this.customerID = customerID;
+    this.orderStatusID = orderStatusID;
+    this.orderStatus = orderStatus;
+    this.paymentMethodID = paymentMethodID;
+    this.paymentMethod = paymentMethod;
+    this.orderTime = orderTime;
+    this.orderTotal = orderTotal;
+    this.orderNote = orderNote;
+    this.deliveryTime = deliveryTime;
+    this.contactPhone = contactPhone;
+    this.orderCancelTime = orderCancelTime;
   }
 
   public int getOrderID() {
@@ -82,6 +114,14 @@ public class Order {
     this.paymentMethodID = paymentMethodID;
   }
 
+  public String getPaymentMethod() {
+    return paymentMethod;
+  }
+
+  public void setPaymentMethod(String paymentMethod) {
+    this.paymentMethod = paymentMethod;
+  }
+
   public Date getOrderTime() {
     return orderTime;
   }
@@ -106,28 +146,28 @@ public class Order {
     this.orderNote = orderNote;
   }
 
-  public Date getDelivery_time() {
-    return delivery_time;
+  public Date getDeliveryTime() {
+    return deliveryTime;
   }
 
-  public void setDelivery_time(Date delivery_time) {
-    this.delivery_time = delivery_time;
+  public void setDeliveryTime(Date deliveryTime) {
+    this.deliveryTime = deliveryTime;
   }
 
-  public String getContact_phone() {
-    return contact_phone;
+  public String getContactPhone() {
+    return contactPhone;
   }
 
-  public void setContact_phone(String contact_phone) {
-    this.contact_phone = contact_phone;
+  public void setContactPhone(String contactPhone) {
+    this.contactPhone = contactPhone;
   }
 
-  public Date getOrder_cancel_time() {
-    return order_cancel_time;
+  public Date getOrderCancelTime() {
+    return orderCancelTime;
   }
 
-  public void setOrder_cancel_time(Date order_cancel_time) {
-    this.order_cancel_time = order_cancel_time;
+  public void setOrderCancelTime(Date orderCancelTime) {
+    this.orderCancelTime = orderCancelTime;
   }
 
 }
