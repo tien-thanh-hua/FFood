@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DBConnection;
 
@@ -12,28 +12,30 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Hung
+ * @author CE171454 Hua Tien Thanh
  */
-public class dbconnection {
-
-    private static Connection conn;
-
+public class DBConnection {
+    private static Connection conn = null;
     public static Connection getConnection() {
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-3SV4P5S\\HUNG-LAPTOP\\SQLEXPRESS:1433;"
-                    + "databaseName=ffood;"
-                    + "user=sa;password=123;"
-                    + "encrypt=true;"
-                    + "trustServerCertificate=true;");
+            try {
+                conn = DriverManager.getConnection("jdbc:sqlserver://"
+                        + "DESKTOP-TP318V1\\SQLEXPRESS:1433;"
+                        + "databaseName=lab01;"
+                        + "user=sa;"
+                        + "password=admin123;"
+                        + "encrypt=true;"
+                        + "trustServerCertificate= true;");
+            } catch (SQLException ex) {
+                Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(dbconnection.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(dbconnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return conn;
-
+         return conn;   
     }
+  
 
 }
