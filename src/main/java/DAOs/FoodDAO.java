@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Models.Food;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,39 @@ public class FoodDAO {
     }
     return foodList;
   }
-
+  
+  public List<Food> getFoodList() {
+    String query = "select * from Food";
+      try {
+          List<Food> foodList = new ArrayList<>();
+          ps = conn.prepareStatement(query);
+          rs = ps.executeQuery();
+          while (rs.next()) {              
+              Food food = new Food(rs.getShort("food_id"),
+                      rs.getString("food_name"),
+                      rs.getBigDecimal("food_price"),
+                      rs.getByte("discount_percent"),
+                      rs.getString("food_img_url"),
+                      rs.getByte("food_type_id"),
+                      this.getFoodType(rs.getByte("food_type_id")));
+              foodList.add(food);
+          }             
+          return foodList;
+      } catch (Exception e) {
+      }
+      return null;
+  }
+  
+    public static void main(String[] args) {
+        FoodDAO dao = new FoodDAO();
+        List<Food> foodList = dao.getFoodList();
+        for (Food o : foodList) {
+            System.out.println(o);
+        }
+    }
+  
+   
+  
   public Food getFood(short foodID) {
     Food food = null;
     try {
@@ -142,4 +175,26 @@ public class FoodDAO {
     }
     return foodType;
   }
+  
+  public List<Food> searchByName(String txtSearch) {
+        List<Food> list = new ArrayList<>();
+        String query = "select * from Food\n"
+                + "where [food_name] like ?";
+        try {
+            conn = DBConnection.DBConnection.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Food(rs.getShort(1),
+                        rs.getString(2),
+                        rs.getBigDecimal(3),
+                        rs.getByte(4),
+                        rs.getString(5),
+                        rs.getByte(6)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }

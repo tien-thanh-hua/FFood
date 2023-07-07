@@ -4,18 +4,23 @@
  */
 package Controllers;
 
+import DAOs.FoodDAO;
+import Models.Food;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author ADMIN
  */
-public class FoodDisplay extends HttpServlet {
+public class HomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -28,18 +33,24 @@ public class FoodDisplay extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FoodDisplay</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FoodDisplay at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        FoodDAO dao = new FoodDAO();
+        ResultSet rs = dao.getAll();
+        List<Food> foodList = new ArrayList<>();
+        try {
+            while (rs.next()) {                
+                Food food = new Food(rs.getShort("food_id"),
+                      rs.getString("food_name"),
+                      rs.getBigDecimal("food_price"),
+                      rs.getByte("discount_percent"),
+                      rs.getString("food_img_url"),
+                      rs.getByte("food_type_id"),
+                      dao.getFoodType(rs.getByte("food_type_id")));
+              foodList.add(food);         
+            }
+        } catch (Exception e) {            
         }
+        request.setAttribute("foodList", foodList);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,7 +65,7 @@ public class FoodDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+         processRequest(request, response);
     }
 
     /**

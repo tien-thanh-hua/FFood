@@ -111,42 +111,33 @@
           </div>
 
           <!<!-- Food list -->
-          <div class="row gx-3">
-            <c:forEach items="${requestScope.listFood}" var="food"  >
-              <div class="col-sm-6 col-md-4 col-lg-2 mb-5 h-100">
-                <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="${food.url}" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title fw-bold fs-1 text-1000 text-truncate mb-1">${food.foodName}</h5>
-                    <div class="card-text">
-                      <span class="text-primary fw-bold">
-                        <fmt:formatNumber type="number" pattern="###,###" value="${food.foodPrice - (food.foodPrice * food.discountPercent / 100)}" />đ
-                      </span>
+          <div class="row gx-3" id="foodList">
+            <c:forEach items="${foodList}" var="o"  >
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-5 h-100" id="foodObject">
+                <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="assets/img/gallery/${o.imageURL}" alt="..." />
+                    <div class="card-img-overlay ps-0">
+                        <c:set var="discount" value="${o.discountPercent}"/>
+                        <c:if test="${discount != 0}">
+                            <span class="badge bg-danger p-2 ms-3">
+                                <i class="fas fa-tag me-2 fs-0"></i>
+                                <span class="fs-0">
+                                    <c:out value="Giảm ${o.discountPercent}%"/>
+                                </span>
+                            </span>
+                        </c:if>
                     </div>
-                  </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold fs-1 text-1000 text-truncate mb-1">${o.foodName}</h5>
+                        <div class="card-text">
+                            <span class="text-primary fw-bold">
+                                <fmt:formatNumber type="number" pattern="###,###" value="${o.foodPrice - (o.foodPrice * o.discountPercent / 100)}" />đ
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-grid gap-2"><a class="btn btn-lg btn-danger" href="" role="button">Thêm vào Giỏ hàng</a></div>
-              </div>
-            </c:forEach>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-5 h-100">
-              <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="https://pastaxi-manager.onepas.vn/content/uploads/articles/vuonghoai/cach-lam-com-tam-suon-bi-cha/cach-lam-com-tam-suon-bi-cha-1.jpg" alt="..." />
-                <div class="card-img-overlay ps-0">
-                  <span class="badge bg-danger p-2 ms-3">
-                    <i class="fas fa-tag me-2 fs-0"></i>
-                    <span class="fs-0">Giảm 20%</span> 
-                  </span>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title fw-bold fs-1 text-1000 text-truncate mb-1">Cơm sườn bì chả</h5>
-                  <div class="card-text">
-                    <span class="text-primary fw-bold">
-                      <fmt:formatNumber type="number" pattern="###,###" value="45000" />đ
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="d-grid gap-2"><a class="btn btn-lg btn-danger px-1" href="" role="button">Thêm vào Giỏ hàng</a></div>
             </div>
-
+            </c:forEach>
             <div class="col-12 d-flex justify-content-center mt-2">
               <a class="btn btn-lg btn-primary" href="#!">
                 XEM TẤT CẢ 
