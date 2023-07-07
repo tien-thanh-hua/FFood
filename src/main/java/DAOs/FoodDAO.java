@@ -40,17 +40,18 @@ public class FoodDAO {
     return null;
   }
 
-  public List<Food> getAllList(ResultSet rs) {
+  public List<Food> getAllList() {
+    ResultSet foodRS = this.getAll();
     List<Food> foodList = new ArrayList<>();
     try {
-      while (rs.next()) {
-        Food food = new Food(rs.getShort("food_id"),
-                rs.getString("food_name"),
-                rs.getBigDecimal("food_price"),
-                rs.getByte("discount_percent"),
-                rs.getString("food_img_url"),
-                rs.getByte("food_type_id"),
-                this.getFoodType(rs.getByte("food_type_id")));
+      while (foodRS.next()) {
+        Food food = new Food(foodRS.getShort("food_id"),
+                foodRS.getString("food_name"),
+                foodRS.getBigDecimal("food_price"),
+                foodRS.getByte("discount_percent"),
+                foodRS.getString("food_img_url"),
+                foodRS.getByte("food_type_id"),
+                this.getFoodType(foodRS.getByte("food_type_id")));
         foodList.add(food);
       }
     } catch (SQLException ex) {
