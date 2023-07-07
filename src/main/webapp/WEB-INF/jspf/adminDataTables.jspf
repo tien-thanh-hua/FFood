@@ -1,5 +1,6 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
+<!-- DataTables -->
 <script src="<%= request.getContextPath() + "vendors/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"%>"></script>
 <script>
   $(document).ready(function () {

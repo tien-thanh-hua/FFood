@@ -4,15 +4,15 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Xóa Món ăn</h5>
+        <h5 class="modal-title">Xóa Tài khoản Người dùng</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Bạn có muốn xóa Món ăn này không?</p>
+        <p>Bạn có muốn xóa Tài khoản Người dùng này không?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
-        <a href="/admin/food/delete/${f.foodID}" class="btn btn-success">Có</a>
+        <a href="/admin/user/delete/${f.id}" class="btn btn-success">Có</a>
       </div>
     </div>
   </div>

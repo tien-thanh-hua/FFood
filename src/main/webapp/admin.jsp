@@ -3,7 +3,7 @@
     Created on : Jul 2, 2023, 10:36:53 PM
     Author     : CE171454 Hua Tien Thanh
 --%>
-
+<%@ include file="WEB-INF/jspf/base.jspf" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,13 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FFood | Dashboard</title>
-    <%@ include file="WEB-INF/jspf/base.jspf" %>
+
     <%@ include file="WEB-INF/jspf/resources.jspf" %>
     <%@ include file="WEB-INF/jspf/adminDataTables.jspf" %>
-
   </head>
   <body>
-
+    
     <%@ include file="WEB-INF/jspf/deleteFood.jspf" %>
     <div class="container-fluid m-0 p-0">
       <div class="row m-0">
@@ -32,7 +31,7 @@
               <div class="container-fluid p-2">
                 <table id="food-table">
                   <h1 class="text-center fw-bold fs-3">Quản lý Món ăn</h1>
-                  <a class="btn btn-primary my-2" href="/Order/Add" role="button">Thêm Món</a>
+                  <a class="btn btn-primary my-2" href="admin/food/add" role="button">Thêm Món</a>
                   <thead>
                     <tr>
                       <th>Mã số</th>
@@ -45,18 +44,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${listFood}" var="f">
+                    <c:forEach items="${foodList}" var="f">
                       <tr>
-                        <td>${f.id}</td>
-                        <td>${f.type}</td>
-                        <td>${f.name}</td>
-                        <td><fmt:formatNumber type="number" pattern="###,###" value="${f.price}"/>đ</td>
+                        <td>${f.foodID}</td>
+                        <td>${f.foodType}</td>
+                        <td>${f.foodName}</td>
+                        <td><fmt:formatNumber type="number" pattern="###,###" value="${f.foodPrice}"/>đ</td>
                         <td>${(f.discountPercent == null) ? 0 : f.discountPercent}%</td>
                         <td class="table-image-cell">
-                          <img src="${f.url}" alt="${f.name}"/>
+                          <img src="${f.imageURL}" alt="${f.foodName}"/>
                         </td>
                         <td>
-                          <a href="/admin/food/update/${f.id}" class="btn btn-sm btn-danger">
+                          <a href="/admin/food/update/${f.foodID}" class="btn btn-sm btn-danger">
                             Cập nhật
                           </a>
                           <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-food-modal">
@@ -75,14 +74,15 @@
             <div class="container-fluid p-2">
               <table id="users-table">
                 <h1 class="text-center fw-bold fs-3">Quản lý Người dùng</h1>
-                <a class="btn btn-primary my-2" href="/Order/Add" role="button">Thêm Người dùng</a>
+                <a class="btn btn-primary my-2" href="admin/user/add" role="button">Thêm Người dùng</a>
                 <thead>
                   <tr>
                     <th>Mã Tài khoản</th>
                     <th>Mã Khách hàng</th>
                     <th>Tên Người dùng</th>
                     <th>Email</th>
-                    <th>Loại Tài khoản</th> 
+                    <th>Loại Tài khoản</th>
+                    <th>Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -93,6 +93,14 @@
                       <td>${u.username}</td>
                       <td>${u.email}</td>
                       <td>${u.accountType}</td>
+                      <td>
+                        <a href="/user/food/update/${f.id}" class="btn btn-sm btn-danger">
+                          Cập nhật
+                        </a>
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
+                          Xóa
+                        </button>
+                      </td>
                     </tr>
                   </c:forEach>
                 </tbody>

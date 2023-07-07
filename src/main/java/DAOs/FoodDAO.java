@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Models.Food;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -36,6 +38,25 @@ public class FoodDAO {
       Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return null;
+  }
+
+  public List<Food> getAllList(ResultSet rs) {
+    List<Food> foodList = new ArrayList<>();
+    try {
+      while (rs.next()) {
+        Food food = new Food(rs.getShort("food_id"),
+                rs.getString("food_name"),
+                rs.getBigDecimal("food_price"),
+                rs.getByte("discount_percent"),
+                rs.getString("food_img_url"),
+                rs.getByte("food_type_id"),
+                this.getFoodType(rs.getByte("food_type_id")));
+        foodList.add(food);
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return foodList;
   }
 
   public Food getFood(short foodID) {

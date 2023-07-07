@@ -8,10 +8,11 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>Controllers.AdminController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>FoodDisplay</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckoutController</servlet-name>
+        <servlet-class>Controllers.CheckoutController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
@@ -54,11 +55,26 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FoodDisplay</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
         <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/checkout/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
       30
     </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
 </web-app>
