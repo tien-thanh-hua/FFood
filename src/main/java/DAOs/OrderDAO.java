@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Models.Order;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,6 +40,33 @@ public class OrderDAO {
     return null;
   }
 
+  public List<Order> getAllList() {
+    ResultSet orderRS = this.getAll();
+    List<Order> orderList = new ArrayList<>();
+    try {
+      while (orderRS.next()) {
+        Order order = new Order(orderRS.getInt("order_id"),
+                orderRS.getInt("cart_id"),
+                orderRS.getInt("customer_id"),
+                orderRS.getByte("order_status_id"),
+                this.getOrderStatus(orderRS.getByte("order_status_id")),
+                orderRS.getByte("payment_method_id"),
+                this.getPaymentMethod(orderRS.getByte("payment_method_id")),
+                this.getOrderItemsList(orderRS.getInt("cart_id")),
+                orderRS.getDate("order_time"),
+                orderRS.getBigDecimal("order_total"),
+                orderRS.getString("order_note"),
+                orderRS.getDate("delivery_time"),
+                orderRS.getString("contact_phone"),
+                orderRS.getDate("order_cancel_time"));
+        orderList.add(order);
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return orderList;
+  }
+
   public Order getOrder(int orderID) {
     Order order = null;
     try {
@@ -52,6 +81,7 @@ public class OrderDAO {
                 this.getOrderStatus(rs.getByte("order_status_id")),
                 rs.getByte("payment_method_id"),
                 this.getPaymentMethod(rs.getByte("payment_method_id")),
+                this.getOrderItemsList(rs.getInt("cart_id")),
                 rs.getDate("order_time"),
                 rs.getBigDecimal("order_total"),
                 rs.getString("order_note"),
@@ -150,5 +180,64 @@ public class OrderDAO {
       Logger.getLogger(FoodTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return orderStatus;
+  }
+
+  public ResultSet getOrderItems(Order order) {
+    int cartID = order.getCartID();
+    String sql = "select food_name, food_quantity from Food join CartItem on Food.food_id = CartItem.food_id join Cart on CartItem.cart_id = Cart.cart_id and Cart.cart_id = ?";
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, cartID);
+      rs = ps.executeQuery();
+      return rs;
+    } catch (SQLException ex) {
+      Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
+
+  public List<String> getOrderItemsList(Order order) {
+    ResultSet orderItemsRS = this.getOrderItems(order);
+    List<String> orderItems = null;
+    try {
+      orderItems = new ArrayList<>();
+      while (orderItemsRS.next()) {
+        String foodName = orderItemsRS.getString("food_name");
+        short foodQuantity = orderItemsRS.getShort("food_quantity");
+        orderItems.add(foodName + " x " + foodQuantity);
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return orderItems;
+  }
+
+  public ResultSet getOrderItems(int cartID) {
+    String sql = "select food_name, food_quantity from Food join CartItem on Food.food_id = CartItem.food_id join Cart on CartItem.cart_id = Cart.cart_id and Cart.cart_id = ?";
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, cartID);
+      rs = ps.executeQuery();
+      return rs;
+    } catch (SQLException ex) {
+      Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
+
+  public List<String> getOrderItemsList(int cartID) {
+    ResultSet orderItemsRS = this.getOrderItems(cartID);
+    List<String> orderItems = null;
+    try {
+      orderItems = new ArrayList<>();
+      while (orderItemsRS.next()) {
+        String foodName = orderItemsRS.getString("food_name");
+        short foodQuantity = orderItemsRS.getShort("food_quantity");
+        orderItems.add(foodName + " x " + foodQuantity);
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return orderItems;
   }
 }

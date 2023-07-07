@@ -7,6 +7,8 @@ package Models;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Order {
   private String orderStatus;
   private byte paymentMethodID;
   private String paymentMethod;
+  private List<String> orderItems;
   private Date orderTime;
   private BigDecimal orderTotal = new BigDecimal(BigInteger.ZERO);
   private String orderNote;
@@ -31,12 +34,14 @@ public class Order {
   public Order() {
   }
 
-  public Order(int orderID, int cartID, int customerID, byte orderStatusID, byte paymentMethodID, Date orderTime, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
-    this.orderID = orderID;
+  public Order(int cartID, int customerID, byte orderStatusID, String orderStatus, byte paymentMethodID, String paymentMethod, List<String> orderItems, Date orderTime, BigDecimal orderTotal, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
     this.cartID = cartID;
     this.customerID = customerID;
     this.orderStatusID = orderStatusID;
+    this.orderStatus = orderStatus;
     this.paymentMethodID = paymentMethodID;
+    this.paymentMethod = paymentMethod;
+    this.orderItems = orderItems;
     this.orderTime = orderTime;
     this.orderNote = orderNote;
     this.deliveryTime = deliveryTime;
@@ -44,21 +49,7 @@ public class Order {
     this.orderCancelTime = orderCancelTime;
   }
 
-  public Order(int orderID, int cartID, int customerID, byte orderStatusID, byte paymentMethodID, Date orderTime, BigDecimal orderTotal, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
-    this.orderID = orderID;
-    this.cartID = cartID;
-    this.customerID = customerID;
-    this.orderStatusID = orderStatusID;
-    this.paymentMethodID = paymentMethodID;
-    this.orderTime = orderTime;
-    this.orderTotal = orderTotal;
-    this.orderNote = orderNote;
-    this.deliveryTime = deliveryTime;
-    this.contactPhone = contactPhone;
-    this.orderCancelTime = orderCancelTime;
-  }
-  
-  public Order(int orderID, int cartID, int customerID, byte orderStatusID, String orderStatus, byte paymentMethodID, String paymentMethod, Date orderTime, BigDecimal orderTotal, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
+  public Order(int orderID, int cartID, int customerID, byte orderStatusID, String orderStatus, byte paymentMethodID, String paymentMethod, List<String> orderItems, Date orderTime, BigDecimal orderTotal, String orderNote, Date deliveryTime, String contactPhone, Date orderCancelTime) {
     this.orderID = orderID;
     this.cartID = cartID;
     this.customerID = customerID;
@@ -66,8 +57,8 @@ public class Order {
     this.orderStatus = orderStatus;
     this.paymentMethodID = paymentMethodID;
     this.paymentMethod = paymentMethod;
+    this.orderItems = orderItems;
     this.orderTime = orderTime;
-    this.orderTotal = orderTotal;
     this.orderNote = orderNote;
     this.deliveryTime = deliveryTime;
     this.contactPhone = contactPhone;
@@ -106,6 +97,14 @@ public class Order {
     this.orderStatusID = orderStatusID;
   }
 
+  public String getOrderStatus() {
+    return orderStatus;
+  }
+
+  public void setOrderStatus(String orderStatus) {
+    this.orderStatus = orderStatus;
+  }
+
   public byte getPaymentMethodID() {
     return paymentMethodID;
   }
@@ -116,6 +115,14 @@ public class Order {
 
   public String getPaymentMethod() {
     return paymentMethod;
+  }
+
+  public List<String> getOrderItems() {
+    return orderItems;
+  }
+
+  public void setOrderItems(List<String> orderItems) {
+    this.orderItems = orderItems;
   }
 
   public void setPaymentMethod(String paymentMethod) {

@@ -98,17 +98,21 @@ public class AccountDAO {
     return null;
   }
 
-  public List<Account> getAllUser(ResultSet rs) {
+  public List<Account> getAllUser() {
+    ResultSet accountRS = this.getAll();
     try {
       List<Account> accountList = new ArrayList<>();
-      while (rs.next()) {
-        Account account = new Account(rs.getInt("account_id"),
-                rs.getInt("customer_id"),
-                rs.getString("account_username"),
-                rs.getString("account_email"),
-                rs.getString("account_password"),
-                rs.getString("account_type"));
-        accountList.add(account);
+      while (accountRS.next()) {
+        // Selected account is of User type
+        if (accountRS.getString("account_type").equals("user")) {
+          Account account = new Account(accountRS.getInt("account_id"),
+                  accountRS.getInt("customer_id"),
+                  accountRS.getString("account_username"),
+                  accountRS.getString("account_email"),
+                  accountRS.getString("account_password"),
+                  accountRS.getString("account_type"));
+          accountList.add(account);
+        }
       }
       return accountList;
     } catch (SQLException ex) {
@@ -117,17 +121,21 @@ public class AccountDAO {
     return null;
   }
 
-  public List<Account> getAllAdmin(ResultSet rs) {
+  public List<Account> getAllAdmin() {
+    ResultSet accountRS = this.getAll();
     try {
       List<Account> accountList = new ArrayList<>();
-      while (rs.next()) {
-        Account account = new Account(rs.getInt("account_id"),
-                rs.getByte("admin_id"),
-                rs.getString("account_username"),
-                rs.getString("account_email"),
-                rs.getString("account_password"),
-                rs.getString("account_type"));
-        accountList.add(account);
+      while (accountRS.next()) {
+        // Selected account is of Admin type
+        if (accountRS.getString("account_type").equals("admin")) {
+          Account account = new Account(accountRS.getInt("account_id"),
+                  accountRS.getByte("admin_id"),
+                  accountRS.getString("account_username"),
+                  accountRS.getString("account_email"),
+                  accountRS.getString("account_password"),
+                  accountRS.getString("account_type"));
+          accountList.add(account);
+        }
       }
       return accountList;
     } catch (SQLException ex) {
