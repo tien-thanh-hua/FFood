@@ -87,44 +87,20 @@ public class AccountDAO {
     return result;
   }
 
-  public List<Account> getAll() {
+  public ResultSet getAll() {
     try {
-      List<Account> accountList = new ArrayList<>();
       ps = conn.prepareStatement("select * from Account");
       rs = ps.executeQuery();
-      while (rs.next()) {
-        Account account;
-        if (rs.getString("account_type").equals("User")) {
-          // Account is of User type (no adminID)
-          account = new Account(rs.getInt("account_id"),
-                  rs.getInt("customer_id"),
-                  rs.getString("account_username"),
-                  rs.getString("account_email"),
-                  rs.getString("account_password"),
-                  rs.getString("account_type"));
-        } else {
-          //  Account is of Admin type (no customerID)
-          account = new Account(rs.getInt("account_id"),
-                  rs.getByte("admin_id"),
-                  rs.getString("account_username"),
-                  rs.getString("account_email"),
-                  rs.getString("account_password"),
-                  rs.getString("account_type"));
-        }
-        accountList.add(account);
-      }
-      return accountList;
+      return rs;
     } catch (SQLException ex) {
       Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return null;
   }
 
-  public List<Account> getAllUser() {
+  public List<Account> getAllUser(ResultSet rs) {
     try {
       List<Account> accountList = new ArrayList<>();
-      ps = conn.prepareStatement("select * from Account where account_type = 'User'");
-      rs = ps.executeQuery();
       while (rs.next()) {
         Account account = new Account(rs.getInt("account_id"),
                 rs.getInt("customer_id"),
@@ -141,11 +117,9 @@ public class AccountDAO {
     return null;
   }
 
-  public List<Account> getAllAdmin() {
+  public List<Account> getAllAdmin(ResultSet rs) {
     try {
       List<Account> accountList = new ArrayList<>();
-      ps = conn.prepareStatement("select * from Account where account_type = 'Admin'");
-      rs = ps.executeQuery();
       while (rs.next()) {
         Account account = new Account(rs.getInt("account_id"),
                 rs.getByte("admin_id"),
@@ -163,15 +137,15 @@ public class AccountDAO {
   }
 
   public Account getAccount(String email) {
-    Account acc = null;
+    Account account = null;
     try {
       ps = conn.prepareStatement("select * from Account where account_email = ?");
       ps.setString(1, email);
       rs = ps.executeQuery();
       if (rs.next()) {
-        if (rs.getString("account_type").equals("User")) {
+        if (rs.getString("account_type").equals("user")) {
           // Account is of User type (no adminID)
-          acc = new Account(rs.getInt("account_id"),
+          account = new Account(rs.getInt("account_id"),
                   rs.getInt("customer_id"),
                   rs.getString("account_username"),
                   rs.getString("account_email"),
@@ -179,7 +153,7 @@ public class AccountDAO {
                   rs.getString("account_type"));
         } else {
           //  Account is of Admin type (no customerID)
-          acc = new Account(rs.getInt("account_id"),
+          account = new Account(rs.getInt("account_id"),
                   rs.getByte("admin_id"),
                   rs.getString("account_username"),
                   rs.getString("account_email"),
@@ -187,7 +161,39 @@ public class AccountDAO {
                   rs.getString("account_type"));
         }
       }
-      return acc;
+      return account;
+    } catch (SQLException ex) {
+      Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
+
+  public Account getAccount(int accountID) {
+    Account account = null;
+    try {
+      ps = conn.prepareStatement("select * from Account where account_id = ?");
+      ps.setInt(1, accountID);
+      rs = ps.executeQuery();
+      if (rs.next()) {
+        if (rs.getString("account_type").equals("user")) {
+          // Account is of User type (no adminID)
+          account = new Account(rs.getInt("account_id"),
+                  rs.getInt("customer_id"),
+                  rs.getString("account_username"),
+                  rs.getString("account_email"),
+                  rs.getString("account_password"),
+                  rs.getString("account_type"));
+        } else {
+          //  Account is of Admin type (no customerID)
+          account = new Account(rs.getInt("account_id"),
+                  rs.getByte("admin_id"),
+                  rs.getString("account_username"),
+                  rs.getString("account_email"),
+                  rs.getString("account_password"),
+                  rs.getString("account_type"));
+        }
+      }
+      return account;
     } catch (SQLException ex) {
       Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
     }

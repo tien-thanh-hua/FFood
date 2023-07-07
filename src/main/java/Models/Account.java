@@ -21,6 +21,11 @@ public class Account {
   public Account() {
   }
 
+  public Account(String email, String password) {
+    this.email = email;
+    this.password = password;
+  }
+
   public Account(int customerID, String username, String email, String password, String accountType) {
     this.customerID = customerID;
     this.username = username;
