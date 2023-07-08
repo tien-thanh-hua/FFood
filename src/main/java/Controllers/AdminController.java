@@ -6,8 +6,10 @@ package Controllers;
 
 import DAOs.AccountDAO;
 import DAOs.FoodDAO;
+import DAOs.OrderDAO;
 import Models.Account;
 import Models.Food;
+import Models.Order;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -115,10 +117,19 @@ public class AdminController extends HttpServlet {
           throws ServletException, IOException {
     String path = request.getRequestURI();
     if (path.endsWith("/admin") || path.endsWith("/admin/")) {
-      FoodDAO dao = new FoodDAO();
-      List<Food> foodList = dao.getAllList(dao.getAll());
+      FoodDAO foodDAO = new FoodDAO();
+      List<Food> foodList = foodDAO.getAllList();
+      AccountDAO accountDAO = new AccountDAO();
+      List<Account> userAccountList = accountDAO.getAllUser();
+      OrderDAO orderDAO = new OrderDAO();
+      List<Order> orderList = orderDAO.getAllList();
+      
       request.setAttribute("foodList", foodList);
+      request.setAttribute("userAccountList", userAccountList);
+      request.setAttribute("orderList", orderList);
       request.getRequestDispatcher("/admin.jsp").forward(request, response);
+    } else if (path.endsWith("/admin/")) {
+      response.sendRedirect("/admin");
     } else if (path.startsWith("/admin/food")) {
       processFood(request, response);
     } else if (path.startsWith("/admin/user")) {

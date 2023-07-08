@@ -11,8 +11,8 @@
         <p>Bạn có muốn xóa Món ăn này không?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
-        <a href="/admin/food/delete/${f.foodID}" class="btn btn-success">Có</a>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Không</button>
+        <a href="/admin/food/delete/${f.foodID}" class="btn btn-danger">Có</a>
       </div>
     </div>
   </div>
