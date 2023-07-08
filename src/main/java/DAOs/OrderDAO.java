@@ -52,12 +52,13 @@ public class OrderDAO {
                 this.getOrderStatus(orderRS.getByte("order_status_id")),
                 orderRS.getByte("payment_method_id"),
                 this.getPaymentMethod(orderRS.getByte("payment_method_id")),
+                orderRS.getString("contact_phone"),
+                orderRS.getString("delivery_address"),
                 this.getOrderItemsList(orderRS.getInt("cart_id")),
-                orderRS.getDate("order_time"),
                 orderRS.getBigDecimal("order_total"),
+                orderRS.getDate("order_time"),
                 orderRS.getString("order_note"),
                 orderRS.getDate("delivery_time"),
-                orderRS.getString("contact_phone"),
                 orderRS.getDate("order_cancel_time"));
         orderList.add(order);
       }
@@ -81,12 +82,13 @@ public class OrderDAO {
                 this.getOrderStatus(rs.getByte("order_status_id")),
                 rs.getByte("payment_method_id"),
                 this.getPaymentMethod(rs.getByte("payment_method_id")),
+                rs.getString("contact_phone"),
+                rs.getString("delivery_address"),
                 this.getOrderItemsList(rs.getInt("cart_id")),
-                rs.getDate("order_time"),
                 rs.getBigDecimal("order_total"),
+                rs.getDate("order_time"),
                 rs.getString("order_note"),
                 rs.getDate("delivery_time"),
-                rs.getString("contact_phone"),
                 rs.getDate("order_cancel_time"));
       }
     } catch (SQLException ex) {
@@ -96,7 +98,7 @@ public class OrderDAO {
   }
 
   public int add(Order order) {
-    String sql = "insert into [Order] (cart_id, customer_id, order_status_id, payment_method_id, order_time, order_total, order_note, delivery_time, contact_phone, order_cancel_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "insert into [Order] (cart_id, customer_id, order_status_id, payment_method_id, contact_phone, delivery_address, order_total, order_time, order_note, delivery_time, order_cancel_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     int result = 0;
     try {
       PreparedStatement ps = conn.prepareStatement(sql);
@@ -104,12 +106,13 @@ public class OrderDAO {
       ps.setInt(2, order.getCustomerID());
       ps.setByte(3, order.getOrderStatusID());
       ps.setByte(4, order.getPaymentMethodID());
-      ps.setDate(5, order.getOrderTime());
-      ps.setBigDecimal(6, order.getOrderTotal());
-      ps.setString(7, order.getOrderNote());
-      ps.setDate(8, order.getDeliveryTime());
-      ps.setString(9, order.getContactPhone());
-      ps.setDate(10, order.getOrderCancelTime());
+      ps.setString(5, order.getContactPhone());
+      ps.setString(6, order.getDeliveryAddress());
+      ps.setBigDecimal(7, order.getOrderTotal());
+      ps.setDate(8, order.getOrderTime());
+      ps.setString(9, order.getOrderNote());
+      ps.setDate(10, order.getDeliveryTime());
+      ps.setDate(11, order.getOrderCancelTime());
       result = ps.executeUpdate();
     } catch (SQLException ex) {
       Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,7 +134,7 @@ public class OrderDAO {
   }
 
   public int update(Order order) {
-    String sql = "update [Order] set cart_id = ?, customer_id = ?, order_status_id = ?, payment_method_id = ?, order_time = ?, order_total = ?, order_note = ?, delivery_time = ?, contact_phone = ?, order_cancel_time = ? where order_id = ?";
+    String sql = "update [Order] set cart_id = ?, customer_id = ?, order_status_id = ?, payment_method_id = ?, contact_phone = ?, delivery_address = ?, order_total = ?, order_time = ?, order_note = ?, delivery_time = ?, order_cancel_time = ? where order_id = ?";
     int result = 0;
     try {
       PreparedStatement ps = conn.prepareStatement(sql);
@@ -139,13 +142,14 @@ public class OrderDAO {
       ps.setInt(2, order.getCustomerID());
       ps.setByte(3, order.getOrderStatusID());
       ps.setByte(4, order.getPaymentMethodID());
-      ps.setDate(5, order.getOrderTime());
-      ps.setBigDecimal(6, order.getOrderTotal());
-      ps.setString(7, order.getOrderNote());
-      ps.setDate(8, order.getDeliveryTime());
-      ps.setString(9, order.getContactPhone());
-      ps.setDate(10, order.getOrderCancelTime());
-      ps.setInt(11, order.getOrderID());
+      ps.setString(5, order.getContactPhone());
+      ps.setString(6, order.getDeliveryAddress());
+      ps.setBigDecimal(7, order.getOrderTotal());
+      ps.setDate(8, order.getOrderTime());
+      ps.setString(9, order.getOrderNote());
+      ps.setDate(10, order.getDeliveryTime());
+      ps.setDate(11, order.getOrderCancelTime());
+      ps.setInt(12, order.getOrderID());
     } catch (SQLException ex) {
       Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
