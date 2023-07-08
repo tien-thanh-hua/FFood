@@ -116,10 +116,7 @@
                       <th>Mã Đơn</th>
                       <th>Mã KH</th>
                       <th>SĐT liên lạc</th>
-<<<<<<< HEAD
                       <th>Địa chỉ nhận</th>
-=======
->>>>>>> dfc11e6384a3b7fb3bd239b30892db1eac4d74af
                       <th>Phương thức thanh toán</th>
                       <th>Các món đặt</th>
                       <th>Ghi chú</th> <!-- contains both customer note and cart details -->
