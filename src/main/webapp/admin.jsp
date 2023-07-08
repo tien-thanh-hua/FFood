@@ -18,8 +18,8 @@
     <%@ include file="WEB-INF/jspf/adminDataTables.jspf" %>
   </head>
   <body>
-
     <%@ include file="WEB-INF/jspf/deleteFood.jspf" %>
+    <%@ include file="WEB-INF/jspf/deleteUser.jspf" %>
     <div class="container-fluid m-0 p-0">
       <div class="row m-0">
         <%@ include file="WEB-INF/jspf/adminSidebar.jspf" %>
@@ -76,11 +76,11 @@
                   <a class="btn btn-primary my-2" href="admin/user/add" role="button">Thêm Người dùng</a>
                   <thead>
                     <tr>
-                      <th>Mã Tài khoản</th>
-                      <th>Mã Khách hàng</th>
+                      <th>Mã TK</th>
+                      <th>Mã KH</th>
                       <th>Tên Người dùng</th>
                       <th>Email</th>
-                      <th>Loại Tài khoản</th>
+                      <th>Loại TK</th>
                       <th>Thao tác</th>
                     </tr>
                   </thead>
@@ -93,10 +93,10 @@
                         <td>${u.email}</td>
                         <td>${u.accountType}</td>
                         <td>
-                          <a href="/user/food/update/${u.accountID}" class="btn btn-sm btn-danger">
+                          <a href="/user/food/update/${u.accountID}" class="btn btn-sm btn-success py-1 m-1">
                             Cập nhật
                           </a>
-                          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
+                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
                             Xóa
                           </button>
                         </td>
@@ -116,10 +116,7 @@
                       <th>Mã Đơn</th>
                       <th>Mã KH</th>
                       <th>SĐT liên lạc</th>
-<<<<<<< HEAD
                       <th>Địa chỉ nhận</th>
-=======
->>>>>>> dfc11e6384a3b7fb3bd239b30892db1eac4d74af
                       <th>Phương thức thanh toán</th>
                       <th>Các món đặt</th>
                       <th>Ghi chú</th> <!-- contains both customer note and cart details -->
