@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>FoodDisplay</servlet-name>
-        <servlet-class>Controllers.FoodDisplay</servlet-class>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>Controllers.HomeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminController</servlet-name>
@@ -12,7 +12,14 @@
         <servlet-name>CheckoutController</servlet-name>
         <servlet-class>Controllers.CheckoutController</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>AboutUsController</servlet-name>
+        <servlet-class>Controllers.AboutUsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TermsAndConditionsController</servlet-name>
+        <servlet-class>Controllers.TermsAndConditionsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
@@ -58,7 +65,7 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FoodDisplay</servlet-name>
+        <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -68,6 +75,14 @@
     <servlet-mapping>
         <servlet-name>CheckoutController</servlet-name>
         <url-pattern>/checkout/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AboutUsController</servlet-name>
+        <url-pattern>/about-us</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TermsAndConditionsController</servlet-name>
+        <url-pattern>/terms-and-conditions</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

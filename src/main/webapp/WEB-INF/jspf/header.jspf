@@ -7,25 +7,19 @@
     <div class="w-100 d-flex justify-content-between">
       <div>
         <i class="fa fa-envelope mx-2"></i>
-        <a class="navbar-sm-brand text-light text-decoration-none" href="#">
+        <span class="navbar-sm-brand text-light text-decoration-none">
           ffood@support.com
-        </a>
+        </span>
         <i class="fa fa-phone mx-2"></i>
-        <a class="navbar-sm-brand text-light text-decoration-none" href="#">
+        <span class="navbar-sm-brand text-light text-decoration-none" href="#">
           0017-001-1704
-        </a>
+        </span>
       </div>
       <div>
-        <a class="text-light" href="#" target="_blank" rel="sponsored">
-          <i class="fab fa-facebook-f fa-sm fa-fw me-2"></i>
+        <a class="text-light" href="https://github.com/tien-thanh-hua/FFood" target="_blank">
+          <i class="fab fa-github fa-sm fa-fw me-2"></i>
         </a>
-        <a class="text-light" href="#" target="_blank">
-          <i class="fab fa-instagram fa-sm fa-fw me-2"></i>
-        </a>
-        <a class="text-light" href="#" target="_blank">
-          <i class="fab fa-twitter fa-sm fa-fw me-2"></i>
-        </a>
-        <a class="text-light" href="#" target="_blank">
+        <a class="text-light" href="https://www.linkedin.com/in/tien-thanh-hua/" target="_blank">
           <i class="fab fa-linkedin fa-sm fa-fw"></i>
         </a>
       </div>
@@ -56,16 +50,9 @@
                 <i class="fas fa-user me-2"></i>
                 ${username}
               </button>
-              <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                ${username}
-              </a>
               <ul class="dropdown-menu text-small shadow">
                 <li><a class="dropdown-item" href="/user/account">Tài khoản của tôi</a></li>
-              </ul>
-              <ul class="dropdown-menu text-small shadow">
                 <li><a class="dropdown-item" href="/user/orders">Đơn món</a></li>
-              </ul>
-              <ul class="dropdown-menu text-small shadow">
                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
               </ul>
             </div>
