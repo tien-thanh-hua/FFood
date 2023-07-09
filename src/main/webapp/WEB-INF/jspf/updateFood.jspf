@@ -1,0 +1,56 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="Models.Food"%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="modal" tabindex="-1" id="update-food-modal-${param.foodID}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form id="update-food-form" method="POST" action="/admin">
+        <div class="modal-header">
+          <h5 class="modal-title">Cập nhật Món</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-5">
+          <!-- Hidden - Food ID -->
+          <input type="hidden" name="txtFoodID" value="${f.foodID}"/>
+          <!-- Food Type -->
+          <div class="mb-3">
+            <label for="txtFoodTypeID" class="form-label">Loại món</label>
+            <select class="form-select" id="txtFoodTypeID" name="txtFoodTypeID" required>
+              <option value="1" ${(f.foodTypeID == 1) ? "selected" : ""}>Cơm</option>
+              <option value="2" ${(f.foodTypeID == 2) ? "selected" : ""}>Mì</option>
+              <option value="3" ${(f.foodTypeID == 3) ? "selected" : ""}>Bánh mì</option>
+              <option value="4" ${(f.foodTypeID == 4) ? "selected" : ""}>Đồ ăn vặt</option>
+              <option value="5" ${(f.foodTypeID == 5) ? "selected" : ""}>Tráng miệng</option>
+              <option value="6" ${(f.foodTypeID == 6) ? "selected" : ""}>Đồ uống</option>
+            </select>
+          </div>
+          <!-- Food Name -->
+          <div class="mb-3">
+            <label for="txtFoodName" class="form-label">Tên món</label>
+            <input type="text" class="form-control" id="txtFoodName" name="txtFoodName" maxlength="50" required value="${f.foodName}">
+          </div>
+          <!-- Price -->
+          <div class="mb-3">
+            <label for="txtFoodPrice" class="form-label">Đơn giá</label>
+            <input type="number" step="0.01" class="form-control" id="txtFoodPrice" name="txtFoodPrice" min="0" required value="${f.foodPrice}">
+          </div>
+          <!-- Discount Percentage -->
+          <div class="mb-3">
+            <label for="txtDiscountPercent" class="form-label">Giảm giá (%)</label>
+            <input type="number" class="form-control" id="txtDiscountPercent" name="txtDiscountPercent" min="0" max="100" required value="${f.discountPercent}">
+          </div>
+          <!-- Image URL -->
+          <div class="mb-3">
+            <label for="txtImageURL" class="form-label">Đường dẫn Hình ảnh</label>
+            <input type="url" class="form-control" id="txtImageURL" name="txtImageURL" maxlength="255" required placeholder="https://drive.google.com/file/d/<mã hình>/view?usp=drive_link" value="${f.imageURL}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Submit Button -->
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-success" id="btnSubmit" name="btnSubmit" value="SubmitUpdateFood" onclick="validateForm()">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
