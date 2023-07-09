@@ -56,10 +56,10 @@ public class OrderDAO {
                 orderRS.getString("delivery_address"),
                 this.getOrderItemsList(orderRS.getInt("cart_id")),
                 orderRS.getBigDecimal("order_total"),
-                orderRS.getDate("order_time"),
+                orderRS.getTimestamp("order_time"),
                 orderRS.getString("order_note"),
-                orderRS.getDate("delivery_time"),
-                orderRS.getDate("order_cancel_time"));
+                orderRS.getTimestamp("delivery_time"),
+                orderRS.getTimestamp("order_cancel_time"));
         orderList.add(order);
       }
     } catch (SQLException ex) {
@@ -86,10 +86,10 @@ public class OrderDAO {
                 rs.getString("delivery_address"),
                 this.getOrderItemsList(rs.getInt("cart_id")),
                 rs.getBigDecimal("order_total"),
-                rs.getDate("order_time"),
+                rs.getTimestamp("order_time"),
                 rs.getString("order_note"),
-                rs.getDate("delivery_time"),
-                rs.getDate("order_cancel_time"));
+                rs.getTimestamp("delivery_time"),
+                rs.getTimestamp("order_cancel_time"));
       }
     } catch (SQLException ex) {
       Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,10 +109,10 @@ public class OrderDAO {
       ps.setString(5, order.getContactPhone());
       ps.setString(6, order.getDeliveryAddress());
       ps.setBigDecimal(7, order.getOrderTotal());
-      ps.setDate(8, order.getOrderTime());
+      ps.setTimestamp(8, order.getOrderTime());
       ps.setString(9, order.getOrderNote());
-      ps.setDate(10, order.getDeliveryTime());
-      ps.setDate(11, order.getOrderCancelTime());
+      ps.setTimestamp(10, order.getDeliveryTime());
+      ps.setTimestamp(11, order.getOrderCancelTime());
       result = ps.executeUpdate();
     } catch (SQLException ex) {
       Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,10 +145,10 @@ public class OrderDAO {
       ps.setString(5, order.getContactPhone());
       ps.setString(6, order.getDeliveryAddress());
       ps.setBigDecimal(7, order.getOrderTotal());
-      ps.setDate(8, order.getOrderTime());
+      ps.setTimestamp(8, order.getOrderTime());
       ps.setString(9, order.getOrderNote());
-      ps.setDate(10, order.getDeliveryTime());
-      ps.setDate(11, order.getOrderCancelTime());
+      ps.setTimestamp(10, order.getDeliveryTime());
+      ps.setTimestamp(11, order.getOrderCancelTime());
       ps.setInt(12, order.getOrderID());
     } catch (SQLException ex) {
       Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);

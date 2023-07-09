@@ -17,6 +17,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class AdminController extends HttpServlet {
     }
   }
 
-  private void processUser(HttpServletRequest request, HttpServletResponse response)
+  private void doGetUser(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String path = request.getRequestURI();
     if (path.endsWith("/admin/user/add")) {
@@ -77,7 +78,7 @@ public class AdminController extends HttpServlet {
     }
   }
 
-  private void processFood(HttpServletRequest request, HttpServletResponse response)
+  private void doGetFood(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String path = request.getRequestURI();
     if (path.endsWith("/admin/food/add")) {
@@ -103,6 +104,49 @@ public class AdminController extends HttpServlet {
     }
   }
 
+  private void doPostAddFood(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    byte foodTypeID = Byte.parseByte(request.getParameter("txtFoodTypeID"));
+    String foodName = request.getParameter("txtFoodName");
+    BigDecimal foodPrice = BigDecimal.valueOf(Double.parseDouble(request.getParameter("txtFoodPrice")));
+    byte discountPercent = Byte.parseByte(request.getParameter("txtDiscountPercent"));
+    String imageURL = request.getParameter("txtImageURL");
+
+    FoodDAO foodDAO = new FoodDAO();
+    Food food = new Food(foodName, foodPrice, discountPercent, imageURL, foodTypeID);
+    int result = foodDAO.add(food);
+
+    if (result == 1) {
+      response.sendRedirect("/admin");
+      return;
+    } else {
+      response.sendRedirect("/admin");
+      return;
+    }
+  }
+
+  private void doPostUpdateFood(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+    short foodID = Short.parseShort(request.getParameter("txtFoodID"));
+    byte foodTypeID = Byte.parseByte(request.getParameter("txtFoodTypeID"));
+    String foodName = request.getParameter("txtFoodName");
+    BigDecimal foodPrice = BigDecimal.valueOf(Double.parseDouble(request.getParameter("txtFoodPrice")));
+    byte discountPercent = Byte.parseByte(request.getParameter("txtDiscountPercent"));
+    String imageURL = request.getParameter("txtImageURL");
+
+    FoodDAO foodDAO = new FoodDAO();
+    Food food = new Food(foodID, foodName, foodPrice, discountPercent, imageURL, foodTypeID);
+    int result = foodDAO.update(food);
+
+    if (result == 1) {
+      response.sendRedirect("/admin");
+      return;
+    } else {
+      response.sendRedirect("/admin/");
+      return;
+    }
+  }
+
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
    * Handles the HTTP <code>GET</code> method.
@@ -116,14 +160,14 @@ public class AdminController extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String path = request.getRequestURI();
-    if (path.endsWith("/admin") || path.endsWith("/admin/")) {
+    if (path.endsWith("/admin")) {
       FoodDAO foodDAO = new FoodDAO();
       List<Food> foodList = foodDAO.getAllList();
       AccountDAO accountDAO = new AccountDAO();
       List<Account> userAccountList = accountDAO.getAllUser();
       OrderDAO orderDAO = new OrderDAO();
       List<Order> orderList = orderDAO.getAllList();
-      
+
       request.setAttribute("foodList", foodList);
       request.setAttribute("userAccountList", userAccountList);
       request.setAttribute("orderList", orderList);
@@ -131,9 +175,9 @@ public class AdminController extends HttpServlet {
     } else if (path.endsWith("/admin/")) {
       response.sendRedirect("/admin");
     } else if (path.startsWith("/admin/food")) {
-      processFood(request, response);
+      doGetFood(request, response);
     } else if (path.startsWith("/admin/user")) {
-      processUser(request, response);
+      doGetUser(request, response);
     } else {
       response.setContentType("text/css");
       request.getRequestDispatcher("/admin.jsp").forward(request, response);
@@ -151,7 +195,15 @@ public class AdminController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
+    if (request.getParameter("btnSubmit") != null
+            && (request.getParameter("btnSubmit")).equals("SubmitAddFood")) {
+      doPostAddFood(request, response);
+    }
+
+    if (request.getParameter("btnSubmit") != null
+            && (request.getParameter("btnSubmit")).equals("SubmitUpdateFood")) {
+      doPostUpdateFood(request, response);
+    }
   }
 
   /**

@@ -16,9 +16,10 @@
 
     <%@ include file="WEB-INF/jspf/resources.jspf" %>
     <%@ include file="WEB-INF/jspf/adminDataTables.jspf" %>
+    <%@ include file="WEB-INF/jspf/validation.jspf" %>
   </head>
   <body>
-    <%@ include file="WEB-INF/jspf/deleteFood.jspf" %>
+    <%@ include file="WEB-INF/jspf/addFood.jspf" %>
     <%@ include file="WEB-INF/jspf/deleteUser.jspf" %>
     <div class="container-fluid m-0 p-0">
       <div class="row m-0">
@@ -31,7 +32,9 @@
               <div class="container-fluid p-2">
                 <table id="food-table">
                   <h1 class="text-center fw-bold fs-3">Quản lý Món ăn</h1>
-                  <a class="btn btn-primary my-2" href="admin/food/add" role="button">Thêm Món</a>
+                  <button type="button" class="btn btn-sm btn-success py-1 my-2 me-2" data-bs-toggle="modal" data-bs-target="#add-food-modal">
+                    Thêm Món
+                  </button>
                   <thead>
                     <tr>
                       <th>Mã số</th>
@@ -44,7 +47,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${foodList}" var="f">
+                    <c:forEach items="${foodList}" var="f">                      
+                      <c:set var="f" value="${f}" scope="request"/>
+                      <c:import url="WEB-INF/jspf/updateFood.jspf">
+                        <c:param name="foodID" value="${f.foodID}" />
+                      </c:import>
+                      <c:import url="WEB-INF/jspf/deleteFood.jspf">
+                        <c:param name="foodID" value="${f.foodID}" />
+                        <c:param name="foodName" value="${f.foodName}" />
+                      </c:import>
                       <tr>
                         <td>${f.foodID}</td>
                         <td>${f.foodType}</td>
@@ -55,10 +66,10 @@
                           <img src="${f.imageURL}" alt="${f.foodName}"/>
                         </td>
                         <td>
-                          <a href="/admin/food/update/${f.foodID}" class="btn btn-sm btn-success py-1 m-1">
+                          <button type="button" class="btn btn-sm btn-success py-1 m-1" data-bs-toggle="modal" data-bs-target="#update-food-modal-${f.foodID}">
                             Cập nhật
-                          </a>
-                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-food-modal">
+                          </button>
+                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-food-modal-${f.foodID}">
                             Xóa
                           </button>
                         </td>
