@@ -14,59 +14,60 @@ public class CartItem {
 
   private int cartItemID;
   private int cartID;
-  private short foodID;
-  private BigDecimal foodPrice;
-  private byte foodQuantity;
+  private Food food;
+  private int foodQuantity;
 
-  public CartItem(int cartItemID, int cartID, short foodID, BigDecimal foodPrice, byte food_quantity) {
-    this.cartItemID = cartItemID;
-    this.cartID = cartID;
-    this.foodID = foodID;
-    this.foodPrice = foodPrice;
-    this.foodQuantity = food_quantity;
-  }
+    public CartItem() {
+    }
 
-  public CartItem() {
-  }
+    public CartItem(int cartItemID, int cartID, Food food, int foodQuantity) {
+        this.cartItemID = cartItemID;
+        this.cartID = cartID;
+        this.food = food;
+        this.foodQuantity = foodQuantity;
+    }
 
-  public int getCartItemID() {
-    return cartItemID;
-  }
+    public CartItem(Food food, int foodQuantity) {
+        this.food = food;
+        this.foodQuantity = foodQuantity;
+    }
 
-  public void setCartItemID(int cartItemID) {
-    this.cartItemID = cartItemID;
-  }
+    public int getCartItemID() {
+        return cartItemID;
+    }
 
-  public int getCartID() {
-    return cartID;
-  }
+    public void setCartItemID(int cartItemID) {
+        this.cartItemID = cartItemID;
+    }
 
-  public void setCartID(int cartID) {
-    this.cartID = cartID;
-  }
+    public int getCartID() {
+        return cartID;
+    }
 
-  public short getFoodID() {
-    return foodID;
-  }
+    public void setCartID(int cartID) {
+        this.cartID = cartID;
+    }
 
-  public void setFoodID(short foodID) {
-    this.foodID = foodID;
-  }
+    public Food getFood() {
+        return food;
+    }
 
-  public BigDecimal getFoodPrice() {
-    return foodPrice;
-  }
+    public void setFood(Food food) {
+        this.food = food;
+    }
 
-  public void setFoodPrice(BigDecimal foodPrice) {
-    this.foodPrice = foodPrice;
-  }
+    public int getFoodQuantity() {
+        return foodQuantity;
+    }
 
-  public byte getFoodQuantity() {
-    return foodQuantity;
-  }
+    public void setFoodQuantity(int foodQuantity) {
+        this.foodQuantity = foodQuantity;
+    }
 
-  public void setFoodQuantity(byte foodQuantity) {
-    this.foodQuantity = foodQuantity;
-  }
+    @Override
+    public String toString() {
+        return "CartItem{" + "cartItemID=" + cartItemID + ", cartID=" + cartID + ", food=" + food + ", foodQuantity=" + foodQuantity + '}';
+    }
 
+  
 }

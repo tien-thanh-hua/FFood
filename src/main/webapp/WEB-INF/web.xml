@@ -9,16 +9,28 @@
         <servlet-class>Controllers.AdminController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CheckoutController</servlet-name>
-        <servlet-class>Controllers.CheckoutController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AboutUsController</servlet-name>
         <servlet-class>Controllers.AboutUsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TermsAndConditionsController</servlet-name>
         <servlet-class>Controllers.TermsAndConditionsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartController</servlet-name>
+        <servlet-class>Controllers.AddToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCartController</servlet-name>
+        <servlet-class>Controllers.ViewCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartController</servlet-name>
+        <servlet-class>Controllers.DeleteCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckoutController</servlet-name>
+        <servlet-class>Controllers.CheckoutController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -73,16 +85,28 @@
         <url-pattern>/admin/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CheckoutController</servlet-name>
-        <url-pattern>/checkout/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AboutUsController</servlet-name>
         <url-pattern>/about-us</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TermsAndConditionsController</servlet-name>
         <url-pattern>/terms-and-conditions</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartController</servlet-name>
+        <url-pattern>/addToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCartController</servlet-name>
+        <url-pattern>/viewCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartController</servlet-name>
+        <url-pattern>/deleteCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
