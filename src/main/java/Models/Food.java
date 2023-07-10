@@ -58,6 +58,15 @@ public class Food {
     this.foodType = foodType;
   }
 
+  public Food(short foodID, String foodName, BigDecimal foodPrice, byte discountPercent, String imageURL, byte foodTypeID) {
+    this.foodID = foodID;
+    this.foodName = foodName;
+    this.foodPrice = foodPrice;
+    this.discountPercent = discountPercent;
+    this.imageURL = imageURL;
+    this.foodTypeID = foodTypeID;
+  }
+  
   public Food(short foodID, String foodName, BigDecimal foodPrice, byte discountPercent, String imageURL, byte foodTypeID, String foodType) {
     this.foodID = foodID;
     this.foodName = foodName;
