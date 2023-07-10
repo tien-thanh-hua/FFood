@@ -26,6 +26,13 @@ public class Account {
     this.password = password;
   }
 
+  public Account(String username, String email, String password, String accountType) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.accountType = accountType;
+  }
+
   public Account(int customerID, String username, String email, String password, String accountType) {
     this.customerID = customerID;
     this.username = username;

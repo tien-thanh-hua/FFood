@@ -61,28 +61,6 @@ public class FoodDAO {
     return foodList;
   }
 
-  public List<Food> getFoodList() {
-    String query = "select * from Food";
-    try {
-      List<Food> foodList = new ArrayList<>();
-      ps = conn.prepareStatement(query);
-      rs = ps.executeQuery();
-      while (rs.next()) {
-        Food food = new Food(rs.getShort("food_id"),
-                rs.getString("food_name"),
-                rs.getBigDecimal("food_price"),
-                rs.getByte("discount_percent"),
-                rs.getString("food_img_url"),
-                rs.getByte("food_type_id"),
-                this.getFoodType(rs.getByte("food_type_id")));
-        foodList.add(food);
-      }
-      return foodList;
-    } catch (Exception e) {
-    }
-    return null;
-  }
-
   public Food getFood(short foodID) {
     Food food = null;
     try {
@@ -167,8 +145,7 @@ public class FoodDAO {
     return foodType;
   }
 
-  public List<Food> searchByName(String txtSearch) {
-    List<Food> list = new ArrayList<>();
+  public ResultSet searchByName(String txtSearch) {
     String query = "select * from Food\n"
             + "where [food_name] like ?";
     try {
@@ -176,14 +153,27 @@ public class FoodDAO {
       ps = conn.prepareStatement(query);
       ps.setString(1, "%" + txtSearch + "%");
       rs = ps.executeQuery();
-      while (rs.next()) {
-        Food food = new Food(rs.getShort("food_id"),
-                rs.getString("food_name"),
-                rs.getBigDecimal("food_price"),
-                rs.getByte("discount_percent"),
-                rs.getString("food_img_url"),
-                rs.getByte("food_type_id"),
-                this.getFoodType(rs.getByte("food_type_id")));
+      return rs;
+    } catch (SQLException ex) {
+      Logger.getLogger(FoodTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
+
+  public List<Food> searchByNameList(String txtSearch) {
+    ResultSet searchRS = searchByName(txtSearch);
+    List<Food> list = new ArrayList<>();
+    String query = "select * from Food\n"
+            + "where [food_name] like ?";
+    try {
+      while (searchRS.next()) {
+        Food food = new Food(searchRS.getShort("food_id"),
+                searchRS.getString("food_name"),
+                searchRS.getBigDecimal("food_price"),
+                searchRS.getByte("discount_percent"),
+                searchRS.getString("food_img_url"),
+                searchRS.getByte("food_type_id"),
+                this.getFoodType(searchRS.getByte("food_type_id")));
         list.add(food);
       }
     } catch (SQLException ex) {

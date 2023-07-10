@@ -6,7 +6,7 @@ package Models;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -25,11 +25,11 @@ public class Order {
   private String contactPhone;
   private String deliveryAddress;
   private List<String> orderItems;
-  private Date orderTime;
+  private Timestamp orderTime;
   private BigDecimal orderTotal = new BigDecimal(BigInteger.ZERO);
   private String orderNote;
-  private Date deliveryTime;
-  private Date orderCancelTime;
+  private Timestamp deliveryTime;
+  private Timestamp orderCancelTime;
 
   public Order() {
   }
@@ -37,7 +37,7 @@ public class Order {
   public Order(int cartID, int customerID, byte orderStatusID, String orderStatus,
           byte paymentMethodID, String paymentMethod, String contactPhone,
           String deliveryAddress, List<String> orderItems, BigDecimal orderTotal,
-          Date orderTime, String orderNote, Date deliveryTime, Date orderCancelTime) {
+          Timestamp orderTime, String orderNote, Timestamp deliveryTime, Timestamp orderCancelTime) {
     this.cartID = cartID;
     this.customerID = customerID;
     this.orderStatusID = orderStatusID;
@@ -57,8 +57,8 @@ public class Order {
   public Order(int orderID, int cartID, int customerID, byte orderStatusID,
           String orderStatus, byte paymentMethodID, String paymentMethod,
           String contactPhone, String deliveryAddress, List<String> orderItems,
-          BigDecimal orderTotal, Date orderTime, String orderNote,
-          Date deliveryTime, Date orderCancelTime) {
+          BigDecimal orderTotal, Timestamp orderTime, String orderNote,
+          Timestamp deliveryTime, Timestamp orderCancelTime) {
     this.orderID = orderID;
     this.cartID = cartID;
     this.customerID = customerID;
@@ -164,11 +164,11 @@ public class Order {
     this.orderTotal = orderTotal;
   }
 
-  public Date getOrderTime() {
+  public Timestamp getOrderTime() {
     return orderTime;
   }
 
-  public void setOrderTime(Date orderTime) {
+  public void setOrderTime(Timestamp orderTime) {
     this.orderTime = orderTime;
   }
 
@@ -180,19 +180,19 @@ public class Order {
     this.orderNote = orderNote;
   }
 
-  public Date getDeliveryTime() {
+  public Timestamp getDeliveryTime() {
     return deliveryTime;
   }
 
-  public void setDeliveryTime(Date deliveryTime) {
+  public void setDeliveryTime(Timestamp deliveryTime) {
     this.deliveryTime = deliveryTime;
   }
 
-  public Date getOrderCancelTime() {
+  public Timestamp getOrderCancelTime() {
     return orderCancelTime;
   }
 
-  public void setOrderCancelTime(Date orderCancelTime) {
+  public void setOrderCancelTime(Timestamp orderCancelTime) {
     this.orderCancelTime = orderCancelTime;
   }
 

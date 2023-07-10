@@ -33,13 +33,12 @@ public class AccountDAO {
     try {
       if (account.getAccountType().equals("user")) {
         // Account is of User type (no adminID)
-        String sql = "insert into Account (customer_id, account_username, account_email, account_password, account_type) values (?, ?, ?, ?, ?)";
+        String sql = "insert into Account (account_username, account_email, account_password, account_type) values (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, account.getCustomerID());
-        ps.setString(2, account.getUsername());
-        ps.setString(3, account.getEmail());
-        ps.setString(4, account.getPassword());
-        ps.setString(5, account.getAccountType());
+        ps.setString(1, account.getUsername());
+        ps.setString(2, account.getEmail());
+        ps.setString(3, account.getPassword());
+        ps.setString(4, account.getAccountType());
         result = ps.executeUpdate();
       } else {
         //  Account is of Admin type (no customerID)
@@ -60,14 +59,26 @@ public class AccountDAO {
   }
 
   public int update(Account account) {
-    String sql = "update Account set account_username = ?, account_password = ? where account_id = ?";
+    String sql = "";
     int result = 0;
+    
     try {
-      PreparedStatement ps = conn.prepareStatement(sql);
-      ps.setString(1, account.getUsername());
-      ps.setString(2, account.getPassword());
-      ps.setInt(3, account.getAccountID());
-      result = ps.executeUpdate();
+      if (account.getPassword() == null || account.getPassword().isEmpty()) {
+        sql = "update Account set account_username = ?, account_email = ? where account_id = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, account.getUsername());
+        ps.setString(2, account.getEmail());
+        ps.setInt(3, account.getAccountID());
+        result = ps.executeUpdate();
+      } else {
+        sql = "update Account set account_username = ?, account_email = ?, account_password = ? where account_id = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, account.getUsername());
+        ps.setString(2, account.getEmail());
+        ps.setString(3, account.getPassword());
+        ps.setInt(4, account.getAccountID());
+        result = ps.executeUpdate();
+      }
     } catch (SQLException ex) {
       Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
     }

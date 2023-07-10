@@ -112,8 +112,15 @@
         <session-timeout>
       30
     </session-timeout>
-    </session-config>
-    <welcome-file-list>
-        <welcome-file>home</welcome-file>
-    </welcome-file-list>
+  </session-config>
+  
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jspf</url-pattern>
+    </jsp-property-group>
+  </jsp-config>
+  
+  <welcome-file-list>
+    <welcome-file>home</welcome-file>
+  </welcome-file-list>
 </web-app>
