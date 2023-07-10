@@ -1,6 +1,6 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
-<div class="modal" tabindex="-1" id="delete-user-modal">
+<div class="modal" tabindex="-1" id="delete-user-modal-${param.accountID}">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,11 +8,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Bạn có muốn xóa Tài khoản Người dùng này không?</p>
+        <p>Bạn có muốn xóa Tài khoản ${param.username} này không?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Không</button>
-        <a href="/admin/user/delete/${u.accountID}" class="btn btn-danger">Có</a>
+        <a href="/admin/user/delete/${param.accountID}" class="btn btn-danger">Có</a>
       </div>
     </div>
   </div>

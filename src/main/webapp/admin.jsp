@@ -19,8 +19,6 @@
     <%@ include file="WEB-INF/jspf/validation.jspf" %>
   </head>
   <body>
-    <%@ include file="WEB-INF/jspf/addFood.jspf" %>
-    <%@ include file="WEB-INF/jspf/deleteUser.jspf" %>
     <div class="container-fluid m-0 p-0">
       <div class="row m-0">
         <%@ include file="WEB-INF/jspf/adminSidebar.jspf" %>
@@ -32,6 +30,7 @@
               <div class="container-fluid p-2">
                 <table id="food-table">
                   <h1 class="text-center fw-bold fs-3">Quản lý Món ăn</h1>
+                  <%@ include file="WEB-INF/jspf/addFood.jspf" %>
                   <button type="button" class="btn btn-sm btn-success py-1 my-2 me-2" data-bs-toggle="modal" data-bs-target="#add-food-modal">
                     Thêm Món
                   </button>
@@ -84,11 +83,13 @@
               <div class="container-fluid p-2">
                 <table id="users-table">
                   <h1 class="text-center fw-bold fs-3">Quản lý Người dùng</h1>
-                  <a class="btn btn-primary my-2" href="admin/user/add" role="button">Thêm Người dùng</a>
+                  <%@ include file="WEB-INF/jspf/addUser.jspf" %>
+                  <button type="button" class="btn btn-sm btn-success py-1 my-2 me-2" data-bs-toggle="modal" data-bs-target="#add-user-modal">
+                    Tạo Tài khoản Người dùng
+                  </button>
                   <thead>
                     <tr>
                       <th>Mã TK</th>
-                      <th>Mã KH</th>
                       <th>Tên Người dùng</th>
                       <th>Email</th>
                       <th>Loại TK</th>
@@ -97,17 +98,24 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${userAccountList}" var="u">
+                      <c:set var="u" value="${u}" scope="request"/>
+                      <c:import url="WEB-INF/jspf/updateUser.jspf">
+                        <c:param name="accountID" value="${u.accountID}" />
+                      </c:import>
+                      <c:import url="WEB-INF/jspf/deleteUser.jspf">
+                        <c:param name="accountID" value="${u.accountID}" />
+                        <c:param name="username" value="${u.username}" />
+                      </c:import>
                       <tr>
                         <td>${u.accountID}</td>
-                        <td>${u.customerID}</td>
                         <td>${u.username}</td>
                         <td>${u.email}</td>
                         <td>${u.accountType}</td>
                         <td>
-                          <a href="/user/food/update/${u.accountID}" class="btn btn-sm btn-success py-1 m-1">
+                          <button type="button" class="btn btn-sm btn-success py-1 m-1" data-bs-toggle="modal" data-bs-target="#update-user-modal-${u.accountID}">
                             Cập nhật
-                          </a>
-                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
+                          </button>
+                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-user-modal-${u.accountID}">
                             Xóa
                           </button>
                         </td>
