@@ -5,6 +5,7 @@
 package Models;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -87,6 +88,10 @@ public class Food {
     return foodPrice;
   }
 
+ public String getFoodPriceFormat() {
+    DecimalFormat decimalFormat = new DecimalFormat("#,### đ");
+    return decimalFormat.format(foodPrice);
+}
   public void setFoodPrice(BigDecimal foodPrice) {
     this.foodPrice = foodPrice;
   }

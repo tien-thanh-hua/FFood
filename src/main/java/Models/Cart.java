@@ -6,6 +6,7 @@ package Models;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  *
@@ -13,40 +14,110 @@ import java.math.BigInteger;
  */
 public class Cart {
 
-  private int cartID;
-  private int customerID;
-  private BigDecimal cartTotal = new BigDecimal(BigInteger.ZERO);
+    private int id;
+    private int userId;
+    private float totalPrice;
+    private List<CartItem> items;
 
-  public Cart(int cartID, int customerID) {
-    this.cartID = cartID;
-    this.customerID = customerID;
-  }
+    public Cart() {
+    }
 
-  public Cart() {
-  }
+    public Cart(int id, int userId, float totalPrice, List<CartItem> items) {
+        this.id = id;
+        this.userId = userId;
+        this.totalPrice = totalPrice;
+        this.items = items;
+    }
 
-  public int getCartID() {
-    return cartID;
-  }
+    public Cart(List<CartItem> items) {
+        this.items = items;
+    }
 
-  public void setCartID(int cartID) {
-    this.cartID = cartID;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public int getCustomerID() {
-    return customerID;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public void setCustomerID(int customerID) {
-    this.customerID = customerID;
-  }
+    public int getUserId() {
+        return userId;
+    }
 
-  public BigDecimal getCartTotal() {
-    return cartTotal;
-  }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-  public void setCartTotal(BigDecimal cartTotal) {
-    this.cartTotal = cartTotal;
-  }
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public List<CartItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CartItem> items) {
+        this.items = items;
+    }
+
+    private CartItem getItemById(int id) {
+        for (CartItem item : items) {
+            if (item.getFood().getFoodID() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private boolean checkExist(int id) {
+        for (CartItem item : items) {
+            if (item.getFood().getFoodID() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addItem(CartItem newItem) {
+        if (checkExist(newItem.getFood().getFoodID())) {
+            CartItem olditem = getItemById(newItem.getFood().getFoodID());
+            olditem.setFoodQuantity(olditem.getFoodQuantity() + newItem.getFoodQuantity());
+        } else {
+            items.add(newItem);
+        }
+    }
+
+    public void addItemCheckout(CartItem newItem) {
+        if (!checkExist(newItem.getFood().getFoodID())) {
+            items.add(newItem);
+        } else {
+            CartItem oldItem = getItemById(newItem.getFood().getFoodID());
+            oldItem.setFoodQuantity(newItem.getFoodQuantity());
+        }
+    }
+
+    public void removeItem(int id) {
+        if (getItemById(id) != null) {
+            items.remove(getItemById(id));
+        }
+    }
+
+    public double getTotalMoney() {
+        double t = 0;
+        for (CartItem i : items) {
+            t += (i.getFoodQuantity() * Double.parseDouble(i.getFood().getFoodPrice().toString()));
+        }
+        return t;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" + "id=" + id + ", userId=" + userId + ", totalPrice=" + totalPrice + ", items=" + items.toString() + '}';
+    }
 
 }
