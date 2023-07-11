@@ -14,7 +14,7 @@ $(document).on("click", "#btn-update-food", function () {
   // Set the values of the corresponding form inputs in the modal
   $("#update-food-modal").find("input[name='txtFoodID']").val(foodID);
   $("#update-food-modal").find("#txtFoodName").val(foodName);
-  $("#update-food-modal").find("#txtFoodPrice").val(foodPrice);
+  $("#update-food-modal").find("#txtFoodPrice").val(Number(foodPrice).toFixed(2));
   $("#update-food-modal").find("#txtDiscountPercent").val(discountPercent);
   $("#update-food-modal").find("#txtImageURL").val(imageURL);
   switch (foodType) {
