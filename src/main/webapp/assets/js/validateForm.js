@@ -4,6 +4,15 @@
  */
 $(document).ready(validateForm);
 function validateForm() {
+  $.validator.addMethod("googleDrivePattern", function (value, element) {
+    // Define the regex patterns
+    let pattern1 = /^https:\/\/drive\.google\.com\/uc\?export=view&id=.*/;
+    let pattern2 = /^https:\/\/drive\.google\.com\/file\/d\/.*\/view\?usp=drive_link$/;
+
+    // Test the value against the regex patterns
+    return pattern1.test(value) || pattern2.test(value);
+  }, "Định dạng đường dẫn không đúng");
+  
   $(".add-food-form").validate({
     rules: {
       txtFoodTypeID: {
@@ -28,7 +37,7 @@ function validateForm() {
         required: true,
         url: true,
         maxlength: 255,
-        pattern: "^https://drive\\.google\\.com/file/d/.*?/view\\?usp=drive_link$"
+        googleDrivePattern: true
       }
     },
     messages: {
@@ -52,7 +61,6 @@ function validateForm() {
         required: "Vui lòng nhập Đường dẫn ảnh",
         url: "Giá trị nhập vào phải là đường dẫn",
         maxlength: "Đường dẫn không dài quá 255 kí tự",
-        pattern: "Định dạng đường dẫn không đúng"
       }
     },
     errorElement: "p",
@@ -66,7 +74,7 @@ function validateForm() {
       form.submit();
     }
   });
-
+  
   $(".update-food-form").validate({
     rules: {
       txtFoodTypeID: {
@@ -91,7 +99,7 @@ function validateForm() {
         required: true,
         url: true,
         maxlength: 255,
-        pattern: "^https://drive\\.google\\.com/file/d/.*?/view\\?usp=drive_link$"
+        googleDrivePattern: true
       }
     },
     messages: {
@@ -117,7 +125,6 @@ function validateForm() {
         required: "Vui lòng nhập Đường dẫn ảnh",
         url: "Giá trị nhập vào phải là đường dẫn",
         maxlength: "Đường dẫn không dài quá 255 kí tự",
-        pattern: "Định dạng đường dẫn không đúng"
       }
     },
     errorElement: "p",

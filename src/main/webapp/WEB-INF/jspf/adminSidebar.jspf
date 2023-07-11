@@ -9,19 +9,19 @@
   <hr class="border border-800 border-1 border-opacity-25">
   <ul class="nav nav-pills flex-column mb-auto"> 
     <li class="nav-item">
-      <button data-bs-target="#food-menu" class="nav-link link-body-emphasis" data-bs-toggle="tab">
+      <button data-bs-target="#food-menu" class="nav-link link-body-emphasis w-100 text-start" data-bs-toggle="tab">
         <i class="fas fa-hamburger fa-fw me-2"></i>
         Món ăn
       </button>
     </li>
     <li class="nav-item">
-      <button data-bs-target="#users" class="nav-link link-body-emphasis" data-bs-toggle="tab">
+      <button data-bs-target="#users" class="nav-link link-body-emphasis w-100 text-start" data-bs-toggle="tab">
         <i class="fas fa-users fa-fw me-2"></i>
         Người dùng
       </button>
     </li>
     <li class="nav-item">
-      <button data-bs-target="#orders" class="nav-link link-body-emphasis" data-bs-toggle="tab">
+      <button data-bs-target="#orders" class="nav-link link-body-emphasis w-100 text-start" data-bs-toggle="tab">
         <i class="fas fa-table fa-fw me-2"></i>
         Đơn món
       </button>
