@@ -122,7 +122,7 @@ public class AdminController extends HttpServlet {
           throws ServletException, IOException {
     String username = request.getParameter("txtAccountUsername");
     String email = request.getParameter("txtEmail");
-    String password = request.getParameter("txtAccountPassword");
+    String password = (String) request.getAttribute("txtAccountPassword");
 
     AccountDAO accountDAO = new AccountDAO();
     Account account = new Account(username, email, password, "user");
@@ -143,7 +143,7 @@ public class AdminController extends HttpServlet {
     int accountID = Integer.parseInt(request.getParameter("txtAccountID"));
     String username = request.getParameter("txtAccountUsername");
     String email = request.getParameter("txtEmail");
-    String password = request.getParameter("txtAccountPassword");
+    String password = (String) request.getAttribute("txtAccountPassword");
 
     AccountDAO accountDAO = new AccountDAO();
     Account account = new Account(username, email, password, "user");

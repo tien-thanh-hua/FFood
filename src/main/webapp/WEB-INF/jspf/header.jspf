@@ -46,14 +46,14 @@
         <c:choose>
           <c:when test="${isLoggedIn}">
             <div class="dropdown">
-              <button class="btn btn-primary text-white ms-2 px-3 px-lg-4" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+              <button class="btn btn-secondary text-white ms-2 px-3 px-lg-4" data-bs-toggle="dropdown" aria-expanded="false" type="button">
                 <i class="fas fa-user me-2"></i>
                 ${username}
               </button>
-              <ul class="dropdown-menu text-small shadow">
+              <ul class="dropdown-menu text-small shadow ms-2 w-100">
                 <li><a class="dropdown-item" href="/user/account">Tài khoản của tôi</a></li>
                 <li><a class="dropdown-item" href="/user/orders">Đơn món</a></li>
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+                <li><a class="dropdown-item" href="user/logout">Đăng xuất</a></li>
               </ul>
             </div>
           </c:when>
