@@ -3,7 +3,7 @@
 <div class="modal" tabindex="-1" id="add-user-modal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <form id="add-user-form" method="POST" action="/admin">
+      <form class="add-user-form" method="POST" action="/admin">
         <div class="modal-header">
           <h5 class="modal-title">Tạo Tài khoản Người dùng</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -29,7 +29,9 @@
         <div class="modal-footer">
           <!-- Submit Button -->
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" class="btn btn-success" id="btnSubmit" name="btnSubmit" value="SubmitAddUser" onclick="validateForm()">Tạo</button>
+          <button type="submit" class="btn btn-success" onclick="validateForm()">Tạo</button>
+          <!-- Hidden Submit Value -->
+          <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitAddUser">
         </div>
       </form>
     </div>

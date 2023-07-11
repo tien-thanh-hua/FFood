@@ -3,7 +3,7 @@
 <div class="modal" tabindex="-1" id="add-food-modal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <form id="add-food-form" method="POST" action="/admin">
+      <form class="add-food-form" method="POST" action="/admin">
         <div class="modal-header">
           <h5 class="modal-title">Thêm Món</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -45,7 +45,7 @@
         <div class="modal-footer">
           <!-- Submit Button -->
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" class="btn btn-success" onclick="validateForm()">Thêm</button>
+          <button type="submit" class="btn btn-success">Thêm</button>
           <!-- Hidden Submit Value -->
           <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitAddFood">
         </div>

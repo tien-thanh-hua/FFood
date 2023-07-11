@@ -13,14 +13,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
   object-fit: cover;
 }
 
-.btn-dark-outline {
-  color: #212121;
-  background-color: #ffffff;
-  border-color: #212121;
-}
-
-.btn-dark-outline:hover, .btn-dark-outline:focus, .btn-dark-outline:active, .btn-dark-outline.active, .open>.dropdown-toggle.btn-dark-outline {
-  color: #ffffff;
-  background-color: #212121;
-  border-color: #212121;
+.error {
+  color: red;
 }
