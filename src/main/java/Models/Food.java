@@ -98,7 +98,7 @@ public class Food {
   }
 
  public String getFoodPriceFormat() {
-    DecimalFormat decimalFormat = new DecimalFormat("#,### đ");
+    DecimalFormat decimalFormat = new DecimalFormat("#,###đ");
     return decimalFormat.format(foodPrice);
 }
   public void setFoodPrice(BigDecimal foodPrice) {
