@@ -16,12 +16,17 @@
 
     <%@ include file="WEB-INF/jspf/resources.jspf" %>
     <%@ include file="WEB-INF/jspf/adminDataTables.jspf" %>
-    <%@ include file="WEB-INF/jspf/validation.jspf" %>
   </head>
   <body>
     <div class="container-fluid m-0 p-0">
       <div class="row m-0">
         <%@ include file="WEB-INF/jspf/adminSidebar.jspf" %>
+        <%@ include file="WEB-INF/jspf/addFood.jspf" %>
+        <%@ include file="WEB-INF/jspf/updateFood.jspf" %>
+        <%@ include file="WEB-INF/jspf/deleteFood.jspf" %>
+        <%@ include file="WEB-INF/jspf/addUser.jspf" %>
+        <%@ include file="WEB-INF/jspf/updateUser.jspf" %>
+        <%@ include file="WEB-INF/jspf/deleteUser.jspf" %>
         <!-- Main Content -->
         <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 p-4">
           <div class="tab-content">
@@ -30,7 +35,6 @@
               <div class="container-fluid p-2">
                 <table id="food-table">
                   <h1 class="text-center fw-bold fs-3">Quản lý Món ăn</h1>
-                  <%@ include file="WEB-INF/jspf/addFood.jspf" %>
                   <button type="button" class="btn btn-sm btn-success py-1 my-2 me-2" data-bs-toggle="modal" data-bs-target="#add-food-modal">
                     Thêm Món
                   </button>
@@ -47,14 +51,6 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${foodList}" var="f">                      
-                      <c:set var="f" value="${f}" scope="request"/>
-                      <c:import url="WEB-INF/jspf/updateFood.jspf">
-                        <c:param name="foodID" value="${f.foodID}" />
-                      </c:import>
-                      <c:import url="WEB-INF/jspf/deleteFood.jspf">
-                        <c:param name="foodID" value="${f.foodID}" />
-                        <c:param name="foodName" value="${f.foodName}" />
-                      </c:import>
                       <tr>
                         <td>${f.foodID}</td>
                         <td>${f.foodType}</td>
@@ -65,10 +61,22 @@
                           <img src="${f.imageURL}" alt="${f.foodName}"/>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-sm btn-success py-1 m-1" data-bs-toggle="modal" data-bs-target="#update-food-modal-${f.foodID}">
+                          <button type="button" id="btn-update-food"
+                                  class="btn btn-sm btn-success py-1 m-1"
+                                  data-food-id="${f.foodID}"
+                                  data-food-type="${f.foodTypeID}"
+                                  data-food-name="${f.foodName}"
+                                  data-food-price="${f.foodPrice}"
+                                  data-discount-percent="${f.discountPercent}"
+                                  data-image-url="${f.imageURL}"
+                                  data-bs-toggle="modal" data-bs-target="#update-food-modal">
                             Cập nhật
                           </button>
-                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-food-modal-${f.foodID}">
+                          <button type="button" id="btn-delete-food"
+                                  class="btn btn-sm btn-danger py-1 m-1"
+                                  data-food-id="${f.foodID}"
+                                  data-food-name="${f.foodName}"
+                                  data-bs-toggle="modal" data-bs-target="#delete-food-modal">
                             Xóa
                           </button>
                         </td>
@@ -83,7 +91,6 @@
               <div class="container-fluid p-2">
                 <table id="users-table">
                   <h1 class="text-center fw-bold fs-3">Quản lý Người dùng</h1>
-                  <%@ include file="WEB-INF/jspf/addUser.jspf" %>
                   <button type="button" class="btn btn-sm btn-success py-1 my-2 me-2" data-bs-toggle="modal" data-bs-target="#add-user-modal">
                     Tạo Tài khoản Người dùng
                   </button>
@@ -98,24 +105,25 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${userAccountList}" var="u">
-                      <c:set var="u" value="${u}" scope="request"/>
-                      <c:import url="WEB-INF/jspf/updateUser.jspf">
-                        <c:param name="accountID" value="${u.accountID}" />
-                      </c:import>
-                      <c:import url="WEB-INF/jspf/deleteUser.jspf">
-                        <c:param name="accountID" value="${u.accountID}" />
-                        <c:param name="username" value="${u.username}" />
-                      </c:import>
                       <tr>
                         <td>${u.accountID}</td>
                         <td>${u.username}</td>
                         <td>${u.email}</td>
                         <td>${u.accountType}</td>
                         <td>
-                          <button type="button" class="btn btn-sm btn-success py-1 m-1" data-bs-toggle="modal" data-bs-target="#update-user-modal-${u.accountID}">
+                          <button type="button" id="btn-update-user"
+                                  class="btn btn-sm btn-success py-1 m-1"
+                                  data-account-id="${u.accountID}"
+                                  data-username="${u.username}"
+                                  data-email="${u.email}"
+                                  data-bs-toggle="modal" data-bs-target="#update-user-modal">
                             Cập nhật
                           </button>
-                          <button type="button" class="btn btn-sm btn-danger py-1 m-1" data-bs-toggle="modal" data-bs-target="#delete-user-modal-${u.accountID}">
+                          <button type="button" id="btn-delete-user"
+                                  class="btn btn-sm btn-danger py-1 m-1"
+                                  data-account-id="${u.accountID}"
+                                  data-username="${u.username}"
+                                  data-bs-toggle="modal" data-bs-target="#delete-user-modal">
                             Xóa
                           </button>
                         </td>
@@ -175,6 +183,7 @@
         </main>
       </div>
     </div>
+    <%@ include file="WEB-INF/jspf/validation.jspf" %>
     <%@ include file="WEB-INF/jspf/javascript.jspf" %>
   </body>
 </html>

@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <!-- DataTables -->
 <script src="<%= request.getContextPath() + "vendors/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"%>"></script>
+<script src="<%= request.getContextPath() + "assets/js/admin.js"%>"></script>
 <script>
   $(document).ready(function () {
     $('#food-table').DataTable({
