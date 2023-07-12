@@ -86,7 +86,7 @@ public class CheckoutController extends HttpServlet {
 //        odao.insertOrderStatusNotCFYet(cart);
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
-            request.setAttribute("mess", "Giỏ hàng rỗng, vui lòng chọn món để thanh toán");
+            request.setAttribute("mess", "Giỏ hàng trống, vui lòng chọn món để thanh toán");
             request.getRequestDispatcher("home").forward(request, response);
             return;
         }
@@ -94,21 +94,30 @@ public class CheckoutController extends HttpServlet {
             cart = new Cart();
         }
         String quantityParam = "";
-        List<Short> foodIdList = new ArrayList<>();
         for (CartItem cartItem : cart.getItems()) {
             Short foodId = cartItem.getFood().getFoodID();
 
             if (request.getParameter("quantity-" + foodId) != null) {
+              // Thông thường nếu truy cập /checkout thì sẽ có 2 cách truy cập:
+              // 1 là từ nút Thanh toán (từ modal Giỏ hàng)
+              // 2 là từ nút Đặt món (từ chính trang /checkout)
+              // Tất cả đều sử dụng POST và dữ liệu lấy từ form của trang trước đó
+              // nên ta sẽ lấy dữ liệu từ parameter
                 quantityParam = request.getParameter("quantity-" + foodId);
-            } else if (request.getAttribute("quantity-" + foodId) != null) {
-                quantityParam = (String) request.getAttribute("quantity-" + foodId);
+            } else if (session.getAttribute("quantity-" + foodId) != null) {
+              // Tuy nhiên nếu yêu cầu là GET, ví dụ như sau khi đăng nhập
+              // hoặc đăng xuất thành công thì trả về trang hiện tại tức /checkout 
+              // thì parameter của request sau khi submit form không còn,
+              // nên ta phải lưu giá trị của form bằng session attribute,
+              // do đó ta phải lấy từ session
+              quantityParam = (String) session.getAttribute("quantity-" + foodId);
             }
             int quantity = Integer.parseInt(quantityParam);
             cartItem.setFoodQuantity(quantity); // Cập nhật số lượng cho mục trong giỏ hàng
-            request.setAttribute("quantity-" + foodId, quantityParam);
-            foodIdList.add(foodId);
+            // Lưu lại số lượng của các mục trong trường hợp request là GET
+            // ví dụ như sau khi đăng nhập/đăng xuất thành công tại /checkout
+            session.setAttribute("quantity-" + foodId, quantityParam);
         }
-        request.setAttribute("foodIdList", foodIdList);
         session.setAttribute("cart", cart);
         
         

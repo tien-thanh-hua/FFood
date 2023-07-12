@@ -17,8 +17,8 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpSession;
+import java.net.URLDecoder;
 
 /**
  *
@@ -137,17 +137,25 @@ public class AuthenticationFilter implements Filter {
           // Destination page is admin page
           if (getAuthStatus(httpRequest) == 2) {
             // Account is of Admin type, proceeds to admin page
-            Cookie[] cookies = httpRequest.getCookies();
-            Cookie admin = null;
+            HttpSession session = httpRequest.getSession();
+            boolean hasAdminSession = (session.getAttribute("admin") != null
+                    && !(((String) session.getAttribute("admin")).isEmpty()));
+            if (hasAdminSession) {
+              String username = (String) session.getAttribute("admin");
+              request.setAttribute("adminName", URLDecoder.decode(username, "UTF-8"));
+            } else {
+              Cookie[] cookies = httpRequest.getCookies();
+              Cookie admin = null;
 
-            for (Cookie cookie : cookies) {
-              if (cookie.getName().equals("admin")) {
-                admin = cookie;
-                break;
+              for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("admin")) {
+                  admin = cookie;
+                  String adminName = cookie.getValue();
+                  request.setAttribute("adminName", URLDecoder.decode(adminName, "UTF-8"));
+                  break;
+                }
               }
             }
-
-            request.setAttribute("adminName", admin.getValue());
             request.setAttribute("isLoggedIn", true);
           } else {
             // Account is of User type: cannot access Admin page
@@ -159,17 +167,31 @@ public class AuthenticationFilter implements Filter {
           // Destination page is non-admin page
           if (getAuthStatus(httpRequest) == 1) {
             // Account is of User type
-            Cookie[] cookies = httpRequest.getCookies();
-            Cookie user = null;
+            HttpSession session = httpRequest.getSession();
+            boolean hasUserSession = (session.getAttribute("user") != null
+                    && !(((String) session.getAttribute("user")).isEmpty()));
+            if (hasUserSession) {
+              String username = (String) session.getAttribute("user");
+              request.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
+            } else {
+              Cookie[] cookies = httpRequest.getCookies();
+              Cookie user = null;
+              Cookie userID = null;
 
-            for (Cookie cookie : cookies) {
-              if (cookie.getName().equals("user")) {
-                user = cookie;
-                break;
+              for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) {
+                  user = cookie;
+                  String username = user.getValue();
+                  request.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
+                  break;
+                }
+                if (cookie.getName().equals("userID")) {
+                  userID = cookie;
+                  request.setAttribute("userID", Integer.parseInt(userID.getValue()));
+                  break;
+                } 
               }
             }
-
-            request.setAttribute("username", user.getValue());
             request.setAttribute("isLoggedIn", true);
           } else if (getAuthStatus(httpRequest) == 2) {
             // Account is of Admin type, cannot access user pages
@@ -301,6 +323,21 @@ public class AuthenticationFilter implements Filter {
     filterConfig.getServletContext().log(msg);
   }
 
+  /**
+   * Returns a status code for authentication. This is used every time a page is
+   * loaded.
+   *
+   * @param request The HttpServletRequest object whose session info and cookies
+   * will be extracted from.
+   * @return An integer status code depicting the authentication result:
+   * <ul>
+   * <li>1 if successful user authentication with session stored</li>
+   * <li>2 if successful user authentication with cookies stored</li>
+   * <li>3 if successful admin authentication with session stored</li>
+   * <li>4 if successful admin authentication with cookie stored</li>
+   * <li>-1 if unsuccessful authentication</li>
+   * </ul>
+   */
   public int getAuthStatus(HttpServletRequest request) {
     Cookie[] cookies = request.getCookies();
     int authStatus = -1;
