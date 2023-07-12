@@ -61,7 +61,7 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -76,14 +76,16 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Lưu trữ URL hiện tại vào session attribute
+        HttpSession session = request.getSession();
+        session.setAttribute("previousUrl", request.getRequestURI());
         //processRequest(request, response);
 //        HttpSession session = request.getSession();
 //        Cart cart = (Cart) object1;
 //        OrderDAO odao = new OrderDAO();
 //        odao.insertOrderStatusNotCFYet(cart);
-        HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
-        if(cart == null){
+        if (cart == null) {
             request.setAttribute("mess", "Giỏ hàng rỗng, vui lòng chọn món để thanh toán");
             request.getRequestDispatcher("home").forward(request, response);
             return;
@@ -91,16 +93,25 @@ public class CheckoutController extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
         }
-
+        String quantityParam = "";
+        List<Short> foodIdList = new ArrayList<>();
         for (CartItem cartItem : cart.getItems()) {
             Short foodId = cartItem.getFood().getFoodID();
-            String quantityParam = request.getParameter("quantity-" + foodId);
+
+            if (request.getParameter("quantity-" + foodId) != null) {
+                quantityParam = request.getParameter("quantity-" + foodId);
+            } else if (request.getAttribute("quantity-" + foodId) != null) {
+                quantityParam = (String) request.getAttribute("quantity-" + foodId);
+            }
             int quantity = Integer.parseInt(quantityParam);
             cartItem.setFoodQuantity(quantity); // Cập nhật số lượng cho mục trong giỏ hàng
+            request.setAttribute("quantity-" + foodId, quantityParam);
+            foodIdList.add(foodId);
         }
-
+        request.setAttribute("foodIdList", foodIdList);
         session.setAttribute("cart", cart);
-
+        
+        
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
 
     }

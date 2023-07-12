@@ -9,12 +9,12 @@
           <div class="flex-grow-1"></div>
           <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>                
         </div>
-        <form class="form mx-2 p-2 mx-md-4 p-md-4 mb-4" id="main-form" method="post">
+          <form class="form mx-2 p-2 mx-md-4 p-md-4 mb-4" id="main-form" method="post" action="/login">
           <h1 class="text-center mb-2 mb-md-4">Đăng nhập</h1>
           <div class="form-group col">
-            <label class="col-form-label" for="txtPhoneNumber">Số điện thoại</label>
+            <label class="col-form-label" for="txtUsername">Tên Tài khoản Người dùng</label>
             <div class="">
-              <input type="text" class="form-control" id="txtPhoneNumber" name="txtPhoneNumber" placeholder="Nhập số điện thoại">
+              <input type="text" class="form-control" id="txtUsername" name="txtUsername" placeholder="Nhập tên tài khoản">
               <div class="lblError" id="lblErrorName"></div>
             </div>
           </div>

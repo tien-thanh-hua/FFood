@@ -221,10 +221,10 @@ public class AccountDAO {
 
   public boolean login(Account acc) throws SQLException {
     rs = null;
-    String sql = "select * from Account where account_username = ? and account_password = ?";
+    String sql = "select * from Account where account_email = ? and account_password = ?";
     try {
       ps = conn.prepareStatement(sql);
-      ps.setString(1, acc.getUsername());
+      ps.setString(1, acc.getEmail());
       ps.setString(2, acc.getPassword());
       rs = ps.executeQuery();
     } catch (SQLException ex) {
