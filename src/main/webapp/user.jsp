@@ -43,29 +43,31 @@
           <div class="row">
             <div class="col-md-6">
               <!-- Edit user information form -->
-              <form>
+              <form method="post" action="/user/info">
+                <!-- Hidden - User Account ID -->
+                <input type="hidden" id="txtAccountID" name="txtAccountID" value="${currentAccount.accountID}"/>
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label for="last-name" class="form-label">Họ</label>
-                    <input type="text" class="form-control" id="last-name">
+                    <label for="txtLastName" class="form-label">Họ</label>
+                    <input type="text" class="form-control" id="txtLastName">
                   </div>
                   <div class="col-md-6">
-                    <label for="first-name" class="form-label">Tên</label>
-                    <input type="text" class="form-control" id="first-name">
+                    <label for="txtFirstName" class="form-label">Tên</label>
+                    <input type="text" class="form-control" id="txtFirstName">
                   </div>
                 </div>
                 <div class="mb-3">
                   <label>Giới tính</label><br>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="Nam">
+                    <input class="form-check-input" type="radio" name="txtGender" id="male" value="Nam">
                     <label class="form-check-label" for="male">Nam</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="Nữ">
+                    <input class="form-check-input" type="radio" name="txtGender" id="female" value="Nữ">
                     <label class="form-check-label" for="female">Nữ</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="other" value="Khác">
+                    <input class="form-check-input" type="radio" name="txtGender" id="other" value="Khác">
                     <label class="form-check-label" for="other">Khác</label>
                   </div>
                 </div>
@@ -75,14 +77,16 @@
               <!-- Edit user contact information form -->
               <form>
                 <div class="mb-3">
-                  <label for="phone" class="form-label">Số điện thoại</label>
-                  <input type="tel" class="form-control" id="phone">
+                  <label for="txtPhoneNumber" class="form-label">Số điện thoại</label>
+                  <input type="tel" class="form-control" id="txtPhoneNumber">
                 </div>
                 <div class="mb-3">
-                  <label for="address" class="form-label">Địa chỉ</label>
-                  <textarea class="form-control" id="address" rows="2"></textarea>
+                  <label for="txtAddress" class="form-label">Địa chỉ</label>
+                  <textarea class="form-control" id="txtAddress" rows="2"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                <!-- Hidden Submit Value -->
+                <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitUpdateUser">
               </form>
             </div>
           </div>
