@@ -4,6 +4,15 @@
  */
 $(document).ready(validateForm);
 function validateForm() {
+  $.validator.addMethod("googleDrivePattern", function (value, element) {
+    // Define the regex patterns
+    let pattern1 = /^https:\/\/drive\.google\.com\/uc\?export=view&id=.*/;
+    let pattern2 = /^https:\/\/drive\.google\.com\/file\/d\/.*\/view\?usp=drive_link$/;
+
+    // Test the value against the regex patterns
+    return pattern1.test(value) || pattern2.test(value);
+  }, "Định dạng đường dẫn không đúng");
+  
   $(".add-food-form").validate({
     rules: {
       txtFoodTypeID: {
@@ -28,7 +37,7 @@ function validateForm() {
         required: true,
         url: true,
         maxlength: 255,
-        pattern: "^https://drive\\.google\\.com/file/d/.*?/view\\?usp=drive_link$"
+        googleDrivePattern: true
       }
     },
     messages: {
@@ -52,7 +61,6 @@ function validateForm() {
         required: "Vui lòng nhập Đường dẫn ảnh",
         url: "Giá trị nhập vào phải là đường dẫn",
         maxlength: "Đường dẫn không dài quá 255 kí tự",
-        pattern: "Định dạng đường dẫn không đúng"
       }
     },
     errorElement: "p",
@@ -66,7 +74,7 @@ function validateForm() {
       form.submit();
     }
   });
-
+  
   $(".update-food-form").validate({
     rules: {
       txtFoodTypeID: {
@@ -91,7 +99,7 @@ function validateForm() {
         required: true,
         url: true,
         maxlength: 255,
-        pattern: "^https://drive\\.google\\.com/file/d/.*?/view\\?usp=drive_link$"
+        googleDrivePattern: true
       }
     },
     messages: {
@@ -117,7 +125,6 @@ function validateForm() {
         required: "Vui lòng nhập Đường dẫn ảnh",
         url: "Giá trị nhập vào phải là đường dẫn",
         maxlength: "Đường dẫn không dài quá 255 kí tự",
-        pattern: "Định dạng đường dẫn không đúng"
       }
     },
     errorElement: "p",
@@ -137,7 +144,7 @@ function validateForm() {
       txtAccountUsername: {
         required: true,
         maxlength: 50,
-        pattern: /^[a-zA-Z0-9-']+$/
+        pattern: /^[a-zA-Z0-9-'_]+$/
       },
       txtEmail: {
         required: true,
@@ -158,7 +165,7 @@ function validateForm() {
       txtAccountUsername: {
         required: "Vui lòng nhập Tên Tài khoản Người dùng",
         maxlength: "Tên Tài khoản Người dùng không được vượt quá 50 ký tự",
-        pattern: "Tên Tài khoản Người dùng chỉ chấp nhận chữ, số, dấu gạch ngang và dấu nháy đơn"
+        pattern: "Tên Tài khoản chỉ chấp nhận chữ, số, dấu gạch ngang, gạch dưới, nháy đơn và không chứa khoảng trắng"
       },
       txtEmail: {
         required: "Vui lòng nhập Email",
@@ -186,7 +193,7 @@ function validateForm() {
       txtAccountUsername: {
         required: true,
         maxlength: 50,
-        pattern: /^[a-zA-Z0-9-']+$/
+        pattern: /^[a-zA-Z0-9-'_]+$/
       },
       txtEmail: {
         required: true,
@@ -194,20 +201,18 @@ function validateForm() {
         email: true
       },
       txtAccountPassword: {
-        required: true,
         minlength: 8
       },
       txtAccountRePassword: {
-        required: true,
         minlength: 8,
-        equalTo: "#txtAccountPassword"
+        equalTo: "#txtUpdateAccountPassword"
       },
     },
     messages: {
       txtAccountUsername: {
         required: "Vui lòng nhập Tên Tài khoản Người dùng",
         maxlength: "Tên Tài khoản Người dùng không được vượt quá 50 ký tự",
-        pattern: "Tên Tài khoản Người dùng chỉ chấp nhận chữ, số, dấu gạch ngang và dấu nháy đơn"
+        pattern: "Tên Tài khoản chỉ chấp nhận chữ, số, dấu gạch ngang, gạch dưới, nháy đơn và không chứa khoảng trắng"
       },
       txtEmail: {
         required: "Vui lòng nhập Email",
@@ -215,12 +220,10 @@ function validateForm() {
         email: "Vui lòng nhập địa chỉ Email hợp lệ"
       },
       txtAccountPassword: {
-        required: "Vui lòng nhập Mật khẩu",
-        minlength: "Mật khẩu phải có ít nhất 8 ký tự"
+        minlength: "Mật khẩu mới phải có ít nhất 8 ký tự"
       },
       txtAccountRePassword: {
-        required: "Vui lòng nhập lại Mật khẩu",
-        minlength: "Mật khẩu phải có ít nhất 8 ký tự",
+        minlength: "Mật khẩu mới phải có ít nhất 8 ký tự",
         equalTo: "Mật khẩu không khớp"
       }
     },

@@ -10,7 +10,6 @@ import DAOs.OrderDAO;
 import Models.Account;
 import Models.Food;
 import Models.Order;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -55,21 +54,6 @@ public class AdminController extends HttpServlet {
   private void doGetUser(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String path = request.getRequestURI();
-//    if (path.endsWith("/admin/user/add")) {
-//      request.getRequestDispatcher("/addUser.jsp").forward(request, response);
-//    } else if (path.startsWith("/admin/user/update")) {
-//      String[] s = path.split("/");
-//      int accountID = Integer.parseInt(s[s.length - 1]);
-//      AccountDAO dao = new AccountDAO();
-//      Account account = dao.getAccount(accountID);
-//      if (account == null) {
-//        response.sendRedirect("/admin");
-//      } else {
-//        HttpSession session = request.getSession();
-//        session.setAttribute("user-info", account);
-//        request.getRequestDispatcher("/updateUser.jsp").forward(request, response);
-//      }
-//    } else 
     if (path.startsWith("/admin/user/delete")) {
       String[] s = path.split("/");
       int accountID = Integer.parseInt(s[s.length - 1]);
@@ -82,21 +66,6 @@ public class AdminController extends HttpServlet {
   private void doGetFood(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String path = request.getRequestURI();
-//    if (path.endsWith("/admin/food/add")) {
-//      request.getRequestDispatcher("/addFood.jsp").forward(request, response);
-//    } else if (path.startsWith("/admin/food/update")) {
-//      String[] s = path.split("/");
-//      short foodID = Short.parseShort(s[s.length - 1]);
-//      FoodDAO dao = new FoodDAO();
-//      Food food = dao.getFood(foodID);
-//      if (food == null) {
-//        response.sendRedirect("/admin");
-//      } else {
-//        HttpSession session = request.getSession();
-//        session.setAttribute("food-info", food);
-//        request.getRequestDispatcher("/updateFood.jsp").forward(request, response);
-//      }
-//    } else 
     if (path.startsWith("/admin/food/delete")) {
       String[] s = path.split("/");
       short foodID = Short.parseShort(s[s.length - 1]);
@@ -112,7 +81,7 @@ public class AdminController extends HttpServlet {
     String foodName = request.getParameter("txtFoodName");
     BigDecimal foodPrice = BigDecimal.valueOf(Double.parseDouble(request.getParameter("txtFoodPrice")));
     byte discountPercent = Byte.parseByte(request.getParameter("txtDiscountPercent"));
-    String imageURL = request.getParameter("txtImageURL");
+    String imageURL = (String) request.getAttribute("txtImageURL");
 
     FoodDAO foodDAO = new FoodDAO();
     Food food = new Food(foodName, foodPrice, discountPercent, imageURL, foodTypeID);
@@ -134,7 +103,7 @@ public class AdminController extends HttpServlet {
     String foodName = request.getParameter("txtFoodName");
     BigDecimal foodPrice = BigDecimal.valueOf(Double.parseDouble(request.getParameter("txtFoodPrice")));
     byte discountPercent = Byte.parseByte(request.getParameter("txtDiscountPercent"));
-    String imageURL = request.getParameter("txtImageURL");
+    String imageURL = (String) request.getAttribute("txtImageURL");
 
     FoodDAO foodDAO = new FoodDAO();
     Food food = new Food(foodID, foodName, foodPrice, discountPercent, imageURL, foodTypeID);
@@ -153,7 +122,7 @@ public class AdminController extends HttpServlet {
           throws ServletException, IOException {
     String username = request.getParameter("txtAccountUsername");
     String email = request.getParameter("txtEmail");
-    String password = request.getParameter("txtAccountPassword");
+    String password = (String) request.getAttribute("txtAccountPassword");
 
     AccountDAO accountDAO = new AccountDAO();
     Account account = new Account(username, email, password, "user");
@@ -174,7 +143,7 @@ public class AdminController extends HttpServlet {
     int accountID = Integer.parseInt(request.getParameter("txtAccountID"));
     String username = request.getParameter("txtAccountUsername");
     String email = request.getParameter("txtEmail");
-    String password = request.getParameter("txtAccountPassword");
+    String password = (String) request.getAttribute("txtAccountPassword");
 
     AccountDAO accountDAO = new AccountDAO();
     Account account = new Account(username, email, password, "user");

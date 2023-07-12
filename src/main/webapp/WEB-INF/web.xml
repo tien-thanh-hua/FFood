@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>GDriveFilter</filter-name>
+        <filter-class>Filters.GDriveFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GDriveFilter</filter-name>
+        <servlet-name>AdminController</servlet-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>MD5Filter</filter-name>
+        <filter-class>Filters.MD5Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MD5Filter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MD5Filter</filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>Filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
@@ -120,15 +149,13 @@
         <session-timeout>
       30
     </session-timeout>
-  </session-config>
-  
-  <jsp-config>
-    <jsp-property-group>
-      <url-pattern>*.jspf</url-pattern>
-    </jsp-property-group>
-  </jsp-config>
-  
-  <welcome-file-list>
-    <welcome-file>home</welcome-file>
-  </welcome-file-list>
+    </session-config>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jspf</url-pattern>
+        </jsp-property-group>
+    </jsp-config>
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
 </web-app>
