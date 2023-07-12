@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ import java.util.List;
 public class HomeController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -37,17 +39,17 @@ public class HomeController extends HttpServlet {
         ResultSet rs = dao.getAll();
         List<Food> foodList = new ArrayList<>();
         try {
-            while (rs.next()) {                
+            while (rs.next()) {
                 Food food = new Food(rs.getShort("food_id"),
-                      rs.getString("food_name"),
-                      rs.getBigDecimal("food_price"),
-                      rs.getByte("discount_percent"),
-                      rs.getString("food_img_url"),
-                      rs.getByte("food_type_id"),
-                      dao.getFoodType(rs.getByte("food_type_id")));
-              foodList.add(food);         
+                        rs.getString("food_name"),
+                        rs.getBigDecimal("food_price"),
+                        rs.getByte("discount_percent"),
+                        rs.getString("food_img_url"),
+                        rs.getByte("food_type_id"),
+                        dao.getFoodType(rs.getByte("food_type_id")));
+                foodList.add(food);
             }
-        } catch (Exception e) {            
+        } catch (Exception e) {
         }
         request.setAttribute("foodList", foodList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -65,7 +67,10 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
+        // Lưu trữ URL hiện tại vào session attribute
+        HttpSession session = request.getSession();
+        session.setAttribute("previousUrl", request.getRequestURI());
+        processRequest(request, response);
     }
 
     /**
