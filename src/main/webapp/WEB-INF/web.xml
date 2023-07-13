@@ -29,10 +29,13 @@
         <url-pattern>/user</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>MD5Filter</filter-name>
+        <url-pattern>/signup</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
@@ -72,6 +75,10 @@
     <servlet>
         <servlet-name>UserController</servlet-name>
         <servlet-class>Controllers.UserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignUpController</servlet-name>
+        <servlet-class>Controllers.SignUpController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -168,6 +175,10 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/user/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignUpController</servlet-name>
+        <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
