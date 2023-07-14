@@ -51,9 +51,9 @@
                 ${username}
               </button>
               <ul class="dropdown-menu text-small shadow ms-2 w-100">
-                <li><a class="dropdown-item" href="/user/account">Tài khoản của tôi</a></li>
+                <li><a class="dropdown-item" href="/user">Tài khoản của tôi</a></li>
                 <li><a class="dropdown-item" href="/user/orders">Đơn món</a></li>
-                <li><a class="dropdown-item" href="user/logout">Đăng xuất</a></li>
+                <li><a class="dropdown-item" href="/user/logout">Đăng xuất</a></li>
               </ul>
             </div>
           </c:when>

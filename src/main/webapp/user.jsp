@@ -23,16 +23,16 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button"
-                  role="tab" aria-controls="edit" aria-selected="true">Thông tin của tôi</button>
+          <button class="nav-link ${((tabID == 0) || (tabID == 1)) ? "active" : ""}" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button"
+                  role="tab" aria-controls="edit" aria-checked="true">Thông tin của tôi</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
-                  role="tab" aria-controls="login" aria-selected="false">Tài khoản đăng nhập</button>
+          <button class="nav-link ${(tabID == 2) ? "active" : ""}" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
+                  role="tab" aria-controls="login" aria-checked="false">Tài khoản đăng nhập</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="order-history-tab" data-bs-toggle="tab" data-bs-target="#order-history"
-                  type="button" role="tab" aria-controls="order-history" aria-selected="false">Đơn món</button>
+          <button class="nav-link ${(tabID == 3) ? "active" : ""}" id="order-history-tab" data-bs-toggle="tab" data-bs-target="#order-history"
+                  type="button" role="tab" aria-controls="order-history" aria-checked="false">Đơn món</button>
         </li>
       </ul>
 
@@ -41,108 +41,122 @@
         <!-- Edit Information Tab -->
         <div class="tab-pane fade show active" id="edit" role="tabpanel" aria-labelledby="edit-tab">
           <div class="row">
-            <div class="col-md-6">
-              <!-- Edit user information form -->
-              <form method="post" action="/user/info">
+            <!-- Edit user information form -->
+            <form class="update-info-form" method="post" action="/user/info">
+              <div class="col-md-6">
                 <!-- Hidden - User Account ID -->
                 <input type="hidden" id="txtAccountID" name="txtAccountID" value="${currentAccount.accountID}"/>
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="txtLastName" class="form-label">Họ</label>
-                    <input type="text" class="form-control" id="txtLastName">
+                    <input type="text" class="form-control" id="txtLastName" name="txtLastName" value="${customer.lastName}">
                   </div>
                   <div class="col-md-6">
                     <label for="txtFirstName" class="form-label">Tên</label>
-                    <input type="text" class="form-control" id="txtFirstName">
+                    <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" value="${customer.firstName}">
                   </div>
                 </div>
                 <div class="mb-3">
                   <label>Giới tính</label><br>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="txtGender" id="male" value="Nam">
+                    <input class="form-check-input" type="radio" name="txtGender" id="male" value="Nam" ${customer.gender == "Nam" ? "checked" : ""}>
                     <label class="form-check-label" for="male">Nam</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="txtGender" id="female" value="Nữ">
+                    <input class="form-check-input" type="radio" name="txtGender" id="female" value="Nữ" ${customer.gender == "Nữ" ? "checked" : ""}>
                     <label class="form-check-label" for="female">Nữ</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="txtGender" id="other" value="Khác">
+                    <input class="form-check-input" type="radio" name="txtGender" id="other" value="Khác" ${customer.gender == "Khác" ? "checked" : ""}>
                     <label class="form-check-label" for="other">Khác</label>
                   </div>
                 </div>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <!-- Edit user contact information form -->
-              <form>
+              </div>
+              <div class="col-md-6">
+                <!-- Edit user contact information form -->
                 <div class="mb-3">
                   <label for="txtPhoneNumber" class="form-label">Số điện thoại</label>
-                  <input type="tel" class="form-control" id="txtPhoneNumber">
+                  <input type="tel" class="form-control" id="txtPhoneNumber" name="txtPhoneNumber" value="${customer.phone}">
                 </div>
                 <div class="mb-3">
                   <label for="txtAddress" class="form-label">Địa chỉ</label>
-                  <textarea class="form-control" id="txtAddress" rows="2"></textarea>
+                  <textarea class="form-control" id="txtAddress" name="txtAddress" rows="2">${customer.address}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                <button type="submit" class="btn btn-success">Lưu thông tin</button>
                 <!-- Hidden Submit Value -->
-                <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitUpdateUser">
-              </form>
-            </div>
+                <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitUpdateInfo">
+              </div>
+            </form>
           </div>
         </div>
 
         <!-- Change Login Info Tab -->
         <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab">
           <div class="row">
-            <div class="col-md-6">
-              <!-- Change username form -->
-              <form>
+            <form class="update-user-form" method="post" action="/user">
+              <!-- Hidden - User Account ID -->
+              <input type="hidden" id="txtAccountID" name="txtAccountID" value="${currentAccount.accountID}"/>
+              <div class="col-md-6">
+                <!-- Change username  -->
                 <div class="mb-3">
-                  <label for="new-username" class="form-label">Tên Người dùng mới</label>
-                  <input type="text" class="form-control" id="new-username">
+                  <label for="txtAccountUsername" class="form-label">Tên Tài khoản Người dùng</label>
+                  <input type="text" class="form-control" id="txtAccountUsername" name="txtAccountUsername" value="${currentAccount.username}">
                 </div>
-                <button type="submit" class="btn btn-primary">Đổi tên Người dùng</button>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <!-- Change password form -->
-              <form>
+              </div>
+              <div class="col-md-6">
+                <!-- Change email  -->
                 <div class="mb-3">
-                  <label for="current-password" class="form-label">Mật khẩu hiện tại</label>
-                  <input type="password" class="form-control" id="current-password">
+                  <label for="txtEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="${currentAccount.email}">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- Change password -->
+                <div class="mb-3">
+                  <label for="txtAccountPassword" class="form-label">Mật khẩu mới</label>
+                  <input type="password" class="form-control" id="txtUpdateAccountPassword" name="txtAccountPassword">
                 </div>
                 <div class="mb-3">
-                  <label for="new-password" class="form-label">Mật khẩu mới</label>
-                  <input type="password" class="form-control" id="new-password">
+                  <label for="txtAccountRePassword" class="form-label">Nhập lại Mật khẩu mới</label>
+                  <input type="password" class="form-control" id="txtAccountRePassword" name="txtAccountRePassword">
                 </div>
-                <div class="mb-3">
-                  <label for="confirm-password" class="form-label">Nhập lại Mật khẩu mới</label>
-                  <input type="password" class="form-control" id="confirm-password">
-                </div>
-                <button type="submit" class="btn btn-primary">Đổi Mật khẩu</button>
-              </form>
-            </div>
+                <button type="submit" class="btn btn-success">Cập nhật</button>
+                <!-- Hidden Submit Value -->
+                <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitUpdateUser">
+              </div>
+            </form>
           </div>
         </div>
 
         <!-- Order History Tab -->
         <div class="tab-pane fade" id="order-history" role="tabpanel" aria-labelledby="order-history-tab">
           <!-- Display order history as cards -->
-          <div class="card">
-            <div class="card-header">
-              Dơn #123456 (Trạng thái: Đã giao thành công)
+          <c:forEach items="${orderList}" var="o">
+            <%@ include file="WEB-INF/jspf/cancelOrder.jspf" %>
+            <div class="card">
+              <div class="card-header d-flex align-items-center">
+                <div>Dơn #${o.orderID} (Trạng thái: ${o.orderStatus})</div>
+                <div class="flex-grow-1"></div>
+                <c:if test="${o.orderStatus eq 'Chờ xác nhận' || o.orderStatus eq 'Đang chuẩn bị món' || o.orderStatus eq 'Đang giao'}">
+                  <button type="button" id="btn-cancel-order"
+                          class="btn btn-sm btn-danger py-1"
+                          data-bs-toggle="modal" data-bs-target="#cancel-order-modal">
+                    Hủy đơn
+                  </button>
+                </c:if>
+              </div>
+              <div class="card-body">
+                <p>Thời gian đặt: <fmt:formatDate value="${o.orderTime}" pattern="HH:mm, dd 'tháng' MM, yyyy" /></p>
+                <p>Các món đặt:</p>
+                <ul>
+                  <c:forEach items="${o.orderItems}" var="item">
+                    <li>${item}</li>
+                    </c:forEach>
+                </ul>
+                <p>Tổng thanh toán: <fmt:formatNumber type="number" pattern="###,###" value="${o.orderTotal}" />đ</p>
+              </div>
             </div>
-            <div class="card-body">
-              <p>Thời gian đặt: 30 tháng 6, 2023, 10:30</p>
-              <p>Ordered Food Items:</p>
-              <ul>
-                <li>Cơm sườn bì chả x 2 (Đơn giá: 40.000đ)</li>
-                <li>Phở x 1 (Đơn giá: 60.000đ)</li>
-              </ul>
-              <p>Tổng thanh toán: 140.000đ</p>
-            </div>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </div>

@@ -163,8 +163,41 @@ public class AuthenticationFilter implements Filter {
             httpResponse.sendRedirect("/");
             return;
           }
+        } else if (path.startsWith("/user")) {
+          // Destination page is user page
+          if (getAuthStatus(httpRequest) == 2) {
+            // Account is of Admin type, cannot access User pages
+            httpResponse.sendRedirect("/admin");
+            return;
+          } else if (getAuthStatus(httpRequest) == 1) {
+            // Account is of User type
+            HttpSession session = httpRequest.getSession();
+            boolean hasUserSession = (session.getAttribute("user") != null
+                    && !(((String) session.getAttribute("user")).isEmpty()));
+            if (hasUserSession) {
+              String username = (String) session.getAttribute("user");
+              request.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
+            } else {
+              Cookie[] cookies = httpRequest.getCookies();
+              Cookie user = null;
+              Cookie userID = null;
+
+              for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) {
+                  user = cookie;
+                  String username = user.getValue();
+                  request.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
+                }
+                if (cookie.getName().equals("userID")) {
+                  userID = cookie;
+                  session.setAttribute("userID", Integer.parseInt(userID.getValue()));
+                }
+              }
+            }
+            request.setAttribute("isLoggedIn", true);
+          }
         } else {
-          // Destination page is non-admin page
+          // Destination page is non-admin page nor user page
           if (getAuthStatus(httpRequest) == 1) {
             // Account is of User type
             HttpSession session = httpRequest.getSession();
@@ -183,13 +216,11 @@ public class AuthenticationFilter implements Filter {
                   user = cookie;
                   String username = user.getValue();
                   request.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
-                  break;
                 }
                 if (cookie.getName().equals("userID")) {
                   userID = cookie;
                   request.setAttribute("userID", Integer.parseInt(userID.getValue()));
-                  break;
-                } 
+                }
               }
             }
             request.setAttribute("isLoggedIn", true);
