@@ -20,9 +20,6 @@
     <!-- Main Content -->
     <main class="main" id="top">
       <%@ include file="WEB-INF/jspf/header.jspf" %>
-      <%@ include file="WEB-INF/jspf/login.jspf" %>
-      <%@ include file="WEB-INF/jspf/signup.jspf" %>
-      <%@ include file="WEB-INF/jspf/cart.jspf" %>
 
       <!-- HERO -->
       <section class="py-5 overflow-hidden bg-primary" id="home">
