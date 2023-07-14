@@ -9,27 +9,34 @@
           <div class="flex-grow-1"></div>
           <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>                
         </div>
-        <form class="form mx-2 p-2 mx-md-4 p-md-4 mb-4" id="main-form" method="post">
+        <form class="form mx-2 p-2 mx-md-4 p-md-4 mb-4" id="main-form" method="post" action="/signup">
           <h1 class="text-center mb-2 mb-md-4">Đăng ký</h1>
           <div class="form-group col">
-            <label class="col-form-label" for="txtPhoneNumber">Số điện thoại</label>
+            <label class="col-form-label" for="txtAccountUsername">Tên Tài khoản Người dùng</label>
             <div class="">
-              <input type="text" class="form-control" id="txtPhoneNumber" name="txtPhoneNumber" placeholder="Nhập số điện thoại">
+              <input type="text" class="form-control" id="txtAccountUsername" name="txtAccountUsername" placeholder="Nhập tên tài khoản người dùng">
               <div class="lblError" id="lblErrorName"></div>
             </div>
           </div>
           <div class="form-group col">
-            <label class="col-form-label" for="txtPassword">Mật khẩu</label>
+            <label class="col-form-label" for="txtAccountEmail">Email</label>
             <div class="">
-              <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Nhập mật khẩu">
+              <input type="text" class="form-control" id="txtAccountEmail" name="txtAccountEmail" placeholder="Nhập email">
+              <div class="lblError" id="lblErrorName"></div>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label class="col-form-label" for="txtAccountPassword">Mật khẩu</label>
+            <div class="">
+              <input type="password" class="form-control" id="txtAccountPassword" name="txtAccountPassword" placeholder="Nhập mật khẩu">
               <i class="bi bi-eye-slash" id="togglePassword"></i>
               <div class="lblError" id="lblErrorPassword"></div>
             </div>
           </div>
           <div class="form-group col mb-4">
-            <label class="col-form-label" for="txtPassword">Nhập lại mật khẩu</label>
+            <label class="col-form-label" for="txtAccountRePassword">Nhập lại mật khẩu</label>
             <div class="">
-              <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Nhập lại mật khẩu">
+              <input type="password" class="form-control" id="txtAccountRePassword" name="txtAccountRePassword" placeholder="Nhập lại mật khẩu">
               <i class="bi bi-eye-slash" id="togglePassword"></i>
               <div class="lblError" id="lblErrorPassword"></div>
             </div>
