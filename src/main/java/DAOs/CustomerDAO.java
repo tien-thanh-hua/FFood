@@ -52,7 +52,61 @@ public class CustomerDAO {
     }
     return customer;
   }
+  
+  public Customer getCustomer(String lastName, String firstName) {
+    Customer customer = null;
+    try {
+      ps = conn.prepareStatement("select * from Customer where customer_lastname = ? and customer_firstname = ?");
+      ps.setString(1, lastName);
+      ps.setString(2, firstName);
+      rs = ps.executeQuery();
+      if (rs.next()) {
+        customer = new Customer(rs.getInt("customer_id"), rs.getString("customer_firstname"), rs.getString("customer_lastname"), rs.getString("customer_gender"), rs.getString("customer_phone"), rs.getString("customer_address"));
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return customer;
+  }
+  
+  public Customer getLatestCustomer() {
+    Customer customer = null;
+    try {
+      ps = conn.prepareStatement("select * from Customer where customer_id = (select max(customer_id) from Customer)");
+      rs = ps.executeQuery();
+      if (rs.next()) {
+        customer = new Customer(rs.getInt("customer_id"), rs.getString("customer_firstname"), rs.getString("customer_lastname"), rs.getString("customer_gender"), rs.getString("customer_phone"), rs.getString("customer_address"));
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return customer;
+  }
 
+  public boolean exists(Customer customer) {
+    String sql = "select 1 from Customer where "
+            + "customer_firstname = ? "
+            + "and customer_lastname = ? "
+            + "and customer_gender = ? "
+            + "and customer_phone = ? "
+            + "and customer_address = ?;";
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, customer.getFirstName());
+      ps.setString(2, customer.getLastName());
+      ps.setString(3, customer.getGender());
+      ps.setString(4, customer.getPhone());
+      ps.setString(5, customer.getAddress());
+      rs = ps.executeQuery();
+      if (rs.next()) {
+        return true;
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return false;
+  }
+  
   public int add(Customer customer) {
     String sql = "insert into Customer (customer_firstname, customer_lastname, customer_gender, customer_phone, customer_address) values (?, ?, ?, ?, ?)";
     int ketqua = 0;

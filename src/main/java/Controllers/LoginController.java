@@ -115,7 +115,7 @@ public class LoginController extends HttpServlet {
             Cookie cUserID = new Cookie("userID", String.valueOf(userID));
             cUser.setMaxAge(cAge);
             cUser.setPath("/");
-            response.addCookie(cUser);
+            response.addCookie(cUserID);
             if (previousUrl != null) {
               // Chuyển hướng người dùng về trang hiện tại
               response.sendRedirect(previousUrl);
