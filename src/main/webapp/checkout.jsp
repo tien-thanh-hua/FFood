@@ -98,5 +98,6 @@
             <%@ include file="WEB-INF/jspf/footer.jspf" %>
         </main>
         <%@ include file="WEB-INF/jspf/javascript.jspf" %>
+        <%@ include file="WEB-INF/jspf/validation.jspf" %>
     </body>
 </html>

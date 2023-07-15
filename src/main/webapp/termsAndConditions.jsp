@@ -19,9 +19,13 @@
   <body>
     <main class="main" id="top">
       <%@ include file="WEB-INF/jspf/header.jspf" %>
+      <%@ include file="WEB-INF/jspf/login.jspf" %>
+      <%@ include file="WEB-INF/jspf/signup.jspf" %>
       Hello
-      <%@ include file="WEB-INF/jspf/footer.jspf" %>
+      <%@ include file="WEB-INF/jspf/footer.jspf" %> 
+     
     </main>
     <%@ include file="WEB-INF/jspf/javascript.jspf" %>
+    <%@ include file="WEB-INF/jspf/validation.jspf" %>
   </body>
 </html>
