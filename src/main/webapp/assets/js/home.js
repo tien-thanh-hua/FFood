@@ -1,5 +1,6 @@
-var sorted = []; // Biến toàn cục lưu trữ danh sách các phần tử đã được sắp xếp
-var notSort = []; // Biến toàn cục lưu trữ danh sách các phần tử chưa được sắp xếp
+var sorted = null; // Biến toàn cục lưu trữ danh sách các phần tử đã được sắp xếp
+var notSort = null; // Biến toàn cục lưu trữ danh sách các phần tử chưa được sắp xếp
+var preButton = null; // Biến toàn cục lưu trữ id của nút trước đó đã được nhấn
 
 $(document).ready(function() {
   notSort = document.querySelectorAll("div[id^='food-']"); // Lưu trữ danh sách ban đầu vào biến notSort
@@ -8,8 +9,10 @@ $(document).ready(function() {
 $(document).on("click", ".btn-cate", function() {
   let foodTypeID = $(this).data("food-type-id");
 
-  if (sorted.length === 0) {
-    // Nếu mảng sorted rỗng, đây là lần nhấn đầu tiên
+  let foodList = document.querySelectorAll("div[id^='food-']");
+
+  if (sorted === null) {
+    // Nếu sorted chưa được khởi tạo, đây là lần nhấn đầu tiên
     sorted = Array.from(notSort); // Sao chép danh sách chưa được sắp xếp vào sorted
     sorted.sort(function(a, b) {
       let aId = a.id.substring(5);
@@ -17,25 +20,46 @@ $(document).on("click", ".btn-cate", function() {
       return aId.localeCompare(bId);
     });
 
-    for (var i = 0; i < sorted.length; i++) {
-      let idString = sorted[i].id;
-      let idFood = idString.substring(5);
-      if (idFood != foodTypeID) {
-        sorted[i].style.display = 'none';
-      } else {
-        sorted[i].style.display = 'block';
-      }
-    }
+    preButton = foodTypeID; // Lưu id của nút hiện tại vào biến preButton
   } else {
-    // Nếu mảng sorted chứa các phần tử, đây là lần nhấn thứ hai
-    for (var i = 0; i < notSort.length; i++) {
-      notSort[i].style.display = 'block'; // Hiển thị tất cả các phần tử chưa được sắp xếp
+    // Nếu sorted đã tồn tại, đây là lần nhấn tiếp theo
+    if (foodTypeID !== preButton) {
+      // Nếu id của nút hiện tại khác với id của nút trước đó, tiếp tục sắp xếp dữ liệu
+      sorted = Array.from(notSort); // Sao chép danh sách chưa được sắp xếp vào sorted
+      sorted.sort(function(a, b) {
+        let aId = a.id.substring(5);
+        let bId = b.id.substring(5);
+        return aId.localeCompare(bId);
+      });
+
+      preButton = foodTypeID; // Lưu id của nút hiện tại vào biến preButton
+    } else {
+      // Nếu id của nút hiện tại trùng với id của nút trước đó, trả lại tất cả giá trị như ban đầu
+      sorted = null; // Xóa dữ liệu đã sắp xếp
+      preButton = null; // Đặt preButton về giá trị null
+
+      // Hiển thị lại tất cả các phần tử
+      for (var i = 0; i < foodList.length; i++) {
+        foodList[i].style.display = 'block';
+      }
+      return; // Kết thúc xử lý sự kiện
     }
-    sorted = []; // Xóa tất cả các phần tử đã được sắp xếp
+  }
+
+  for (var i = 0; i < foodList.length; i++) {
+    let idString = foodList[i].id;
+    let idFood = idString.substring(5);
+    if (idFood != foodTypeID) {
+      foodList[i].style.display = 'none';
+    } else {
+      foodList[i].style.display = 'block';
+    }
   }
 });
 
 
+
+//search 
 function searchFood() {
   var searchTerm = document.getElementById("btn-search").value.toLowerCase();
   var foodList = document.getElementById("foodList").querySelectorAll(".col-sm-6");
