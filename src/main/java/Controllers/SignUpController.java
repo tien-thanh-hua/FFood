@@ -87,7 +87,6 @@ public class SignUpController extends HttpServlet {
                 int result = accountDAO.add(account);
                 if (result == 1) {
                     //Lưu thành công
-                    accountDAO.add(account);
                     if (previousUrl != null) {
                         // Chuyển hướng người dùng về trang hiện tại
                         response.sendRedirect(previousUrl);

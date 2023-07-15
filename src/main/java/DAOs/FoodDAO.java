@@ -181,4 +181,25 @@ public class FoodDAO {
     }
     return list;
   }
+  
+  public List<Food> getCateByCid(String cid){
+      List<Food> list = new ArrayList<>();
+      String query = "select * from Food\n"
+              + "where cateID = ?";
+      try {
+          ps = conn.prepareStatement(query);
+          ps.setString(1, cid);
+          rs = ps.executeQuery();
+          while (rs.next()) {              
+              list.add(new Food(rs.getShort("food_id"),
+                rs.getString("food_name"),
+                rs.getBigDecimal("food_price"),
+                rs.getByte("discount_percent"),
+                rs.getString("food_img_url"),
+                rs.getByte("food_type_id")));
+          }
+      } catch (Exception e) {
+      }
+      return list;
+  }
 }
