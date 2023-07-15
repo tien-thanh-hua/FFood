@@ -5,14 +5,14 @@
 package Controllers;
 
 import DAOs.FoodDAO;
+import DAOs.FoodTypeDAO;
 import Models.Food;
+import Models.FoodType;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,7 @@ import java.util.List;
 public class HomeController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -39,19 +38,33 @@ public class HomeController extends HttpServlet {
         ResultSet rs = dao.getAll();
         List<Food> foodList = new ArrayList<>();
         try {
-            while (rs.next()) {
+            while (rs.next()) {                
                 Food food = new Food(rs.getShort("food_id"),
-                        rs.getString("food_name"),
-                        rs.getBigDecimal("food_price"),
-                        rs.getByte("discount_percent"),
-                        rs.getString("food_img_url"),
-                        rs.getByte("food_type_id"),
-                        dao.getFoodType(rs.getByte("food_type_id")));
-                foodList.add(food);
+                      rs.getString("food_name"),
+                      rs.getBigDecimal("food_price"),
+                      rs.getByte("discount_percent"),
+                      rs.getString("food_img_url"),
+                      rs.getByte("food_type_id"),
+                      dao.getFoodType(rs.getByte("food_type_id")));
+              foodList.add(food);         
             }
-        } catch (Exception e) {
+        } catch (Exception e) {            
         }
         request.setAttribute("foodList", foodList);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+        
+        FoodTypeDAO dao2 = new FoodTypeDAO();
+        ResultSet rs2 = dao2.getAllFoodType();
+        List<FoodType> foodTypeList = new ArrayList<>();
+        try {
+            while (rs.next()) {                
+                FoodType foodType = new FoodType(rs2.getByte("foodTypeID"),
+                        rs2.getString("foodType"));
+              foodTypeList.add(foodType);         
+            }
+        } catch (Exception e) {            
+        }
+        request.setAttribute("foodTypeList", foodList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
@@ -67,12 +80,50 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lưu trữ URL hiện tại vào session attribute
-        HttpSession session = request.getSession();
-        session.setAttribute("previousUrl", request.getRequestURI());
-        processRequest(request, response);
+        FoodDAO dao = new FoodDAO();
+        ResultSet rs = dao.getAll();
+        List<Food> foodList = new ArrayList<>();
+        try {
+                while (rs.next()) {
+                    Food food = new Food(rs.getShort("food_id"),
+                            rs.getString("food_name"),
+                            rs.getBigDecimal("food_price"),
+                            rs.getByte("discount_percent"),
+                            rs.getString("food_img_url"),
+                            rs.getByte("food_type_id"),
+                            dao.getFoodType(rs.getByte("food_type_id")));
+                    foodList.add(food);
+                }
+            } catch (Exception e) {
+            }
+        request.setAttribute("foodList", foodList);
+        
+        List<String> imgURLList = new ArrayList<>();
+        imgURLList.add("assets/img/gallery/com_tam.jpg");
+        imgURLList.add("assets/img/gallery/noodles.png");
+        imgURLList.add("assets/img/gallery/sub-sandwich.png");
+        imgURLList.add("assets/img/gallery/junk_food.jpg");
+        imgURLList.add("assets/img/gallery/dessert.jpg");
+        imgURLList.add("assets/img/gallery/drinks.jpg");
+       
+        FoodTypeDAO dao1 = new FoodTypeDAO();
+        ResultSet rs1 = dao1.getAllFoodType();
+        List<FoodType> foodTypeList = new ArrayList<>();
+        try {
+            while (rs1.next()) {
+                FoodType foodType = new FoodType(rs1.getByte("food_type_id"),
+                        rs1.getString("food_type"));
+                foodTypeList.add(foodType);
+            }
+        } catch (Exception e) {
+        }
+        for (int i = 0; i < 6; i++) {
+            foodTypeList.get(i).setImgURL(imgURLList.get(i));
+        }
+        request.setAttribute("foodTypeList", foodTypeList);            
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *

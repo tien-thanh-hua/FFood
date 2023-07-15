@@ -26,7 +26,7 @@ public class FoodTypeDAO {
     conn = DBConnection.DBConnection.getConnection();
   }
 
-  public ResultSet getAll() {
+  public ResultSet getAllFoodType() {
     String sql = "select * from FoodType";
     try {
       ps = conn.prepareStatement(sql);
@@ -93,4 +93,5 @@ public class FoodTypeDAO {
     }
     return result;
   }
+   
 }

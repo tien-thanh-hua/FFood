@@ -12,6 +12,7 @@ public class FoodType {
 
   private byte foodTypeID;
   private String foodType;
+  private String imgURL;
 
   public FoodType() {
   }
@@ -21,6 +22,13 @@ public class FoodType {
     this.foodType = foodType;
   }
 
+    public FoodType(byte foodTypeID, String foodType, String imgURL) {
+        this.foodTypeID = foodTypeID;
+        this.foodType = foodType;
+        this.imgURL = imgURL;
+    }
+
+  
   public byte getFoodTypeID() {
     return foodTypeID;
   }
@@ -37,4 +45,13 @@ public class FoodType {
     this.foodType = foodType;
   }
 
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+  
 }

@@ -15,6 +15,7 @@
     <!-- Title -->
     <title>FFood | Đặt món nhanh, rẻ, tiện</title>
     <%@ include file="WEB-INF/jspf/resources.jspf" %>
+    <link rel="stylesheet" href="assets/css/style.css"/>
   </head>
   <body>
     <!-- Main Content -->
@@ -47,58 +48,25 @@
           </div>
           <!-- Food Categories -->
           <div class="row flex-center">
-            <div class="col-12">
-              <div class="row h-100 align-items-center">
-                <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                  <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
-                    <div class="card-body">
-                      <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Cơm</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                  <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
-                    <div class="card-body">
-                      <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Mì</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                  <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
-                    <div class="card-body">
-                      <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Bánh mì</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                  <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/fried-chicken-square.png" alt="..." />
-                    <div class="card-body">
-                      <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Gà rán</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                  <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
-                    <div class="card-body">
-                      <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Tráng miệng</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                  <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
-                    <div class="card-body">
-                      <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Đồ uống</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+                        <div class="col-12">
+                            <div class="row h-100 align-items-center">
+                                <c:forEach items="${foodTypeList}" var="o">
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-circle">
+                                            <button class="btn-cate" data-food-type-id="${o.foodTypeID}"><img class="img-fluid rounded-circle h-100" src="${o.imgURL}" alt="..." /></button>
+                                            <div class="card-body">
+                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${o.foodType}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>                 
           <!<!-- Food list -->
           <div class="row gx-3" id="foodList">
             <c:forEach items="${foodList}" var="f"  >
-              <div class="col-sm-6 col-md-4 col-lg-3 mb-5 h-100" id="foodObject">
+              <div class="col-sm-6 col-md-4 col-lg-3 mb-5 h-100" id="food-${f.foodTypeID}">
                 <div class="card card-span h-100 rounded-3 shadow">
                   <div class="position-relative">
                     <img class="card-img-top img-fluid rounded-3 h-100" src="${f.imageURL}" alt="${f.foodName}" />
@@ -130,7 +98,6 @@
             </c:forEach>
           </div>
         </div><!-- end of .container-->
-
       </section>
 
       <!-- CÁCH GỌI MÓN -->
@@ -192,5 +159,6 @@
       <%@ include file="WEB-INF/jspf/footer.jspf" %>
     </main>
     <%@ include file="WEB-INF/jspf/javascript.jspf" %>
+    <script <script src="assets/js/home.js"></script>
   </body>
 </html>
