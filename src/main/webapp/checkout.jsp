@@ -67,6 +67,8 @@
           <div class="col-md-6">
             <form action="checkout" method="post">
               <div class="row">
+                <!-- Hidden - User Account ID -->
+                <input type="hidden" id="txtAccountID" name="txtAccountID" value="${currentAccount.accountID}"/>
                 <div class="col-md-12">
                   <h4>Thông tin giao món</h4>
                   <div class="mb-3">
@@ -83,7 +85,7 @@
                   <div class="mb-3">
                     <label for="txtGender" class="form-label">Giới tính</label>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="txtGender" id="genderMale" value="Nam" ${customer.gender == "Nam" ? "checked" : ""}>
+                      <input class="form-check-input" type="radio" name="txtGender" id="genderMale" value="Nam" ${(customer.gender == "Nam") || (empty customer.gender) ? "checked" : ""}>
                       <label class="form-check-label" for="genderMale">
                         Nam
                       </label>
@@ -175,9 +177,9 @@
       var isFirstNameValid = true;
       if (input.value.trim() === "") {
         if (option === "firstName") {
-          showError(input, "Tên không được để trống!!!");
+          showError(input, "Tên không được để trống");
         } else {
-          showError(input, "Họ không được để trống!!!");
+          showError(input, "Họ không được để trống");
         }
         isFirstNameValid = false;
       } else {
@@ -191,9 +193,9 @@
       input.value = input.value.trim();
       var isPhoneValid = regexPhone.test(input.value);
       if (input.value === "") {
-        showError(input, "Số điện thoại không được để trống!!!");
+        showError(input, "Số điện thoại không được để trống");
       } else if (!isPhoneValid) {
-        showError(input, "Số điện thoại không hợp lệ!!!");
+        showError(input, "Số điện thoại không hợp lệ");
       } else {
         showSuccess(input);
       }
@@ -205,7 +207,7 @@
     function checkAddress(input) {
       var isCheckAddressValid = true;
       if (input.value.trim() === "") {
-        showError(input, "Địa chỉ không được để trống!!!");
+        showError(input, "Địa chỉ không được để trống");
         isCheckAddressValid = false;
       } else {
         showSuccess(input);
@@ -221,7 +223,7 @@
       let isAddressValid = checkAddress(address);
 
       if (isFirstNameValid && isLastNameValid && isPhoneValid && isAddressValid) {
-        confirm("Đặt hàng thành công!");
+        
         return true;
 
       }

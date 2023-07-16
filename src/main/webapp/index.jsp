@@ -22,6 +22,7 @@
     <%@ include file="WEB-INF/jspf/cart.jspf" %>
     <%@ include file="WEB-INF/jspf/login.jspf" %>
     <%@ include file="WEB-INF/jspf/signup.jspf" %>
+    <%@ include file="WEB-INF/jspf/success.jspf" %>
     <!-- Main Content -->
     <main class="main" id="top">
 
