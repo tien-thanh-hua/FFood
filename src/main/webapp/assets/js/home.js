@@ -2,11 +2,17 @@ var sorted = null; // Biến toàn cục lưu trữ danh sách các phần tử 
 var notSort = null; // Biến toàn cục lưu trữ danh sách các phần tử chưa được sắp xếp
 var preButton = null; // Biến toàn cục lưu trữ id của nút trước đó đã được nhấn
 
-$(document).ready(function() {
+$(document).ready(function () {
   notSort = document.querySelectorAll("div[id^='food-']"); // Lưu trữ danh sách ban đầu vào biến notSort
+  if (window.location.hash === '#success') {
+    $('#success').modal('show');
+    setTimeout(function () {
+      $('#success').modal('hide');
+    }, 3000);
+  }
 });
 
-$(document).on("click", ".btn-cate", function() {
+$(document).on("click", ".btn-cate", function () {
   let foodTypeID = $(this).data("food-type-id");
 
   let foodList = document.querySelectorAll("div[id^='food-']");
@@ -14,7 +20,7 @@ $(document).on("click", ".btn-cate", function() {
   if (sorted === null) {
     // Nếu sorted chưa được khởi tạo, đây là lần nhấn đầu tiên
     sorted = Array.from(notSort); // Sao chép danh sách chưa được sắp xếp vào sorted
-    sorted.sort(function(a, b) {
+    sorted.sort(function (a, b) {
       let aId = a.id.substring(5);
       let bId = b.id.substring(5);
       return aId.localeCompare(bId);
@@ -26,7 +32,7 @@ $(document).on("click", ".btn-cate", function() {
     if (foodTypeID !== preButton) {
       // Nếu id của nút hiện tại khác với id của nút trước đó, tiếp tục sắp xếp dữ liệu
       sorted = Array.from(notSort); // Sao chép danh sách chưa được sắp xếp vào sorted
-      sorted.sort(function(a, b) {
+      sorted.sort(function (a, b) {
         let aId = a.id.substring(5);
         let bId = b.id.substring(5);
         return aId.localeCompare(bId);

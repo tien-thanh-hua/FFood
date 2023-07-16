@@ -87,16 +87,12 @@ public class CustomerDAO {
         String sql = "select 1 from Customer where "
                 + "customer_firstname = ? "
                 + "and customer_lastname = ? "
-                + "and customer_gender = ? "
-                + "and customer_phone = ? "
-                + "and customer_address = ?;";
+                + "and customer_gender = ?;";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, customer.getFirstName());
             ps.setString(2, customer.getLastName());
             ps.setString(3, customer.getGender());
-            ps.setString(4, customer.getPhone());
-            ps.setString(5, customer.getAddress());
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
