@@ -49,25 +49,25 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="txtLastName" class="form-label">Họ</label>
-                    <input type="text" class="form-control" id="txtLastName" name="txtLastName" value="${customer.lastName}">
+                    <input type="text" class="form-control" id="txtLastName" name="txtLastName" value="${customer.lastName}" required="">
                   </div>
                   <div class="col-md-6">
                     <label for="txtFirstName" class="form-label">Tên</label>
-                    <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" value="${customer.firstName}">
+                    <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" value="${customer.firstName}" required="">
                   </div>
                 </div>
                 <div class="mb-3">
                   <label>Giới tính</label><br>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="txtGender" id="male" value="Nam" ${customer.gender == "Nam" ? "checked" : ""}>
+                      <input class="form-check-input" type="radio" name="txtGender" id="male" value="Nam" ${customer.gender == "Nam" ? "checked" : ""} required="">
                     <label class="form-check-label" for="male">Nam</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="txtGender" id="female" value="Nữ" ${customer.gender == "Nữ" ? "checked" : ""}>
+                      <input class="form-check-input" type="radio" name="txtGender" id="female" value="Nữ" ${customer.gender == "Nữ" ? "checked" : ""} required="">
                     <label class="form-check-label" for="female">Nữ</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="txtGender" id="other" value="Khác" ${customer.gender == "Khác" ? "checked" : ""}>
+                      <input class="form-check-input" type="radio" name="txtGender" id="other" value="Khác" ${customer.gender == "Khác" ? "checked" : ""} required="">
                     <label class="form-check-label" for="other">Khác</label>
                   </div>
                 </div>
@@ -76,11 +76,11 @@
                 <!-- Edit user contact information form -->
                 <div class="mb-3">
                   <label for="txtPhoneNumber" class="form-label">Số điện thoại</label>
-                  <input type="tel" class="form-control" id="txtPhoneNumber" name="txtPhoneNumber" value="${customer.phone}">
+                  <input type="tel" class="form-control" id="txtPhoneNumber" name="txtPhoneNumber" value="${customer.phone}" required="">
                 </div>
                 <div class="mb-3">
                   <label for="txtAddress" class="form-label">Địa chỉ</label>
-                  <textarea class="form-control" id="txtAddress" name="txtAddress" rows="2">${customer.address}</textarea>
+                  <textarea class="form-control" id="txtAddress" name="txtAddress" required="" rows="2">${customer.address}</textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Lưu thông tin</button>
                 <!-- Hidden Submit Value -->
@@ -100,14 +100,14 @@
                 <!-- Change username  -->
                 <div class="mb-3">
                   <label for="txtAccountUsername" class="form-label">Tên Tài khoản Người dùng</label>
-                  <input type="text" class="form-control" id="txtAccountUsername" name="txtAccountUsername" value="${currentAccount.username}">
+                  <input type="text" class="form-control" id="txtAccountUsername" name="txtAccountUsername" value="${currentAccount.username}" required="">
                 </div>
               </div>
               <div class="col-md-6">
                 <!-- Change email  -->
                 <div class="mb-3">
                   <label for="txtEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="${currentAccount.email}">
+                  <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="${currentAccount.email}" required="">
                 </div>
               </div>
               <div class="col-md-6">
