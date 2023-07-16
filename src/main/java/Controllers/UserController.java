@@ -79,11 +79,11 @@ public class UserController extends HttpServlet {
       result = customerDAO.update(customer);
       if (result != 1) {
         // New Customer failed to be updated
-        response.sendRedirect("/user");
+        response.sendRedirect("/user#info");
         return;
       }
       // Customer info update is successful
-      response.sendRedirect("/user");
+      response.sendRedirect("/user#info");
       return;
     } else {
       // Account has no associated Customer -> create new Customer then assign it to current Account
@@ -93,7 +93,7 @@ public class UserController extends HttpServlet {
         customer = customerDAO.getCustomer(customer.getLastName(), customer.getFirstName());
         if (customer == null) {
           // Existing Customer failed to be obtained from database
-          response.sendRedirect("/user");
+          response.sendRedirect("/user#info");
           return;
         }
         // Proceed to assign the customer to User account if the existing Customer is
@@ -104,18 +104,18 @@ public class UserController extends HttpServlet {
         result = accountDAO.update(account);
         if (result != 1) {
           // Either or both Customer insertion and Account update procedures are unsuccessful
-          response.sendRedirect("/user");
+          response.sendRedirect("/user#info");
           return;
         }
         // Both procedures are successful
-        response.sendRedirect("/user");
+        response.sendRedirect("/user#info");
         return;
       } else {
         // Customer does not already exists -> create new Customer
         result = customerDAO.add(customer);
         if (result != 1) {
           // New Customer failed to be added to database
-          response.sendRedirect("/user");
+          response.sendRedirect("/user#info");
           return;
         }
         // Proceed to assign the customer to User account if the new Customer is
@@ -127,11 +127,11 @@ public class UserController extends HttpServlet {
         result = accountDAO.update(account);
         if (result != 1) {
           // Either or both Customer insertion and Account update procedures are unsuccessful
-          response.sendRedirect("/user");
+          response.sendRedirect("/user#info");
           return;
         }
         // Both procedures are successful
-        response.sendRedirect("/user");
+        response.sendRedirect("/user#info");
         return;
       }
     }
@@ -152,10 +152,10 @@ public class UserController extends HttpServlet {
 
     if (result == 1) {
       request.setAttribute("tabID", 3);
-      response.sendRedirect("/user");
+      response.sendRedirect("/user#account");
       return;
     } else {
-      response.sendRedirect("/user");
+      response.sendRedirect("/user#account");
       return;
     }
   }
@@ -167,7 +167,7 @@ public class UserController extends HttpServlet {
     int orderID = Integer.parseInt(s[s.length - 1]);
     OrderDAO orderDAO = new OrderDAO();
     orderDAO.cancelOrder(orderID);
-    response.sendRedirect("/user");
+    response.sendRedirect("/user#order");
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
