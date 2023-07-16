@@ -18,9 +18,12 @@
     <link rel="stylesheet" href="assets/css/style.css"/>
   </head>
   <body>
+    <%@ include file="WEB-INF/jspf/header.jspf" %>
+    <%@ include file="WEB-INF/jspf/cart.jspf" %>
+    <%@ include file="WEB-INF/jspf/login.jspf" %>
+    <%@ include file="WEB-INF/jspf/signup.jspf" %>
     <!-- Main Content -->
     <main class="main" id="top">
-      <%@ include file="WEB-INF/jspf/header.jspf" %>
 
       <!-- HERO -->
       <section class="py-5 overflow-hidden bg-primary" id="home">
@@ -42,27 +45,32 @@
       <section class="py-4 overflow-hidden">
         <div class="container">
           <div class="row flex-grow-1 mb-6">
-            <div class="col-lg-7 mx-auto text-center mt-7 mb-3">
+            <div class="col-lg-7 mx-auto text-center mt-5 mb-3">
               <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Danh sách món ăn</h5>
             </div>
           </div>
           <!-- Food Categories -->
           <div class="row flex-center">
-                        <div class="col-12">
-                            <div class="row h-100 align-items-center">
-                                <c:forEach items="${foodTypeList}" var="o">
-                                    <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
-                                        <div class="card card-span h-100 rounded-circle">
-                                            <button class="btn-cate" data-food-type-id="${o.foodTypeID}"><img class="img-fluid rounded-circle h-100" src="${o.imgURL}" alt="..." /></button>
-                                            <div class="card-body">
-                                                <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${o.foodType}</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </div>                 
+            <div class="col-12">
+              <div class="row h-100 align-items-center">
+                <c:forEach items="${foodTypeList}" var="o">
+                  <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
+                    <div class="card card-span h-100 rounded-circle">
+                      <button class="btn-cate" data-food-type-id="${o.foodTypeID}">
+                        <img class="img-fluid rounded-circle h-100" src="${o.imgURL}" alt="${o.foodType}" />
+                      </button>
+                      <div class="card-body">
+                        <h5 class="text-center fw-bold text-1000 text-truncate mb-2"
+                            style="${o.foodTypeID == 5 
+                                     ? "letter-spacing: -0.5px; font-size: 18px;" 
+                                     : ""}">${o.foodType}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </c:forEach>
+              </div>
+            </div>
+          </div>                 
           <!<!-- Food list -->
           <div class="row gx-3" id="foodList">
             <c:forEach items="${foodList}" var="f"  >
@@ -86,6 +94,11 @@
                       <span class="text-primary fw-bold">
                         <fmt:formatNumber type="number" pattern="###,###" value="${f.foodPrice - (f.foodPrice * f.discountPercent / 100)}" />đ
                       </span>
+                      <c:if test="${discount != 0}">
+                        <span class="ms-3 text-600">
+                          <s><fmt:formatNumber type="number" pattern="###,###" value="${f.foodPrice}" />đ</s>
+                        </span>
+                      </c:if>
                     </div>
                     <div class="d-grid gap-2">
                       <a href="addToCart?fid=${f.foodID}&quantity=1">
@@ -159,6 +172,7 @@
       <%@ include file="WEB-INF/jspf/footer.jspf" %>
     </main>
     <%@ include file="WEB-INF/jspf/javascript.jspf" %>
+    <%@ include file="WEB-INF/jspf/validation.jspf" %>
     <script <script src="assets/js/home.js"></script>
   </body>
 </html>

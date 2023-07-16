@@ -230,5 +230,8 @@
             
         </script>
 
+
+        <%@ include file="WEB-INF/jspf/validation.jspf" %>
+
     </body>
 </html>
