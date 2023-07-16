@@ -7,7 +7,7 @@
       <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-3">
         <h5 class="lh-lg fw-bold text-white">THÔNG TIN CHUNG</h5>
         <ul class="list-unstyled mb-md-4 mb-lg-0">
-          <li class="lh-lg"><a class="text-200 text-decoration-none" href="/about-us">Về chúng tôi</a></li>
+          <li class="lh-lg"><a class="text-200 text-decoration-none" href="https://github.com/tien-thanh-hua/FFood">Về chúng tôi</a></li>
         </ul>
       </div>
       <div class="col-6 col-md-4 col-lg-3 col-xxl-2 col-lg-3 mb-3">
@@ -20,7 +20,7 @@
       <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-3">
         <h5 class="lh-lg fw-bold text-white">CÁC CHÍNH SÁCH</h5>
         <ul class="list-unstyled mb-md-4 mb-lg-0">
-          <li class="lh-lg"><a class="text-200 text-decoration-none" href="/terms-and-conditions">Điều khoản &amp; Chính sách</a></li>
+          <li class="lh-lg"><a class="text-200 text-decoration-none" href="https://github.com/tien-thanh-hua/FFood">Điều khoản &amp; Chính sách</a></li>
         </ul>
       </div>
       <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-3">
