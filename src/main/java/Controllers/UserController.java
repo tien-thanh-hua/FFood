@@ -53,7 +53,9 @@ public class UserController extends HttpServlet {
 
   private void doPostUpdateInfo(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    int accountID = Integer.parseInt(request.getParameter("txtAccountID"));
+//    int accountID = Integer.parseInt(request.getParameter("txtAccountID"));
+    HttpSession session = request.getSession();
+    int accountID = (Integer) session.getAttribute("userID");
     String lastName = request.getParameter("txtLastName");
     String firstName = request.getParameter("txtFirstName");
     String phoneNumber = request.getParameter("txtPhoneNumber");
