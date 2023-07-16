@@ -19,6 +19,7 @@
   <body>
     <%@ include file="WEB-INF/jspf/base.jspf" %>
     <%@ include file="WEB-INF/jspf/header.jspf" %>
+    <%@ include file="WEB-INF/jspf/cart.jspf" %>
     <div class="container my-5">
       <!-- Nav tabs -->
       <ul id="user-tab" class="nav nav-tabs flex-center" role="tablist">
