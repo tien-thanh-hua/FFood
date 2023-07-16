@@ -45,7 +45,7 @@
       <section class="py-4 overflow-hidden">
         <div class="container">
           <div class="row flex-grow-1 mb-6">
-            <div class="col-lg-7 mx-auto text-center mt-7 mb-3">
+            <div class="col-lg-7 mx-auto text-center mt-5 mb-3">
               <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Danh sách món ăn</h5>
             </div>
           </div>
@@ -56,9 +56,14 @@
                 <c:forEach items="${foodTypeList}" var="o">
                   <div class="col-6 col-sm-4 col-md-3 col-lg mb-5 h-100">
                     <div class="card card-span h-100 rounded-circle">
-                      <button class="btn-cate" data-food-type-id="${o.foodTypeID}"><img class="img-fluid rounded-circle h-100" src="${o.imgURL}" alt="..." /></button>
+                      <button class="btn-cate" data-food-type-id="${o.foodTypeID}">
+                        <img class="img-fluid rounded-circle h-100" src="${o.imgURL}" alt="${o.foodType}" />
+                      </button>
                       <div class="card-body">
-                        <h5 class="text-center fw-bold text-1000 text-truncate mb-2">${o.foodType}</h5>
+                        <h5 class="text-center fw-bold text-1000 text-truncate mb-2"
+                            style="${o.foodTypeID == 5 
+                                     ? "letter-spacing: -0.5px; font-size: 18px;" 
+                                     : ""}">${o.foodType}</h5>
                       </div>
                     </div>
                   </div>
