@@ -33,6 +33,13 @@ public class Cart {
         this.items = items;
     }
 
+    public Cart(int id, int userId) {
+        this.id = id;
+        this.userId = userId;
+    }
+
+   
+
     public int getId() {
         return id;
     }

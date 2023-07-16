@@ -183,7 +183,7 @@ public class UserController extends HttpServlet {
     HttpSession session = request.getSession();
     String path = request.getRequestURI();
     if (path.equals("/user")) {
-      //<editor-fold defaultstate="collapsed" desc="Get user account info">
+//<editor-fold defaultstate="collapsed" desc="Get user account info">
       int userID = (Integer) session.getAttribute("userID");
       AccountDAO accountDAO = new AccountDAO();
       Account currentAccount = accountDAO.getAccount(userID);
@@ -211,7 +211,7 @@ public class UserController extends HttpServlet {
       }
       //</editor-fold>
 
-      request.getRequestDispatcher("/user.jsp").forward(request, response);
+      request.getRequestDispatcher("/user.jsp").forward(request, response);                
     } else if (path.equals("/user/")) {
       response.sendRedirect("/user");
     } else if (path.startsWith("/user/orders")) {
