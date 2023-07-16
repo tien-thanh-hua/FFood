@@ -195,6 +195,9 @@ public class AuthenticationFilter implements Filter {
               }
             }
             request.setAttribute("isLoggedIn", true);
+          } else {
+            // Return to home page if authentication fails
+            httpResponse.sendRedirect("/");
           }
         } else {
           // Destination page is non-admin page nor user page
@@ -229,7 +232,7 @@ public class AuthenticationFilter implements Filter {
             httpResponse.sendRedirect("/admin");
             return;
           }
-          // If auth fails, continue the filter (nothing happens)
+          // If auth fails in neither admin nor user pages, continue the filter (nothing happens)
         }
       }
       chain.doFilter(request, response);
