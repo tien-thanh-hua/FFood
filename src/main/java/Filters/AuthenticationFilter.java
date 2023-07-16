@@ -218,11 +218,11 @@ public class AuthenticationFilter implements Filter {
                 if (cookie.getName().equals("user")) {
                   user = cookie;
                   String username = user.getValue();
-                  request.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
+                  session.setAttribute("username", URLDecoder.decode(username, "UTF-8"));
                 }
                 if (cookie.getName().equals("userID")) {
                   userID = cookie;
-                  request.setAttribute("userID", Integer.parseInt(userID.getValue()));
+                  session.setAttribute("userID", Integer.parseInt(userID.getValue()));
                 }
               }
             }
