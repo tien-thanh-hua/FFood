@@ -34,6 +34,19 @@ public class Order {
   public Order() {
   }
 
+    public Order(int cartID, int customerID, byte orderStatusID, byte paymentMethodID, String contactPhone, String deliveryAddress, Timestamp orderTime, String orderNote, Timestamp deliveryTime) {
+        this.cartID = cartID;
+        this.customerID = customerID;
+        this.orderStatusID = orderStatusID;
+        this.paymentMethodID = paymentMethodID;
+        this.contactPhone = contactPhone;
+        this.deliveryAddress = deliveryAddress;
+        this.orderTime = orderTime;
+        this.orderNote = orderNote;
+        this.deliveryTime = deliveryTime;
+      
+    }
+
   public Order(int cartID, int customerID, byte orderStatusID, String orderStatus,
           byte paymentMethodID, String paymentMethod, String contactPhone,
           String deliveryAddress, List<String> orderItems, BigDecimal orderTotal,
@@ -95,8 +108,7 @@ public class Order {
   public int getCustomerID() {
     return customerID;
   }
-
-  public void setCustomerID(int customerID) {
+public void setCustomerID(int customerID) {
     this.customerID = customerID;
   }
 
