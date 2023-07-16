@@ -159,7 +159,7 @@ function validateForm() {
         required: true,
         minlength: 8,
         equalTo: "#txtAccountPassword"
-      },
+      }
     },
     messages: {
       txtAccountUsername: {
@@ -192,8 +192,7 @@ function validateForm() {
     rules: {
       txtAccountUsername: {
         required: true,
-        maxlength: 50,
-        pattern: /^[a-zA-Z0-9-'_]+$/
+        maxlength: 50
       },
       txtEmail: {
         required: true,
@@ -206,13 +205,12 @@ function validateForm() {
       txtAccountRePassword: {
         minlength: 8,
         equalTo: "#txtUpdateAccountPassword"
-      },
+      }
     },
     messages: {
       txtAccountUsername: {
         required: "Vui lòng nhập Tên Tài khoản Người dùng",
-        maxlength: "Tên Tài khoản Người dùng không được vượt quá 50 ký tự",
-        pattern: "Tên Tài khoản chỉ chấp nhận chữ, số, dấu gạch ngang, gạch dưới, nháy đơn và không chứa khoảng trắng"
+        maxlength: "Tên Tài khoản Người dùng không được vượt quá 50 ký tự"
       },
       txtEmail: {
         required: "Vui lòng nhập Email",
@@ -233,4 +231,122 @@ function validateForm() {
     }
   });
 
+    $("#login-form").validate({
+        rule: {
+            txtEmail: {
+            required: true,
+            maxlength: 255,
+            email: true
+            },
+            txtPassword: {
+            required: true,
+            minlength: 8
+            }
+        },
+        messages: {
+            txtEmail: {
+            required: "Vui lòng nhập Email",
+            maxlength: "Email không được vượt quá 255 ký tự",
+            email: "Vui lòng nhập địa chỉ Email hợp lệ"
+            },
+            txtPassword: {
+            required: "Vui lòng nhập mật khẩu",
+            minlength: "Mật khẩu mới phải có ít nhất 8 ký tự"
+            }
+        },
+        submitHandler: function (form) {
+        // Handle form submission here
+        form.submit();
+        }
+    });
+    
+    $("#signup-form").validate({
+        rule: {
+            txtAccountUsername: {
+            required: true,
+            maxlength: 50
+            },
+            txtAccountEmail: {
+            required: true,
+            maxlength: 255,
+            email: true
+            },
+            txtAccountPassword: {
+            required: true,
+            minlength: 8
+            },
+            txtAccountRePassword: {
+            required: true,
+            minlength: 8,
+            equalTo: "#txtAccountPassword"
+            }
+        },
+        messages: {
+            txtAccountUsername: {
+            required: "Vui lòng nhập Tên Tài khoản Người dùng",
+            maxlength: "Tên Tài khoản Người dùng không được vượt quá 50 ký tự"
+            },
+            txtAccountEmail: {
+            required: "Vui lòng nhập Email",
+            maxlength: "Email không được vượt quá 255 ký tự",
+            email: "Vui lòng nhập địa chỉ Email hợp lệ"
+            },
+            txtAccountPassword: {
+            required: "Vui lòng nhập mật khẩu",
+            minlength: "Mật khẩu mới phải có ít nhất 8 ký tự"
+            },
+            txtAccountRePassword: {
+            required: "Vui lòng nhập lại mật khẩu",
+            minlength: "Mật khẩu mới phải có ít nhất 8 ký tự",
+            equalTo: "Mật khẩu không khớp"
+            }
+        },
+        submitHandler: function (form) {
+            // Handle form submission here
+            form.submit();
+        }
+    });
+    
+    $(".update-info-form").validate({
+        rule: {
+            txtLastName: {
+            required: true,
+            maxlength: 40
+            },
+            txtFirstName: {
+            required: true,
+            maxlength: 10
+            },
+            txtPhoneNumber: {
+            required: true,
+            maxlength: 11
+            },
+            txtAddress: {
+            required: true,
+            maxlength: 255 
+            }          
+        },
+        messages: {
+            txtLastName: {
+            required: "Vui lòng nhập họ",
+            maxlength: "Họ Người dùng không được vượt quá 40 ký tự"
+            },
+            txtFirstName: {
+            required: "Vui lòng nhập tên",
+            maxlength: "Tên Người dùng không được vượt quá 40 ký tự"
+            },
+            txtPhoneNumber: {
+            required: "Vui lòng nhập số điện thoại",
+            maxlength: "Số điện thoại không được vượt quá 11 kí tự"
+            },
+            txtAddress: {
+            required: "Vui lòng nhập địa chỉ của Người dùng",
+            maxlength: "Địa chỉ không được vượt quá 255 kí tự"
+            } 
+        },
+        submitHandler: function (form) {
+            // Handle form submission here
+            form.submit();
+        }
+    });
 }
