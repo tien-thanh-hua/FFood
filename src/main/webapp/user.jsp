@@ -131,6 +131,9 @@
         <!-- Order History Tab -->
         <div class="tab-pane fade" id="order-history" role="tabpanel" aria-labelledby="order-history-tab">
           <!-- Display order history as cards -->
+          <c:if test="${empty orderList}">
+            <p class="my-4 text-center">Không có đơn hàng</p>
+          </c:if>
           <c:forEach items="${orderList}" var="o">
             <%@ include file="WEB-INF/jspf/cancelOrder.jspf" %>
             <div class="card">
