@@ -4,6 +4,12 @@
     Author     : CE171454 Hua Tien Thanh
 --%>
 
+<%-- 
+    Document   : checkout
+    Created on : Jul 1, 2023, 8:00:52 PM
+    Author     : CE171454 Hua Tien Thanh
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -174,20 +180,29 @@
 
     // 2. Check Email;
     function checkName(input, option) {
-      var isFirstNameValid = true;
+      var isNameValid = true;
       if (input.value.trim() === "") {
+        // Kiểm tra trường rỗng
         if (option === "firstName") {
           showError(input, "Tên không được để trống");
         } else {
           showError(input, "Họ không được để trống");
         }
-        isFirstNameValid = false;
+        isNameValid = false;
+      } else if (input.value.trim().length > 40 && option === "firstName")
+      {
+        showError(input, "Tên không được vượt quá 40 ký tự");
+        isNameValid = false;
+      } else if (input.value.trim().length > 10 && option === "lastName")
+      {
+        showError(input, "Họ không được vượt quá 10 ký tự");
+        isNameValid = false;
       } else {
         showSuccess(input);
       }
-      return isFirstNameValid;
+      return isNameValid;
     }
-//            // 2. Check phone;
+    //            // 2. Check phone;
     function checkPhoneValid(input) {
       const regexPhone = /^0[1-9]\d{8,9}$/;
       input.value = input.value.trim();
@@ -209,6 +224,10 @@
       if (input.value.trim() === "") {
         showError(input, "Địa chỉ không được để trống");
         isCheckAddressValid = false;
+      } else if (input.value.trim().length > 255 && option === "firstName")
+      {
+        showError(input, "Họ không được vượt quá 10 ký tự");
+        isCheckAddressValid = false;
       } else {
         showSuccess(input);
       }
@@ -223,7 +242,7 @@
       let isAddressValid = checkAddress(address);
 
       if (isFirstNameValid && isLastNameValid && isPhoneValid && isAddressValid) {
-        
+
         return true;
 
       }
