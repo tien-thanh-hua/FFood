@@ -1,8 +1,12 @@
-# FFood - Food E-Commerce Website
+# FFood - Vietnamese Food Website
 
-FFood is a food e-commerce site that lets customers order food in a quick and convenient way.
+FFood is a food website that lets customers order food in a quick and convenient way.
 
-[Optional: Include badges or shields to showcase the project's status or any important metrics such as build status, code coverage, or version.]
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white) ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white) ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black) ![Apache Netbeans](https://img.shields.io/badge/apache%20netbeans-1B6AC6?style=for-the-badge&logo=apache%20netbeans%20IDE&logoColor=white)
+  
+  ![FFood Home](cover.png)
 
 ## Table of Contents
 
@@ -14,7 +18,8 @@ FFood is a food e-commerce site that lets customers order food in a quick and co
 
 ## Introduction
 
-[Provide a detailed introduction to your food e-commerce website. Describe its purpose, target audience, and any unique selling points. Highlight the problems it solves or the benefits it offers to users.]
+FFood is a food website that lets customers order food in a quick and convenient way.
+
 
 ## Features
 
@@ -95,7 +100,7 @@ public class DBConnection {
                 conn = DriverManager.getConnection("jdbc:sqlserver://"
                         + "ENTER-YOUR-DATABASE-NAME\\SQLEXPRESS:1433;"
                         + "databaseName=ffood;"
-						            // Enter your SSMS login username
+			// Enter your SSMS login username
                         + "user=enter-your-username;"
                         // Enter your SSMS login password
                         + "password=enter-your-password;"
@@ -119,8 +124,8 @@ public class DBConnection {
 
 8. Start the Tomcat server and access the food e-commerce website:
    - Start the Tomcat server either through your IDE or by running the appropriate startup script.
-   - Open a web browser and visit `http://localhost:8080/your-web-app-context` to access the website. The web application context path can be configured in `src/main/webapp/META-INF/context.xml`.
-	   - By default the context path is empty, so the website URL should be `http://localhost:8080`.
+   - Open a web browser and visit `http://localhost:8080/your-web-app-context` to access the website. The web application context path can be configured in `src/main/webapp/META-INF/context.xml`
+	   - By default it is `""`, so the website URL should be `http://localhost:8080`
 
 Now you should have FFood running locally on your machine.
 
