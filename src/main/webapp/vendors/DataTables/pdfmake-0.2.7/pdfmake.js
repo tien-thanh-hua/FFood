@@ -13805,7 +13805,7 @@ var PDFNameTree = /*#__PURE__*/function (_PDFTree) {
   }, {
     key: "_dataForKey",
     value: function _dataForKey(k) {
-      return new String(k);
+      return String(k);
     }
   }]);
   return PDFNameTree;
@@ -16355,8 +16355,8 @@ var EmbeddedFont = /*#__PURE__*/function (_PDFFont) {
         Subtype: 'CIDFontType0',
         BaseFont: name,
         CIDSystemInfo: {
-          Registry: new String('Adobe'),
-          Ordering: new String('Identity'),
+          Registry: String('Adobe'),
+          Ordering: String('Identity'),
           Supplement: 0
         },
         FontDescriptor: descriptor,
@@ -17711,7 +17711,7 @@ var AnnotationsMixin = {
 
     delete options.color;
     if (typeof options.Dest === 'string') {
-      options.Dest = new String(options.Dest);
+      options.Dest = String(options.Dest);
     } // Capitalize keys
 
     for (var key in options) {
@@ -17726,7 +17726,7 @@ var AnnotationsMixin = {
   note: function note(x, y, w, h, contents) {
     var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
     options.Subtype = 'Text';
-    options.Contents = new String(contents);
+    options.Contents = String(contents);
     options.Name = 'Comment';
     if (options.color == null) {
       options.color = [243, 223, 92];
@@ -17738,7 +17738,7 @@ var AnnotationsMixin = {
     options.Subtype = 'Link';
     options.A = this.ref({
       S: 'GoTo',
-      D: new String(name)
+      D: String(name)
     });
     options.A.end();
     return this.annotate(x, y, w, h, options);
@@ -17762,7 +17762,7 @@ var AnnotationsMixin = {
       // Link to an external url
       options.A = this.ref({
         S: 'URI',
-        URI: new String(url)
+        URI: String(url)
       });
       options.A.end();
     }
@@ -17777,7 +17777,7 @@ var AnnotationsMixin = {
       x2 = _this$_convertRect2[2],
       y2 = _this$_convertRect2[3];
     options.QuadPoints = [x1, y2, x2, y2, x1, y1, x2, y1];
-    options.Contents = new String();
+    options.Contents = String();
     return this.annotate(x, y, w, h, options);
   },
   highlight: function highlight(x, y, w, h) {
@@ -17801,27 +17801,27 @@ var AnnotationsMixin = {
   lineAnnotation: function lineAnnotation(x1, y1, x2, y2) {
     var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
     options.Subtype = 'Line';
-    options.Contents = new String();
+    options.Contents = String();
     options.L = [x1, this.page.height - y1, x2, this.page.height - y2];
     return this.annotate(x1, y1, x2, y2, options);
   },
   rectAnnotation: function rectAnnotation(x, y, w, h) {
     var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
     options.Subtype = 'Square';
-    options.Contents = new String();
+    options.Contents = String();
     return this.annotate(x, y, w, h, options);
   },
   ellipseAnnotation: function ellipseAnnotation(x, y, w, h) {
     var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
     options.Subtype = 'Circle';
-    options.Contents = new String();
+    options.Contents = String();
     return this.annotate(x, y, w, h, options);
   },
   textAnnotation: function textAnnotation(x, y, w, h, text) {
     var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
     options.Subtype = 'FreeText';
-    options.Contents = new String(text);
-    options.DA = new String();
+    options.Contents = String(text);
+    options.DA = String();
     return this.annotate(x, y, w, h, options);
   },
   fileAnnotation: function fileAnnotation(x, y, w, h) {
@@ -17835,7 +17835,7 @@ var AnnotationsMixin = {
     options.FS = filespec; // add description from filespec unless description (Contents) has already been set
 
     if (options.Contents) {
-      options.Contents = new String(options.Contents);
+      options.Contents = String(options.Contents);
     } else if (filespec.data.Desc) {
       options.Contents = filespec.data.Desc;
     }
@@ -17878,7 +17878,7 @@ var PDFOutline = /*#__PURE__*/function () {
       this.outlineData['Parent'] = parent;
     }
     if (title !== null) {
-      this.outlineData['Title'] = new String(title);
+      this.outlineData['Title'] = String(title);
     }
     this.dictionary = this.document.ref(this.outlineData);
     this.children = [];
@@ -17976,19 +17976,19 @@ var PDFStructureElement = /*#__PURE__*/function () {
       options = {};
     }
     if (typeof options.title !== 'undefined') {
-      data.T = new String(options.title);
+      data.T = String(options.title);
     }
     if (typeof options.lang !== 'undefined') {
-      data.Lang = new String(options.lang);
+      data.Lang = String(options.lang);
     }
     if (typeof options.alt !== 'undefined') {
-      data.Alt = new String(options.alt);
+      data.Alt = String(options.alt);
     }
     if (typeof options.expanded !== 'undefined') {
-      data.E = new String(options.expanded);
+      data.E = String(options.expanded);
     }
     if (typeof options.actual !== 'undefined') {
-      data.ActualText = new String(options.actual);
+      data.ActualText = String(options.actual);
     }
     this._children = [];
     if (children) {
@@ -18232,16 +18232,16 @@ var MarkingsMixin = {
     }
     if (tag === 'Span') {
       if (options.lang) {
-        dictionary.Lang = new String(options.lang);
+        dictionary.Lang = String(options.lang);
       }
       if (options.alt) {
-        dictionary.Alt = new String(options.alt);
+        dictionary.Alt = String(options.alt);
       }
       if (options.expanded) {
-        dictionary.E = new String(options.expanded);
+        dictionary.E = String(options.expanded);
       }
       if (options.actual) {
-        dictionary.ActualText = new String(options.actual);
+        dictionary.ActualText = String(options.actual);
       }
     }
     this.addContent("/".concat(tag, " ").concat(PDFObject.convert(dictionary), " BDC"));
@@ -18402,7 +18402,7 @@ var AcroFormMixin = {
     var data = {
       Fields: [],
       NeedAppearances: true,
-      DA: new String("/".concat(this._font.id, " 0 Tf 0 g")),
+      DA: String("/".concat(this._font.id, " 0 Tf 0 g")),
       DR: {
         Font: {}
       }
@@ -18530,7 +18530,7 @@ var AcroFormMixin = {
     opts = this._resolveStrings(opts);
     opts = this._resolveColors(opts);
     opts = this._resolveFormat(opts);
-    opts.T = new String(name);
+    opts.T = String(name);
     if (opts.parent) {
       opts.Parent = opts.parent;
       delete opts.parent;
@@ -18588,11 +18588,11 @@ var AcroFormMixin = {
       opts.AA = opts.AA ? opts.AA : {};
       opts.AA.K = {
         S: 'JavaScript',
-        JS: new String("".concat(fnKeystroke, "(").concat(params, ");"))
+        JS: String("".concat(fnKeystroke, "(").concat(params, ");"))
       };
       opts.AA.F = {
         S: 'JavaScript',
-        JS: new String("".concat(fnFormat, "(").concat(params, ");"))
+        JS: String("".concat(fnFormat, "(").concat(params, ");"))
       };
     }
     delete opts.format;
@@ -18658,7 +18658,7 @@ var AcroFormMixin = {
 
       var fontSize = options.fontSize || 0;
       options.DR.Font[this._font.id] = this._font.ref();
-      options.DA = new String("/".concat(this._font.id, " ").concat(fontSize, " Tf 0 g"));
+      options.DA = String("/".concat(this._font.id, " ").concat(fontSize, " Tf 0 g"));
     }
     return options;
   },
@@ -18668,7 +18668,7 @@ var AcroFormMixin = {
       if (Array.isArray(a)) {
         for (var idx = 0; idx < a.length; idx++) {
           if (typeof a[idx] === 'string') {
-            select.push(new String(a[idx]));
+            select.push(String(a[idx]));
           } else {
             select.push(a[idx]);
           }
@@ -18691,15 +18691,15 @@ var AcroFormMixin = {
     });
     ['V', 'DV'].forEach(function (key) {
       if (typeof options[key] === 'string') {
-        options[key] = new String(options[key]);
+        options[key] = String(options[key]);
       }
     });
     if (options.MK && options.MK.CA) {
-      options.MK.CA = new String(options.MK.CA);
+      options.MK.CA = String(options.MK.CA);
     }
     if (options.label) {
       options.MK = options.MK ? options.MK : {};
-      options.MK.CA = new String(options.label);
+      options.MK.CA = String(options.label);
       delete options.label;
     }
     return options;
@@ -18766,7 +18766,7 @@ var AttachmentsMixin = {
     } // add checksum and size information
 
     var checksum = _cryptoJs.default.MD5(_cryptoJs.default.lib.WordArray.create(new Uint8Array(data)));
-    refBody.Params.CheckSum = new String(checksum);
+    refBody.Params.CheckSum = String(checksum);
     refBody.Params.Size = data.byteLength; // save some space when embedding the same file again
     // if a file with the same name and metadata exists, reuse its reference
 
@@ -18785,14 +18785,14 @@ var AttachmentsMixin = {
 
     var fileSpecBody = {
       Type: 'Filespec',
-      F: new String(options.name),
+      F: String(options.name),
       EF: {
         F: ref
       },
-      UF: new String(options.name)
+      UF: String(options.name)
     };
     if (options.description) {
-      fileSpecBody.Desc = new String(options.description);
+      fileSpecBody.Desc = String(options.description);
     }
     var filespec = this.ref(fileSpecBody);
     filespec.end();
@@ -18858,7 +18858,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
       Names: Names
     });
     if (_this.options.lang) {
-      _this._root.data.Lang = new String(_this.options.lang);
+      _this._root.data.Lang = String(_this.options.lang);
     } // The current page
 
     _this.page = null; // Initialize mixins
@@ -19010,7 +19010,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
         this._root.data.Names.data.JavaScript = new PDFNameTree();
       }
       var data = {
-        JS: new String(js),
+        JS: String(js),
         S: 'JavaScript'
       };
       this._root.data.Names.data.JavaScript.add(name, data);
@@ -19069,7 +19069,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
       for (var key in this.info) {
         var val = this.info[key];
         if (typeof val === 'string') {
-          val = new String(val);
+          val = String(val);
         }
         var entry = this.ref(val);
         entry.end();
@@ -20368,7 +20368,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       Border: [0, 0, 0],
       A: {
         S: 'URI',
-        URI: new String(url)
+        URI: String(url)
       }
     });
     ref.end();
@@ -20504,7 +20504,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     }
     return result;
   }
-  ;
+
   function decodeEntities(str) {
     return str.replace(/&(?:#([0-9]+)|#[xX]([0-9A-Fa-f]+)|([0-9A-Za-z]+));/g, function (mt, m0, m1, m2) {
       if (m0) {
@@ -23351,7 +23351,7 @@ BrotliBitReader.prototype.reset = function() {
 */
 BrotliBitReader.prototype.readMoreInput = function() {
   if (this.bit_end_pos_ > 256) {
-    return;
+
   } else if (this.eos_) {
     if (this.bit_pos_ > this.bit_end_pos_)
       throw new Error('Unexpected end of input ' + this.bit_pos_ + ' ' + this.bit_end_pos_);
@@ -26435,22 +26435,22 @@ clone.clonePrototype = function clonePrototype(parent) {
 
 function __objToStr(o) {
   return Object.prototype.toString.call(o);
-};
+}
 clone.__objToStr = __objToStr;
 
 function __isDate(o) {
   return typeof o === 'object' && __objToStr(o) === '[object Date]';
-};
+}
 clone.__isDate = __isDate;
 
 function __isArray(o) {
   return typeof o === 'object' && __objToStr(o) === '[object Array]';
-};
+}
 clone.__isArray = __isArray;
 
 function __isRegExp(o) {
   return typeof o === 'object' && __objToStr(o) === '[object RegExp]';
-};
+}
 clone.__isRegExp = __isRegExp;
 
 function __getRegExpFlags(re) {
@@ -26459,7 +26459,7 @@ function __getRegExpFlags(re) {
   if (re.ignoreCase) flags += 'i';
   if (re.multiline) flags += 'm';
   return flags;
-};
+}
 clone.__getRegExpFlags = __getRegExpFlags;
 
 return clone;
@@ -36292,7 +36292,7 @@ function once(emitter, name) {
         emitter.removeListener('error', errorListener);
       }
       resolve([].slice.call(arguments));
-    };
+    }
 
     eventTargetAgnosticAddListener(emitter, name, resolver, { once: true });
     if (name !== 'error') {
@@ -39223,7 +39223,7 @@ function _writeCodepoint(dst, offset, codepoint, badChar) {
     dst[offset++] = codepoint >> 8;
 
     return offset;
-};
+}
 
 Utf32Decoder.prototype.end = function() {
     this.overflow.length = 0;
@@ -39382,7 +39382,7 @@ exports.utf7 = Utf7Codec;
 exports.unicode11utf7 = 'utf7'; // Alias UNICODE-1-1-UTF-7
 function Utf7Codec(codecOptions, iconv) {
     this.iconv = iconv;
-};
+}
 
 Utf7Codec.prototype.encoder = Utf7Encoder;
 Utf7Codec.prototype.decoder = Utf7Decoder;
@@ -39506,7 +39506,7 @@ Utf7Decoder.prototype.end = function() {
 exports.utf7imap = Utf7IMAPCodec;
 function Utf7IMAPCodec(codecOptions, iconv) {
     this.iconv = iconv;
-};
+}
 
 Utf7IMAPCodec.prototype.encoder = Utf7IMAPEncoder;
 Utf7IMAPCodec.prototype.decoder = Utf7IMAPDecoder;
@@ -43386,7 +43386,7 @@ module.exports = function inflate_fast(strm, start) {
           }
           else if ((op & 64) === 0) {          /* 2nd level distance code */
             here = dcode[(here & 0xffff)/*here.val*/ + (hold & ((1 << op) - 1))];
-            continue dodist;
+            continue;
           }
           else {
             strm.msg = 'invalid distance code';
@@ -43399,7 +43399,7 @@ module.exports = function inflate_fast(strm, start) {
       }
       else if ((op & 64) === 0) {              /* 2nd level length code */
         here = lcode[(here & 0xffff)/*here.val*/ + (hold & ((1 << op) - 1))];
-        continue dolen;
+        continue;
       }
       else if (op & 32) {                     /* end-of-block */
         //Tracevv((stderr, "inflate:         end of block\n"));
@@ -43429,7 +43429,7 @@ module.exports = function inflate_fast(strm, start) {
   strm.avail_out = (_out < end ? 257 + (end - _out) : 257 - (_out - end));
   state.hold = hold;
   state.bits = bits;
-  return;
+
 };
 
 
@@ -49998,7 +49998,7 @@ function flow(stream) {
   debug('flow', state.flowing);
 
   while (state.flowing && stream.read() !== null) {
-    ;
+
   }
 } // wrap an old-style stream as the async data source.
 // This is *not* part of the readable stream interface.
@@ -51774,7 +51774,7 @@ function _normalizeEncoding(enc) {
         retried = true;
     }
   }
-};
+}
 
 // Do not cache `Buffer.isEncoding` when checking encoding names as some
 // modules monkey-patch it to support additional encodings
@@ -52507,7 +52507,7 @@ fontkit.open = function (filename, postscriptName, callback) {
     }
     return callback(null, font);
   });
-  return;
+
 };
 fontkit.create = function (buffer, postscriptName) {
   for (var i = 0; i < formats.length; i++) {
@@ -53625,7 +53625,7 @@ var CFFIndex = /*#__PURE__*/function () {
       var _item = _step3.value;
       type.encode(stream, _item, parent);
     }
-    return;
+
   };
   return CFFIndex;
 }();
@@ -53896,7 +53896,7 @@ var CFFDict = /*#__PURE__*/function () {
       var ptr = ctx.pointers[i++];
       ptr.type.encode(stream, ptr.val, ptr.parent);
     }
-    return;
+
   };
   return CFFDict;
 }();
@@ -56614,7 +56614,7 @@ var UnicodeLayoutEngine = /*#__PURE__*/function () {
         yOffset -= position.yAdvance;
       }
     }
-    return;
+
   };
   _proto17.getCombiningClass = function getCombiningClass(codePoint) {
     var combiningClass = unicode.getCombiningClass(codePoint); // Thai / Lao need some per-character work
@@ -62135,7 +62135,7 @@ var TTFGlyph = /*#__PURE__*/function (_Glyph) {
       this._font._variationProcessor.transformPoints(this.id, points);
       glyph.phantomPoints = points.slice(-4);
     }
-    return;
+
   };
   _proto34._decodeComposite = function _decodeComposite(glyph, stream, offset) {
     if (offset === void 0) {
@@ -62972,7 +62972,7 @@ var COLRGlyph = /*#__PURE__*/function (_Glyph3) {
       ctx.fillColor([color.red, color.green, color.blue], color.alpha / 255 * 100);
       glyph.render(ctx, size);
     }
-    return;
+
   };
   _createClass(COLRGlyph, [{
     key: "layers",
@@ -63784,7 +63784,7 @@ var CFFSubset = /*#__PURE__*/function (_Subset2) {
         dict.Private.Subrs = this.subsetSubrs(dict.Private.Subrs, used_subrs[i]);
       }
     }
-    return;
+
   };
   _proto42.createCIDFontdict = function createCIDFontdict(topDict) {
     var used_subrs = {};

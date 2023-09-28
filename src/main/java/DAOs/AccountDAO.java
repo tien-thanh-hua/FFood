@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class AccountDAO {
 
-  private Connection conn;
+  private final Connection conn;
   private PreparedStatement ps;
   private ResultSet rs;
 

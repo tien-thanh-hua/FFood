@@ -18,7 +18,7 @@ import Models.OrderStatus;
  */
 public class OrderStatusDAO {
 
-  private Connection conn;
+  private final Connection conn;
   private PreparedStatement ps;
   private ResultSet rs;
 

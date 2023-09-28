@@ -303,10 +303,9 @@ public class AuthenticationFilter implements Filter {
     if (filterConfig == null) {
       return ("AuthenticationFilter()");
     }
-    StringBuffer sb = new StringBuffer("AuthenticationFilter(");
-    sb.append(filterConfig);
-    sb.append(")");
-    return (sb.toString());
+      String sb = "AuthenticationFilter(" + filterConfig +
+              ")";
+    return (sb);
   }
 
   private void sendProcessingError(Throwable t, ServletResponse response) {

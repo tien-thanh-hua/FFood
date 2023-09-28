@@ -84,7 +84,6 @@ public class UserController extends HttpServlet {
       }
       // Customer info update is successful
       response.sendRedirect("/user#info");
-      return;
     } else {
       // Account has no associated Customer -> create new Customer then assign it to current Account
       // Note: these 2 procedures should be surrounded by a transaction for safety purpose
@@ -109,7 +108,6 @@ public class UserController extends HttpServlet {
         }
         // Both procedures are successful
         response.sendRedirect("/user#info");
-        return;
       } else {
         // Customer does not already exists -> create new Customer
         result = customerDAO.add(customer);
@@ -132,7 +130,6 @@ public class UserController extends HttpServlet {
         }
         // Both procedures are successful
         response.sendRedirect("/user#info");
-        return;
       }
     }
   }
@@ -153,10 +150,8 @@ public class UserController extends HttpServlet {
     if (result == 1) {
       request.setAttribute("tabID", 3);
       response.sendRedirect("/user#account");
-      return;
     } else {
       response.sendRedirect("/user#account");
-      return;
     }
   }
 

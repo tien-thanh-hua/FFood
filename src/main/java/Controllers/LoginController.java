@@ -80,7 +80,7 @@ public class LoginController extends HttpServlet {
           throws ServletException, IOException {
     String contextPath = request.getContextPath();
     if (request.getParameter("btnSubmit") != null
-            && ((String) request.getParameter("btnSubmit")).equals("Submit")) {
+            && request.getParameter("btnSubmit").equals("Submit")) {
       String email = request.getParameter("txtEmail");
       String password = (String) request.getAttribute("txtPassword");
 

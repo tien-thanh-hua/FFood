@@ -210,10 +210,9 @@ public class MD5Filter implements Filter {
     if (filterConfig == null) {
       return ("MD5()");
     }
-    StringBuffer sb = new StringBuffer("MD5(");
-    sb.append(filterConfig);
-    sb.append(")");
-    return (sb.toString());
+      String sb = "MD5(" + filterConfig +
+              ")";
+    return (sb);
   }
   
   private void sendProcessingError(Throwable t, ServletResponse response) {

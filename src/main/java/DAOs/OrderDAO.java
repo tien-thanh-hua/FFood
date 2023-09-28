@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 public class OrderDAO {
 
-    private Connection conn;
+    private final Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
 

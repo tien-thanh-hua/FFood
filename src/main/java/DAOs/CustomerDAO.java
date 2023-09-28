@@ -18,7 +18,7 @@ import Models.Customer;
  */
 public class CustomerDAO {
 
-    private Connection conn;
+    private final Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
 

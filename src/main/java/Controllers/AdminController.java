@@ -89,10 +89,8 @@ public class AdminController extends HttpServlet {
 
     if (result == 1) {
       response.sendRedirect("/admin");
-      return;
     } else {
       response.sendRedirect("/admin");
-      return;
     }
   }
 
@@ -111,10 +109,8 @@ public class AdminController extends HttpServlet {
 
     if (result == 1) {
       response.sendRedirect("/admin");
-      return;
     } else {
       response.sendRedirect("/admin");
-      return;
     }
   }
 
@@ -131,10 +127,8 @@ public class AdminController extends HttpServlet {
 
     if (result == 1) {
       response.sendRedirect("/admin");
-      return;
     } else {
       response.sendRedirect("/admin");
-      return;
     }
   }
 
@@ -153,10 +147,8 @@ public class AdminController extends HttpServlet {
 
     if (result == 1) {
       response.sendRedirect("/admin");
-      return;
     } else {
       response.sendRedirect("/admin");
-      return;
     }
   }
 

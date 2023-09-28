@@ -18,7 +18,7 @@ import Models.FoodType;
  */
 public class FoodTypeDAO {
 
-  private Connection conn;
+  private final Connection conn;
   private PreparedStatement ps;
   private ResultSet rs;
 

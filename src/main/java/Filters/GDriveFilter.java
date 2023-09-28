@@ -177,10 +177,9 @@ public class GDriveFilter implements Filter {
     if (filterConfig == null) {
       return ("GDriveFilter()");
     }
-    StringBuffer sb = new StringBuffer("GDriveFilter(");
-    sb.append(filterConfig);
-    sb.append(")");
-    return (sb.toString());
+      String sb = "GDriveFilter(" + filterConfig +
+              ")";
+    return (sb);
   }
   
   private void sendProcessingError(Throwable t, ServletResponse response) {

@@ -18,7 +18,7 @@ import Models.PaymentMethod;
  */
 public class PaymentMethodDAO {
 
-  private Connection conn;
+  private final Connection conn;
   private PreparedStatement ps;
   private ResultSet rs;
 
